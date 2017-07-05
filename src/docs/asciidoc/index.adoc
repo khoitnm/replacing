@@ -1,0 +1,21 @@
+= Publishing Service
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+== Introduction
+This service provides APIs to manage content entities and relationships.
+
+== Authentication
+All API requests require *Authorization* token (Bearer) in the header.
+
+== APIs
+
+include::{snippets}/validate_shouldCreateNewPublishingInstance/section.adoc[]
+
+include::{snippets}/validate_shouldExecutePublishingTask/section.adoc[]
+
+include::{snippets}/validate_shouldReturnPublishingInformation/section.adoc[]
