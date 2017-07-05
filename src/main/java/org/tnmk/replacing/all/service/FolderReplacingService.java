@@ -1,4 +1,4 @@
-package org.tnmk.rename.all.service;
+package org.tnmk.replacing.all.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,11 +12,11 @@ import java.util.Map;
  * @author khoi.tran on 7/5/17.
  */
 @Service
-public class ProjectRenamingService {
-    public static final Logger LOGGER = LoggerFactory.getLogger(ProjectRenamingService.class);
+public class FolderReplacingService {
+    public static final Logger LOGGER = LoggerFactory.getLogger(FolderReplacingService.class);
 
     @Autowired
-    private RenamingService renamingService;
+    private ReplacingService replacingService;
 
     public void renamingProject() {
         String projectRootPath = "/SourceCode/MBC/stream-service";
@@ -25,6 +25,6 @@ public class ProjectRenamingService {
         renaming.put("CAMPAIGN", "STREAM");
         renaming.put("Campaign", "Stream");
 
-        renamingService.rename(projectRootPath, renaming);
+        replacingService.rename(projectRootPath, renaming);
     }
 }

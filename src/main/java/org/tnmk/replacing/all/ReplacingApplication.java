@@ -1,22 +1,22 @@
-package org.tnmk.rename.all;
+package org.tnmk.replacing.all;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.tnmk.rename.all.service.ProjectRenamingService;
+import org.tnmk.replacing.all.service.FolderReplacingService;
 
 /**
  * @author khoi.tran on 7/4/17.
  */
 @SpringBootApplication
-public class RenameApplication implements CommandLineRunner {
+public class ReplacingApplication implements CommandLineRunner {
 
     @Autowired
-    private ProjectRenamingService projectNamingService;
+    private FolderReplacingService projectNamingService;
 
     public static void main(String[] args) {
-        SpringApplication.run(RenameApplication.class, args);
+        SpringApplication.run(ReplacingApplication.class, args);
     }
 
     @Override

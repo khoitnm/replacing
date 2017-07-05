@@ -1,12 +1,12 @@
-package org.tnmk.rename.all.service;
+package org.tnmk.replacing.all.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.tnmk.rename.all.exception.UnexpectedException;
-import org.tnmk.rename.all.util.IOUtils;
+import org.tnmk.replacing.all.exception.UnexpectedException;
+import org.tnmk.replacing.all.util.IOUtils;
 
 import java.io.File;
 import java.util.Map;
@@ -15,8 +15,8 @@ import java.util.Map;
  * @author khoi.tran on 7/5/17.
  */
 @Service
-public class RenamingService {
-    public static final Logger LOGGER = LoggerFactory.getLogger(RenamingService.class);
+public class ReplacingService {
+    public static final Logger LOGGER = LoggerFactory.getLogger(ReplacingService.class);
 
     @Autowired
     private TraverseFolderService traverseFolderService;

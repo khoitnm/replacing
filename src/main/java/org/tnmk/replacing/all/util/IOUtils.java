@@ -1,6 +1,6 @@
-package org.tnmk.rename.all.util;
+package org.tnmk.replacing.all.util;
 
-import org.tnmk.rename.all.exception.UnexpectedException;
+import org.tnmk.replacing.all.exception.UnexpectedException;
 
 import java.io.File;
 import java.io.FileInputStream;

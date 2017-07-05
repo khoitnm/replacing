@@ -1,4 +1,4 @@
-package org.tnmk.rename.all.exception;
+package org.tnmk.replacing.all.exception;
 
 /**
  * This class is used for the business resource, not the infrastructure resource.

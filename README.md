@@ -1,5 +1,5 @@
 This project helps us to replace both file/folder name and file content (with file text only, not apply for binary file)
-Look up in the ``ProjectRenamingService``
+Look up in the ``FolderReplacingService``
 
 ```
         String projectRootPath = "/SourceCode/MBC/campaign-service";

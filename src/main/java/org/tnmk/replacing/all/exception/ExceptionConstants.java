@@ -1,4 +1,4 @@
-package org.tnmk.rename.all.exception;
+package org.tnmk.replacing.all.exception;
 
 /**
  * Created by khoi.tran on 4/15/16.
