@@ -17,7 +17,11 @@ import java.util.Map;
  */
 @SpringBootApplication
 public class ReplacingApplication implements CommandLineRunner {
-
+    public static final List<String> PATTERN_EXCLUDING_JAVA_PROJECT = Arrays.asList(
+        ".*[\\/]\\.git",
+        ".*[\\/]\\.idea",
+        ".*[\\/]\\.gradle",
+        ".*\\.class");
     @Autowired
     private CopyingAndReplacingService copyingAndReplacingService;
 
@@ -27,14 +31,31 @@ public class ReplacingApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        cloneToPublishingService();
+        cloneToStreamService();
+    }
+
+    private void cloneToPublishingService() {
         String sourcePath = "/SourceCode/MBC/campaign-service";
         String destPath = "/SourceCode/MBC/publishing-service";
-        List<String> excludingPatterns = Arrays.asList(".*[\\/]\\.git", ".*[\\/]\\.idea", ".*[\\/]\\.gradle");
+        List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
 
         Map<String, String> renaming = new HashMap<>();
         renaming.put("campaign", "publishing");
         renaming.put("CAMPAIGN", "PUBLISHING");
         renaming.put("Campaign", "Publishing");
+        copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
+    }
+
+    private void cloneToStreamService() {
+        String sourcePath = "/SourceCode/MBC/campaign-service";
+        String destPath = "/SourceCode/MBC/stream-service";
+        List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
+
+        Map<String, String> renaming = new HashMap<>();
+        renaming.put("campaign", "stream");
+        renaming.put("CAMPAIGN", "STREAM");
+        renaming.put("Campaign", "Stream");
         copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
     }
 }
