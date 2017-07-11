@@ -31,31 +31,58 @@ public class ReplacingApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        cloneToPublishingService();
-        cloneToStreamService();
+        cloneToCampaignService();
+//        cloneToPublishingService();
+//        cloneToStreamService();
     }
 
-    private void cloneToPublishingService() {
-        String sourcePath = "/SourceCode/MBC/campaign-service";
-        String destPath = "/SourceCode/MBC/publishing-service";
+    private void cloneToCampaignService() {
+        String sourcePath = "/SourceCode/MBC/content-presentation-service";
+        String destPath = "/SourceCode/MBC/campaign-service";
         List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
 
         Map<String, String> renaming = new HashMap<>();
-        renaming.put("campaign", "publishing");
-        renaming.put("CAMPAIGN", "PUBLISHING");
-        renaming.put("Campaign", "Publishing");
+        //Plural
+        renaming.put("content-presentations", "campaigns");
+        renaming.put("contentpresentations", "campaigns");
+        renaming.put("contentPresentations", "campaigns");
+        renaming.put("ContentPresentations", "Campaigns");
+        renaming.put("CONTENT_PRESENTATIONS", "CAMPAIGNS");
+
+        //Singular
+        renaming.put("content-presentation", "campaign");
+        renaming.put("contentpresentation", "campaign");
+        renaming.put("contentPresentation", "campaign");
+        renaming.put("ContentPresentation", "Campaign");
+        renaming.put("CONTENT_PRESENTATION", "CAMPAIGN");
         copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
     }
-
-    private void cloneToStreamService() {
-        String sourcePath = "/SourceCode/MBC/campaign-service";
-        String destPath = "/SourceCode/MBC/stream-service";
-        List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
-
-        Map<String, String> renaming = new HashMap<>();
-        renaming.put("campaign", "stream");
-        renaming.put("CAMPAIGN", "STREAM");
-        renaming.put("Campaign", "Stream");
-        copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
-    }
+//
+//    private void cloneToPublishingService() {
+//        String sourcePath = "/SourceCode/MBC/content-presentation-service";
+//        String destPath = "/SourceCode/MBC/publishing-service";
+//        List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
+//
+//        Map<String, String> renaming = new HashMap<>();
+//        renaming.put("content-presentation", "publishing");
+//        renaming.put("contentpresentation", "publishing");
+//        renaming.put("contentPresentation", "publishing");
+//        renaming.put("ContentPresentation", "Publishing");
+//        renaming.put("CONTENT_PRESENTATION", "PUBLISHING");
+//        copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
+//    }
+//
+//    private void cloneToStreamService() {
+//        String sourcePath = "/SourceCode/MBC/content-presentation-service";
+//        String destPath = "/SourceCode/MBC/stream-service";
+//        List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
+//
+//        Map<String, String> renaming = new HashMap<>();
+//        renaming.put("content-presentation", "stream");
+//        renaming.put("contentpresentation", "stream");
+//        renaming.put("contentPresentation", "stream");
+//        renaming.put("ContentPresentation", "Stream");
+//        renaming.put("CONTENT_PRESENTATION", "STREAM");
+//        copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
+//    }
 }
