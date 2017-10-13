@@ -5,7 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.tnmk.replacing.all.service.CopyingAndReplacingService;
-import org.tnmk.replacing.all.service.FolderReplacingService;
+import org.tnmk.replacing.all.service.RenameService;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -25,36 +25,52 @@ public class ReplacingApplication implements CommandLineRunner {
     @Autowired
     private CopyingAndReplacingService copyingAndReplacingService;
 
+    @Autowired
+    private RenameService renameService;
+
     public static void main(String[] args) {
         SpringApplication.run(ReplacingApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
-        cloneToCampaignService();
+//        cloneToCampaignService();
 //        cloneToPublishingService();
 //        cloneToStreamService();
+        renameService();
+    }
+
+    private void renameService() {
+        String sourcePath = "/Users/khoi.tran/Pictures/Photo/Khoi-Tien/Album";
+//        String destPath = "/SourceCode/MBC/dam-service";
+//        List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
+
+        Map<String, String> renaming = new HashMap<>();
+        renaming.put("_!", "");
+        renaming.put("!", "");
+        renaming.put("_.", ".");
+        renameService.rename(sourcePath, renaming);
     }
 
     private void cloneToCampaignService() {
         String sourcePath = "/SourceCode/MBC/content-presentation-service";
-        String destPath = "/SourceCode/MBC/campaign-service";
+        String destPath = "/SourceCode/MBC/dam-service";
         List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
 
         Map<String, String> renaming = new HashMap<>();
         //Plural
-        renaming.put("content-presentations", "campaigns");
-        renaming.put("contentpresentations", "campaigns");
-        renaming.put("contentPresentations", "campaigns");
-        renaming.put("ContentPresentations", "Campaigns");
-        renaming.put("CONTENT_PRESENTATIONS", "CAMPAIGNS");
+        renaming.put("content-presentations", "dams");
+        renaming.put("contentpresentations", "dams");
+        renaming.put("contentPresentations", "dams");
+        renaming.put("ContentPresentations", "Dams");
+        renaming.put("CONTENT_PRESENTATIONS", "DAMS");
 
         //Singular
-        renaming.put("content-presentation", "campaign");
-        renaming.put("contentpresentation", "campaign");
-        renaming.put("contentPresentation", "campaign");
-        renaming.put("ContentPresentation", "Campaign");
-        renaming.put("CONTENT_PRESENTATION", "CAMPAIGN");
+        renaming.put("content-presentation", "dam");
+        renaming.put("contentpresentation", "dam");
+        renaming.put("contentPresentation", "dam");
+        renaming.put("ContentPresentation", "Dam");
+        renaming.put("CONTENT_PRESENTATION", "DAM");
         copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
     }
 //
