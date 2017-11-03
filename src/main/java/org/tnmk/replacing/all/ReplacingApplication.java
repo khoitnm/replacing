@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.util.StringUtils;
 import org.tnmk.replacing.all.service.CopyingAndReplacingService;
 import org.tnmk.replacing.all.service.RenameService;
+import org.tnmk.replacing.all.util.IOUtils;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -41,14 +43,14 @@ public class ReplacingApplication implements CommandLineRunner {
     }
 
     private void renameService() {
-        String sourcePath = "/Users/khoi.tran/Pictures/Photo/Khoi-Tien/Album";
+        String sourcePath = "D:\\Photos\\KhoiTien_100_tam_album-20171103T081956Z-001\\KhoiTien_100_tam_album";
 //        String destPath = "/SourceCode/MBC/dam-service";
 //        List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
 
         Map<String, String> renaming = new HashMap<>();
-        renaming.put("_!", "");
-        renaming.put("!", "");
-        renaming.put("_.", ".");
+        renaming.put("KhôiTiên", "KhoiTien");
+//        renaming.put("!", "");
+//        renaming.put("_.", ".");
         renameService.rename(sourcePath, renaming);
     }
 

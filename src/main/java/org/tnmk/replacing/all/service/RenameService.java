@@ -5,8 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tnmk.replacing.all.exception.UnexpectedException;
+import org.tnmk.replacing.all.util.StringUtils;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 /**
@@ -31,10 +33,16 @@ public class RenameService {
     }
 
     private File renameFileIfMatch(File file, String sourceText, String destText) {
+        String encoding = StandardCharsets.UTF_8.name();
         String parentFolderPath = file.getParent();
         String currentFileName = file.getName();
-        if (currentFileName.contains(sourceText)) {
-            String newFileName = currentFileName.replace(sourceText, destText);
+        String encodedCurrentFileName = StringUtils.encode(currentFileName, encoding);
+        String encodedSourceText = StringUtils.encode(sourceText, encoding);
+//
+//        String currentFileNameEncode = StringUtils.charsetEncode(currentFileName, "ISO-8859-1");
+//        String sourceTextEncode = StringUtils.charsetEncode(sourceText, "ISO-8859-1");
+        if (encodedCurrentFileName.contains(encodedSourceText)) {
+            String newFileName = encodedCurrentFileName.replace(sourceText, destText);
             String newFilePath = parentFolderPath + "/" + newFileName;
             File newFile = new File(newFilePath);
             boolean renameSuccess = file.renameTo(newFile);

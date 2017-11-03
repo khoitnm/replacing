@@ -66,3 +66,4 @@ build.properties
 !/src/main/resources/static/node_modules/**/*.min.css
 src/main/resources/static/node_modules
 gradle*
+out/
