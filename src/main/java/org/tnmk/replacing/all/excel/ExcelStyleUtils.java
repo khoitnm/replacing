@@ -8,7 +8,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.awt.Color;
 
-public class ExcelStyleUtils {
+/**
+ * Version: 1.0.0
+ */
+public final class ExcelStyleUtils {
+    private ExcelStyleUtils() {
+        //Utils
+    }
+
     public static XSSFCellStyle newBackgroundColorStyle(XSSFWorkbook workbook, Color color) {
         XSSFCellStyle style = workbook.createCellStyle();
         applyBackgroundColor(style, color);
@@ -50,7 +57,9 @@ public class ExcelStyleUtils {
     }
 
     public static void applyStyleToRow(CellStyle cellStyle, Row row) {
-        for (Cell cell : row) {
+        int lastCellNum = row.getLastCellNum();
+        for (int i = 0; i <= lastCellNum; i++) {
+            Cell cell = row.getCell(i, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
             cell.setCellStyle(cellStyle);
         }
     }
