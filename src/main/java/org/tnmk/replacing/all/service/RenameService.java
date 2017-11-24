@@ -49,7 +49,7 @@ public class RenameService {
             LOGGER.info("Rename: \n\tfrom: {} \n\tto: {}", file.getAbsoluteFile(), newFile.getAbsoluteFile());
             if (!renameSuccess) {
                 throw new UnexpectedException(
-                    String.format("Cannot rename from %s to %s", file.getAbsolutePath(), newFilePath));
+                    String.format("Cannot addingLine from %s to %s", file.getAbsolutePath(), newFilePath));
             }
             return newFile;
         } else {

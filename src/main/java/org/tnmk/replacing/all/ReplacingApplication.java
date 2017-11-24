@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.util.StringUtils;
+import org.tnmk.replacing.all.service.AddingLineService;
 import org.tnmk.replacing.all.service.CopyingAndReplacingService;
 import org.tnmk.replacing.all.service.RenameService;
 import org.tnmk.replacing.all.util.IOUtils;
@@ -28,6 +29,8 @@ public class ReplacingApplication implements CommandLineRunner {
     private CopyingAndReplacingService copyingAndReplacingService;
 
     @Autowired
+    private AddingLineService addingLineService;
+    @Autowired
     private RenameService renameService;
 
     public static void main(String[] args) {
@@ -39,7 +42,8 @@ public class ReplacingApplication implements CommandLineRunner {
 //        cloneToCampaignService();
 //        cloneToPublishingService();
 //        cloneToStreamService();
-        renameService();
+//        renameService();
+        cloneToCampaignService();
     }
 
     private void renameService() {
@@ -55,24 +59,30 @@ public class ReplacingApplication implements CommandLineRunner {
     }
 
     private void cloneToCampaignService() {
-        String sourcePath = "/SourceCode/MBC/content-presentation-service";
-        String destPath = "/SourceCode/MBC/dam-service";
+        String sourcePath = "D:\\Program Files (x86)\\Championship Manager 01-02\\search\\DC";
+        String destPath = "D:\\Program Files (x86)\\Championship Manager 01-02\\search\\DC-copy";
         List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
 
         Map<String, String> renaming = new HashMap<>();
-        //Plural
-        renaming.put("content-presentations", "dams");
-        renaming.put("contentpresentations", "dams");
-        renaming.put("contentPresentations", "dams");
-        renaming.put("ContentPresentations", "Dams");
-        renaming.put("CONTENT_PRESENTATIONS", "DAMS");
+        renaming.put(", ", " ");
+        renaming.put(";", ",");
+        renaming.put(" % ", "%, ");
+        renaming.put("Scout Rating", "Scout,Rating");
 
-        //Singular
-        renaming.put("content-presentation", "dam");
-        renaming.put("contentpresentation", "dam");
-        renaming.put("contentPresentation", "dam");
-        renaming.put("ContentPresentation", "Dam");
-        renaming.put("CONTENT_PRESENTATION", "DAM");
+        addingLineService.addingLine(destPath, 0, "Improve rate,2.5");
+//        //Plural
+//        renaming.put("content-presentations", "dams");
+//        renaming.put("contentpresentations", "dams");
+//        renaming.put("contentPresentations", "dams");
+//        renaming.put("ContentPresentations", "Dams");
+//        renaming.put("CONTENT_PRESENTATIONS", "DAMS");
+//
+//        //Singular
+//        renaming.put("content-presentation", "dam");
+//        renaming.put("contentpresentation", "dam");
+//        renaming.put("contentPresentation", "dam");
+//        renaming.put("ContentPresentation", "Dam");
+//        renaming.put("CONTENT_PRESENTATION", "DAM");
         copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
     }
 //
