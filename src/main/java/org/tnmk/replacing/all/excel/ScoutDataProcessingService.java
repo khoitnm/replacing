@@ -1,19 +1,19 @@
 package org.tnmk.replacing.all.excel;
 
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
+import java.awt.Color;
 
 @Service
 public class ScoutDataProcessingService {
     private static final int ROW_DATA_HEADER = 1;
 
     private static final int ROW_DATA_CONTENT = 2;
+    private static final int COL_NAME = 0;
     private static final int COL_CP = 4;
     private static final int COL_PP = 5;
     private static final int COL_AP = 6;
@@ -33,10 +33,12 @@ public class ScoutDataProcessingService {
 
         applyHeaderFilter(sheet);
         changeHeaderStyle(workbook, sheet);
+        sheet.createFreezePane(COL_NAME + 1, ROW_DATA_CONTENT);
     }
 
     private void changeHeaderStyle(XSSFWorkbook workbook, Sheet sheet) {
-        CellStyle cellStyle = ExcelStyleUtils.newCellStyle(workbook, Color.WHITE, new Color(106, 44, 114));
+        XSSFCellStyle cellStyle = ExcelStyleUtils.newCellStyle(workbook, Color.WHITE, new Color(106, 44, 114));
+        cellStyle.getFont().setBold(true);
         ExcelStyleUtils.applyStyleToRows(sheet, cellStyle, 0, 1);
     }
 
@@ -53,6 +55,7 @@ public class ScoutDataProcessingService {
 
     private void calculatePotentialRate(Workbook workbook, Sheet sheet) {
         insertColumn(workbook, sheet, COL_POTENTIAL_RATE, "Potential Rate", "Kirow+Girow*$B$1/10/100");
+        stylePercentage(workbook, sheet, COL_POTENTIAL_RATE);
     }
 
     /**
@@ -72,6 +75,17 @@ public class ScoutDataProcessingService {
         for (int irow = ROW_DATA_CONTENT; irow < numRow; irow++) {
             String formula = formulaPattern.replaceAll("irow", "" + (irow + 1));
             ExcelValueUtils.setFormula(sheet, irow, colIndex, formula);
+        }
+    }
+
+    private void stylePercentage(Workbook workbook, Sheet sheet, int colIndex) {
+        CellStyle style = workbook.createCellStyle();
+        style.setDataFormat(workbook.createDataFormat().getFormat("0%"));
+
+        int numRow = ExcelOperatorUtils.countRows(sheet);
+        for (int irow = ROW_DATA_CONTENT; irow < numRow; irow++) {
+            Cell cell = sheet.getRow(irow).getCell(colIndex, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+            cell.setCellStyle(style);
         }
     }
 

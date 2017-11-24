@@ -57,7 +57,7 @@ public final class ExcelStyleUtils {
     }
 
     public static void applyStyleToRow(CellStyle cellStyle, Row row) {
-        int lastCellNum = row.getLastCellNum();
+        int lastCellNum = ExcelOperatorUtils.countColumns(row.getSheet());
         for (int i = 0; i <= lastCellNum; i++) {
             Cell cell = row.getCell(i, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
             cell.setCellStyle(cellStyle);
