@@ -59,8 +59,8 @@ public class ReplacingApplication implements CommandLineRunner {
     }
 
     private void cloneToCampaignService() {
-        String sourcePath = "D:\\Program Files (x86)\\Championship Manager 01-02\\search\\DC";
-        String destPath = "D:\\Program Files (x86)\\Championship Manager 01-02\\search\\DC-copy";
+        String sourcePath = "D:\\Program Files (x86)\\Championship Manager 01-02\\search\\WB";
+        String destPath = "D:\\Program Files (x86)\\Championship Manager 01-02\\search\\WB-analysis";
         List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
 
         Map<String, String> renaming = new HashMap<>();
@@ -69,7 +69,6 @@ public class ReplacingApplication implements CommandLineRunner {
         renaming.put(" % ", "%, ");
         renaming.put("Scout Rating", "Scout,Rating");
 
-        addingLineService.addingLine(destPath, 0, "Improve rate,2.5");
 //        //Plural
 //        renaming.put("content-presentations", "dams");
 //        renaming.put("contentpresentations", "dams");
@@ -84,6 +83,7 @@ public class ReplacingApplication implements CommandLineRunner {
 //        renaming.put("ContentPresentation", "Dam");
 //        renaming.put("CONTENT_PRESENTATION", "DAM");
         copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
+        addingLineService.addingLine(destPath, 0, "Improve rate,2");
     }
 //
 //    private void cloneToPublishingService() {

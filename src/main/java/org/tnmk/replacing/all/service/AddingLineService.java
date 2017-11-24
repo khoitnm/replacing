@@ -29,10 +29,10 @@ public class AddingLineService {
     public void addingLine(String rootFolderPath, int lineIndex, String addingContent) {
         File file = new File(rootFolderPath);
         traverseFolderService.traverFile(file, currentFile -> {
-            if (file.isFile()) {
-                addingContentFile(file, lineIndex, addingContent);
+            if (currentFile.isFile()) {
+                addingContentFile(currentFile, lineIndex, addingContent);
             }
-            return file;
+            return currentFile;
         });
     }
 
@@ -42,7 +42,7 @@ public class AddingLineService {
         }
         String content = IOUtils.loadTextFileInSystem(file.getAbsolutePath());
         if (lineIndex == 0) {
-            content = addingContent + '\n' + content;
+            content = addingContent + "\n" + content;
         } else if (lineIndex < 0) {
             content += '\n' + addingContent;
         }
