@@ -1,10 +1,12 @@
 package org.tnmk.replacing.all.excel;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.tnmk.replacing.all.exception.UnexpectedException;
+import org.tnmk.replacing.all.util.NumberUtils;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
@@ -20,15 +22,22 @@ public final class ExcelIOUtils {
             XSSFWorkbook workBook = new XSSFWorkbook();
             XSSFSheet sheet = workBook.createSheet("sheet1");
             String currentLine = null;
-            int RowNum = 0;
+            int rowIndex = 0;
             BufferedReader br = new BufferedReader(new FileReader(csvAbsFileName));
             while ((currentLine = br.readLine()) != null) {
-                String str[] = currentLine.split(deliminator);
-                RowNum++;
-                XSSFRow currentRow = sheet.createRow(RowNum);
-                for (int i = 0; i < str.length; i++) {
-                    currentRow.createCell(i).setCellValue(str[i]);
+                String strings[] = currentLine.split(deliminator);
+                XSSFRow currentRow = sheet.createRow(rowIndex);
+                for (int i = 0; i < strings.length; i++) {
+                    String string = strings[i];
+                    Double doubleValue = NumberUtils.toDoubleIfPossible(string);
+                    Cell cell = currentRow.createCell(i);
+                    if (doubleValue != null) {
+                        cell.setCellValue(doubleValue);
+                    } else {
+                        cell.setCellValue(string);
+                    }
                 }
+                rowIndex++;
             }
             return workBook;
         } catch (Exception ex) {

@@ -4,11 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.util.StringUtils;
+import org.tnmk.replacing.all.excel.ScoutDataProcessingService;
 import org.tnmk.replacing.all.service.AddingLineService;
 import org.tnmk.replacing.all.service.CopyingAndReplacingService;
 import org.tnmk.replacing.all.service.RenameService;
-import org.tnmk.replacing.all.util.IOUtils;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -25,6 +24,9 @@ public class ReplacingApplication implements CommandLineRunner {
         ".*[\\/]\\.idea",
         ".*[\\/]\\.gradle",
         ".*\\.class");
+
+    @Autowired
+    private ScoutDataProcessingService scoutDataProcessingService;
     @Autowired
     private CopyingAndReplacingService copyingAndReplacingService;
 
@@ -39,11 +41,11 @@ public class ReplacingApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        cloneToCampaignService();
+//        analyseScoutData();
 //        cloneToPublishingService();
 //        cloneToStreamService();
 //        renameService();
-        cloneToCampaignService();
+        analyseScoutData();
     }
 
     private void renameService() {
@@ -58,7 +60,7 @@ public class ReplacingApplication implements CommandLineRunner {
         renameService.rename(sourcePath, renaming);
     }
 
-    private void cloneToCampaignService() {
+    private void analyseScoutData() {
         String sourcePath = "D:\\Program Files (x86)\\Championship Manager 01-02\\search\\WB";
         String destPath = "D:\\Program Files (x86)\\Championship Manager 01-02\\search\\WB-analysis";
         List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
@@ -68,6 +70,19 @@ public class ReplacingApplication implements CommandLineRunner {
         renaming.put(";", ",");
         renaming.put(" % ", "%, ");
         renaming.put("Scout Rating", "Scout,Rating");
+
+        copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
+        addingLineService.addingLine(destPath, 0, "Improve rate,2");
+
+        scoutDataProcessingService.processCsvToXlsx(destPath+"\\WB.csv", destPath+"\\WB.xlsx");
+    }
+//
+//    private void cloneToPublishingService() {
+//        String sourcePath = "/SourceCode/MBC/content-presentation-service";
+//        String destPath = "/SourceCode/MBC/publishing-service";
+//        List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
+//
+//        Map<String, String> renaming = new HashMap<>();
 
 //        //Plural
 //        renaming.put("content-presentations", "dams");
@@ -82,21 +97,7 @@ public class ReplacingApplication implements CommandLineRunner {
 //        renaming.put("contentPresentation", "dam");
 //        renaming.put("ContentPresentation", "Dam");
 //        renaming.put("CONTENT_PRESENTATION", "DAM");
-        copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
-        addingLineService.addingLine(destPath, 0, "Improve rate,2");
-    }
-//
-//    private void cloneToPublishingService() {
-//        String sourcePath = "/SourceCode/MBC/content-presentation-service";
-//        String destPath = "/SourceCode/MBC/publishing-service";
-//        List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
-//
-//        Map<String, String> renaming = new HashMap<>();
-//        renaming.put("content-presentation", "publishing");
-//        renaming.put("contentpresentation", "publishing");
-//        renaming.put("contentPresentation", "publishing");
-//        renaming.put("ContentPresentation", "Publishing");
-//        renaming.put("CONTENT_PRESENTATION", "PUBLISHING");
+
 //        copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
 //    }
 //
