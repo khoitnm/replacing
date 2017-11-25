@@ -6,10 +6,7 @@ import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.tnmk.replacing.all.excel.ExcelIOUtils;
-import org.tnmk.replacing.all.excel.ExcelOperatorUtils;
-import org.tnmk.replacing.all.excel.ExcelStyleUtils;
-import org.tnmk.replacing.all.excel.ExcelValueUtils;
+import org.tnmk.replacing.all.excel.*;
 import org.tnmk.replacing.all.renaming.TraverseFolderService;
 import org.tnmk.replacing.all.util.FileUtils;
 
@@ -58,6 +55,8 @@ public class ScoutDataProcessingService {
 
         calculateAP(sheet);
         calculatePotentialRate(sheet);
+
+        rearrangeColumns(sheet);
 
         applyHeaderFilter(sheet);
         changeHeaderStyle(sheet);
@@ -123,5 +122,23 @@ public class ScoutDataProcessingService {
 
     private int getLastCol(Sheet sheet) {
         return sheet.getRow(ROW_DATA_HEADER).getLastCellNum();
+    }
+
+    private void rearrangeColumns(Sheet sheet) {
+        int accelerateColIndex = findColumnWithHeader(sheet, "Acceleration");
+        int paceColIndex = findColumnWithHeader(sheet, "Pace");
+        ExcelOperatorUtils.moveColumn(sheet, paceColIndex, accelerateColIndex + 1);
+        int jumpIndex = findColumnWithHeader(sheet, "Jump");
+        ExcelOperatorUtils.moveColumn(sheet, jumpIndex, accelerateColIndex + 2);
+        int staminaColIndex = findColumnWithHeader(sheet, "Stamina");
+        ExcelOperatorUtils.moveColumn(sheet, staminaColIndex, accelerateColIndex + 3);
+        int strengthIndex = findColumnWithHeader(sheet, "Strength");
+        ExcelOperatorUtils.moveColumn(sheet, strengthIndex, accelerateColIndex + 4);
+
+
+    }
+
+    private int findColumnWithHeader(Sheet sheet, String header) {
+        return ExcelSearchUtils.findFirstColumnIndexOnRow(sheet, ROW_DATA_HEADER, header);
     }
 }

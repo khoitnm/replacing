@@ -5,6 +5,7 @@ import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
 
 /**
  * Version: 1.0.0
+ * TODO Below methods may not work well with formula values.
  */
 public final class ExcelOperatorUtils {
     private ExcelOperatorUtils() {
@@ -40,9 +41,9 @@ public final class ExcelOperatorUtils {
      * @param insertingColIndex
      */
     public static void insertColumn(Sheet sheet, int insertingColIndex) {
-        Workbook workbook = sheet.getWorkbook();
-        assert workbook != null;
+        assert sheet != null;
 
+        Workbook workbook = sheet.getWorkbook();
         FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
         evaluator.clearAllCachedResultValues();
 
@@ -80,8 +81,55 @@ public final class ExcelOperatorUtils {
         XSSFFormulaEvaluator.evaluateAllFormulaCells(workbook);
     }
 
-    private static void moveColumn(Sheet sheet, int sourceColIndex, int targetColIndex) {
+    public static void copyColumn(Sheet sheet, int sourceColIndex, int targetColIndex) {
+        assert sheet != null;
 
+        Workbook workbook = sheet.getWorkbook();
+        FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
+        evaluator.clearAllCachedResultValues();
+
+        int numRows = countRows(sheet);
+        for (int rowIndex = 0; rowIndex < numRows; rowIndex++) {
+            Row row = sheet.getRow(rowIndex);
+            if (row == null) {
+                continue;
+            }
+            cloneCell(row, sourceColIndex, targetColIndex);
+        }
+        XSSFFormulaEvaluator.evaluateAllFormulaCells(workbook);
+    }
+
+    private static Cell cloneCell(Row row, int sourceColIndex, int targetColIndex) {
+        Sheet sheet = row.getSheet();
+        Cell sourceCell = row.getCell(sourceColIndex, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+        Cell targetCell = row.createCell(targetColIndex, sourceCell.getCellTypeEnum());
+        cloneCell(sourceCell, targetCell);
+
+        sheet.setColumnWidth(targetColIndex, sheet.getColumnWidth(sourceColIndex));
+        return targetCell;
+    }
+
+    public static void moveColumn(Sheet sheet, int sourceColIndex, int targetColIndex) {
+        if (targetColIndex == sourceColIndex) {
+            return;
+        }
+        insertColumn(sheet, targetColIndex);
+        if (targetColIndex < sourceColIndex) {
+            sourceColIndex++;
+        }
+        copyColumn(sheet, sourceColIndex, targetColIndex);
+
+        if (targetColIndex > sourceColIndex) {
+            //columns from source to target - 1 will be shift to the left.
+            for (int movingColIndex = sourceColIndex + 1; movingColIndex <= targetColIndex - 1; movingColIndex++) {
+                copyColumn(sheet, movingColIndex, movingColIndex - 1);
+            }
+        } else {
+            int lastColIndex = countColumns(sheet) - 1;
+            for (int movingColIndex = sourceColIndex + 1; movingColIndex <= lastColIndex; movingColIndex++) {
+                copyColumn(sheet, movingColIndex, movingColIndex - 1);
+            }
+        }
     }
 
     /**
