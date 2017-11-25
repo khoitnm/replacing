@@ -56,15 +56,16 @@ public class ScoutDataProcessingService {
     private void process(XSSFWorkbook workbook) {
         Sheet sheet = workbook.getSheetAt(0);
 
-        calculateAP(workbook, sheet);
-        calculatePotentialRate(workbook, sheet);
+        calculateAP(sheet);
+        calculatePotentialRate(sheet);
 
         applyHeaderFilter(sheet);
-        changeHeaderStyle(workbook, sheet);
+        changeHeaderStyle(sheet);
         sheet.createFreezePane(COL_NAME + 1, ROW_DATA_CONTENT);
     }
 
-    private void changeHeaderStyle(XSSFWorkbook workbook, Sheet sheet) {
+    private void changeHeaderStyle(Sheet sheet) {
+        XSSFWorkbook workbook = (XSSFWorkbook) sheet.getWorkbook();
         XSSFCellStyle cellStyle = ExcelStyleUtils.newCellStyle(workbook, Color.WHITE, new Color(106, 44, 114));
         cellStyle.getFont().setBold(true);
         ExcelStyleUtils.applyStyleToRows(sheet, cellStyle, 0, 1);
@@ -74,29 +75,27 @@ public class ScoutDataProcessingService {
     /**
      * Insert column: Availability Point (AP = Potential P - Current P)
      *
-     * @param workbook
      * @param sheet
      */
-    private void calculateAP(Workbook workbook, Sheet sheet) {
-        insertColumn(workbook, sheet, COL_AP, "AP", "Firow-Eirow");
+    private void calculateAP(Sheet sheet) {
+        insertColumn(sheet, COL_AP, "AP", "Firow-Eirow");
     }
 
-    private void calculatePotentialRate(Workbook workbook, Sheet sheet) {
-        insertColumn(workbook, sheet, COL_POTENTIAL_RATE, "Potential Rate", "Kirow+Girow*$B$1/10/100");
-        stylePercentage(workbook, sheet, COL_POTENTIAL_RATE);
+    private void calculatePotentialRate(Sheet sheet) {
+        insertColumn(sheet, COL_POTENTIAL_RATE, "Potential Rate", "Kirow+Girow*$B$1/10/100");
+        stylePercentage(sheet, COL_POTENTIAL_RATE);
     }
 
     /**
      * This method is specific for this Excel file only.
      *
-     * @param workbook
      * @param sheet
      * @param colIndex
      * @param header
      * @param formulaPattern
      */
-    private void insertColumn(Workbook workbook, Sheet sheet, int colIndex, String header, String formulaPattern) {
-        ExcelOperatorUtils.insertColumn(workbook, sheet, colIndex);
+    private void insertColumn(Sheet sheet, int colIndex, String header, String formulaPattern) {
+        ExcelOperatorUtils.insertColumn(sheet, colIndex);
 
         ExcelValueUtils.setString(sheet, ROW_DATA_HEADER, colIndex, header);
         int numRow = ExcelOperatorUtils.countRows(sheet);
@@ -106,7 +105,8 @@ public class ScoutDataProcessingService {
         }
     }
 
-    private void stylePercentage(Workbook workbook, Sheet sheet, int colIndex) {
+    private void stylePercentage(Sheet sheet, int colIndex) {
+        Workbook workbook = sheet.getWorkbook();
         CellStyle style = workbook.createCellStyle();
         style.setDataFormat(workbook.createDataFormat().getFormat("0%"));
 

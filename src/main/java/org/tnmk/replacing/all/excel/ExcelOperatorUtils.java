@@ -36,11 +36,11 @@ public final class ExcelOperatorUtils {
     /**
      * Copy from https://github.com/bit-twit/poi-shift-column/blob/master/src/main/java/org/bittwit/poi/ExcelOpener.java
      *
-     * @param workbook
      * @param sheet
      * @param insertingColIndex
      */
-    public static void insertColumn(Workbook workbook, Sheet sheet, int insertingColIndex) {
+    public static void insertColumn(Sheet sheet, int insertingColIndex) {
+        Workbook workbook = sheet.getWorkbook();
         assert workbook != null;
 
         FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
@@ -80,6 +80,9 @@ public final class ExcelOperatorUtils {
         XSSFFormulaEvaluator.evaluateAllFormulaCells(workbook);
     }
 
+    private static void moveColumn(Sheet sheet, int sourceColIndex, int targetColIndex) {
+
+    }
 
     /**
      * @param evaluator
