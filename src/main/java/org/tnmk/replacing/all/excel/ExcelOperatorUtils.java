@@ -123,11 +123,22 @@ public final class ExcelOperatorUtils {
             //columns from source to target - 1 will be shift to the left.
             for (int movingColIndex = sourceColIndex + 1; movingColIndex <= targetColIndex - 1; movingColIndex++) {
                 copyColumn(sheet, movingColIndex, movingColIndex - 1);
+                clearColumn(sheet, movingColIndex);
             }
         } else {
             int lastColIndex = countColumns(sheet) - 1;
             for (int movingColIndex = sourceColIndex + 1; movingColIndex <= lastColIndex; movingColIndex++) {
                 copyColumn(sheet, movingColIndex, movingColIndex - 1);
+                clearColumn(sheet, movingColIndex);
+            }
+        }
+    }
+
+    public static void clearColumn(Sheet sheet, int columnIndex) {
+        for (Row row : sheet) {
+            Cell cell = row.getCell(columnIndex);
+            if (cell != null) {
+                row.removeCell(cell);
             }
         }
     }

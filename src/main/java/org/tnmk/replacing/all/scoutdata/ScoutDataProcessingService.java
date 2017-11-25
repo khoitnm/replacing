@@ -4,6 +4,8 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tnmk.replacing.all.excel.*;
@@ -15,6 +17,8 @@ import java.io.File;
 
 @Service
 public class ScoutDataProcessingService {
+    public static final Logger LOGGER = LoggerFactory.getLogger(ScoutDataProcessingService.class);
+
     private static final int ROW_DATA_HEADER = 1;
 
     private static final int ROW_DATA_CONTENT = 2;
@@ -126,8 +130,8 @@ public class ScoutDataProcessingService {
 
     private void rearrangeColumns(Sheet sheet) {
         arrangeColumns(sheet,
-                "Acceleration", "Pace", "Jump", "Stamina", "Strength",
-                "Tackling", "Mark", "Position", "Head",
+                "Acceleration", "Pace", "Jumping", "Stamina", "Strength",
+                "Tackling", "Marking", "Positioning", "Head",
                 "Finishing", "Long shot", "Off The Ball",
                 "Dribbling", "Technique",
                 "Passing", "Creativity", "Crossing");
@@ -138,7 +142,12 @@ public class ScoutDataProcessingService {
         int firstColumnIndex = findColumnWithHeader(sheet, firstColumnHeader);
         for (int i = 1; i < columnHeaders.length; i++) {
             String nextColumnHeader = columnHeaders[i];
+            LOGGER.info("Moving column '{}'...", nextColumnHeader);
             int nextColIndex = findColumnWithHeader(sheet, nextColumnHeader);
+            if (nextColIndex == -1) {
+                LOGGER.warn("Cannot found column '{}' in the sheet '{}'", nextColumnHeader, sheet);
+                continue;
+            }
             ExcelOperatorUtils.moveColumn(sheet, nextColIndex, firstColumnIndex + i);
         }
     }
