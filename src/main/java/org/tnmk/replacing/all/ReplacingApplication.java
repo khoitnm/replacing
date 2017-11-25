@@ -20,10 +20,10 @@ import java.util.Map;
 @SpringBootApplication
 public class ReplacingApplication implements CommandLineRunner {
     public static final List<String> PATTERN_EXCLUDING_JAVA_PROJECT = Arrays.asList(
-        ".*[\\/]\\.git",
-        ".*[\\/]\\.idea",
-        ".*[\\/]\\.gradle",
-        ".*\\.class");
+            ".*[\\/]\\.git",
+            ".*[\\/]\\.idea",
+            ".*[\\/]\\.gradle",
+            ".*\\.class");
 
     @Autowired
     private ScoutDataProcessingService scoutDataProcessingService;
@@ -57,12 +57,12 @@ public class ReplacingApplication implements CommandLineRunner {
         renaming.put("KhôiTiên", "KhoiTien");
 //        renaming.put("!", "");
 //        renaming.put("_.", ".");
-        renameService.rename(sourcePath, renaming);
+        this.renameService.rename(sourcePath, renaming);
     }
 
     private void analyseScoutData() {
-        String sourcePath = "D:\\Program Files (x86)\\Championship Manager 01-02\\search\\WB";
-        String destPath = "D:\\Program Files (x86)\\Championship Manager 01-02\\search\\WB-analysis";
+        String sourcePath = "D:\\Program Files (x86)\\Championship Manager 01-02\\search\\All";
+        String destPath = "D:\\Program Files (x86)\\Championship Manager 01-02\\search\\All-analysis";
         List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
 
         Map<String, String> renaming = new HashMap<>();
@@ -71,10 +71,10 @@ public class ReplacingApplication implements CommandLineRunner {
         renaming.put(" % ", "%, ");
         renaming.put("Scout Rating", "Scout,Rating");
 
-        copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
-        addingLineService.addingLine(destPath, 0, "Improve rate,2");
+        this.copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
+        this.addingLineService.addingLine(destPath, 0, "Improve rate,2");
 
-        scoutDataProcessingService.processCsvToXlsx(destPath+"\\WB.csv", destPath+"\\WB.xlsx");
+        this.scoutDataProcessingService.processCsvToXlsx(destPath);
     }
 //
 //    private void cloneToPublishingService() {

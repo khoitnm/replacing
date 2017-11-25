@@ -4,9 +4,13 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.tnmk.replacing.all.service.TraverseFolderService;
+import org.tnmk.replacing.all.util.FileUtils;
 
 import java.awt.Color;
+import java.io.File;
 
 @Service
 public class ScoutDataProcessingService {
@@ -18,6 +22,26 @@ public class ScoutDataProcessingService {
     private static final int COL_PP = 5;
     private static final int COL_AP = 6;
     private static final int COL_POTENTIAL_RATE = 7;
+
+    @Autowired
+    private TraverseFolderService traverseFolderService;
+
+    public void processCsvToXlsx(String rootFolderPath) {
+        File file = new File(rootFolderPath);
+        this.traverseFolderService.traverFile(file, currentFile -> {
+            if (isCsvFile(currentFile)) {
+                String targetFileName = currentFile + ".xlsx";
+                processCsvToXlsx(currentFile.getAbsolutePath(), targetFileName);
+            }
+            return currentFile;
+        });
+    }
+
+    private boolean isCsvFile(File file) {
+        if (!file.isFile()) return false;
+        String fileExtension = FileUtils.getFileExtension(file.getAbsolutePath());
+        return "csv".equalsIgnoreCase(fileExtension);
+    }
 
     public void processCsvToXlsx(String csvAbsFileName, String xlsxAbsFileName) {
         XSSFWorkbook workbook = ExcelIOUtils.readCsvAsXlsx(csvAbsFileName, ",");
