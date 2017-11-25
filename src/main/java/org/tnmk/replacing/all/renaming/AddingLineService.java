@@ -25,7 +25,7 @@ public class AddingLineService {
      */
     public void addingLine(String rootFolderPath, int lineIndex, String addingContent) {
         File file = new File(rootFolderPath);
-        traverseFolderService.traverFile(file, currentFile -> {
+        this.traverseFolderService.traverFile(file, currentFile -> {
             if (currentFile.isFile()) {
                 addingContentFile(currentFile, lineIndex, addingContent);
             }

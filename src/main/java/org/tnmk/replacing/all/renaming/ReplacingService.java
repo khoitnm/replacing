@@ -24,7 +24,7 @@ public class ReplacingService {
     public void rename(String rootPath, Map<String, String> renameMap) {
         File file = new File(rootPath);
         for (String sourceText : renameMap.keySet()) {
-            traverseFolderService.traverFile(file, currentFile -> {
+            this.traverseFolderService.traverFile(file, currentFile -> {
                 String destText = renameMap.get(sourceText);
                 File renamedFile = renameFileIfMatch(currentFile, sourceText, destText);
                 if (renamedFile.isFile()) {
@@ -46,7 +46,7 @@ public class ReplacingService {
             LOGGER.info("Rename: \n\tfrom: {} \n\tto: {}", file.getAbsoluteFile(), newFile.getAbsoluteFile());
             if (!renameSuccess) {
                 throw new UnexpectedException(
-                    String.format("Cannot addingLine from %s to %s", file.getAbsolutePath(), newFilePath));
+                        String.format("Cannot addingLine from %s to %s", file.getAbsolutePath(), newFilePath));
             }
             return newFile;
         } else {
@@ -55,7 +55,9 @@ public class ReplacingService {
     }
 
     private boolean replaceContentFile(File file, String sourceText, String destText) {
-        if (!IOUtils.isTextFile(file.getAbsolutePath())) { return false; }
+        if (!IOUtils.isTextFile(file.getAbsolutePath())) {
+            return false;
+        }
         String content = IOUtils.loadTextFileInSystem(file.getAbsolutePath());
         if (content.contains(sourceText)) {
             content = StringUtils.replace(content, sourceText, destText);

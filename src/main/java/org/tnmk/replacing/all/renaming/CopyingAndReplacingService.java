@@ -21,8 +21,8 @@ public class CopyingAndReplacingService {
     private ReplacingService replacingService;
 
     public void copyingAndReplacing(String sourcePath, String destPath, List<String> excludingPatterns,
-        Map<String, String> renaming) {
-        copyingService.copySubItems(sourcePath, destPath, excludingPatterns);
-        replacingService.rename(destPath, renaming);
+                                    Map<String, String> renaming) {
+        this.copyingService.copySubItems(sourcePath, destPath, excludingPatterns);
+        this.replacingService.rename(destPath, renaming);
     }
 }

@@ -23,33 +23,11 @@ public final class ExcelOperatorUtils {
         for (int i = row.getPhysicalNumberOfCells() - 1; i >= originalIndex; i--) {
             Cell oldCell = row.getCell(i);
             Cell newCell = row.createCell(i + shiftCount, oldCell.getCellTypeEnum());
-            cloneCellValue(oldCell, newCell);
-            //Will have bug with formular columns.
+            cloneCell(oldCell, newCell);
+            //Will have bug with formula columns.
         }
     }
 
-    @Deprecated
-    public static void cloneCellValue(Cell oldCell, Cell newCell) { //TODO test it
-        switch (oldCell.getCellTypeEnum()) {
-            case STRING:
-                newCell.setCellValue(oldCell.getStringCellValue());
-                break;
-            case NUMERIC:
-                newCell.setCellValue(oldCell.getNumericCellValue());
-                break;
-            case BOOLEAN:
-                newCell.setCellValue(oldCell.getBooleanCellValue());
-                break;
-            case FORMULA:
-                newCell.setCellFormula(oldCell.getCellFormula());
-                break;
-            case ERROR:
-                newCell.setCellErrorValue(oldCell.getErrorCellValue());
-            case BLANK:
-            case _NONE:
-                break;
-        }
-    }
 
     public static int countRows(Sheet sheet) {
         return sheet.getLastRowNum() + 1;
@@ -60,62 +38,36 @@ public final class ExcelOperatorUtils {
      *
      * @param workbook
      * @param sheet
-     * @param columnIndex
+     * @param insertingColIndex
      */
-    public static void insertColumn(Workbook workbook, Sheet sheet, int columnIndex) {
+    public static void insertColumn(Workbook workbook, Sheet sheet, int insertingColIndex) {
         assert workbook != null;
 
         FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
         evaluator.clearAllCachedResultValues();
 
-        int nrRows = countRows(sheet);
-        int nrCols = countColumns(sheet);
+        int numRows = countRows(sheet);
+        int numCols = countColumns(sheet);
 
-        for (int row = 0; row < nrRows; row++) {
-            Row r = sheet.getRow(row);
-
-            if (r == null) {
+        for (int rowIndex = 0; rowIndex < numRows; rowIndex++) {
+            Row row = sheet.getRow(rowIndex);
+            if (row == null) {
                 continue;
             }
 
             // shift to right
-            for (int col = nrCols; col > columnIndex; col--) {
-                Cell rightCell = r.getCell(col);
-                if (rightCell != null) {
-                    r.removeCell(rightCell);
-                }
-
-                Cell leftCell = r.getCell(col - 1);
-
-                if (leftCell != null) {
-                    Cell newCell = r.createCell(col, leftCell.getCellTypeEnum());
-                    cloneCell(newCell, leftCell);
-                    if (newCell.getCellTypeEnum() == CellType.FORMULA) {
-                        newCell.setCellFormula(ExcelHelper.updateFormula(newCell.getCellFormula(), columnIndex));
-                        evaluator.notifySetFormula(newCell);
-                        CellValue cellValue = evaluator.evaluate(newCell);
-                        evaluator.evaluateFormulaCellEnum(newCell);
-                        System.out.println(cellValue);
-                    }
-                }
-            }
-
-            // delete old column
-            CellType cellType = CellType.BLANK;
-
-            Cell currentEmptyWeekCell = r.getCell(columnIndex);
-            if (currentEmptyWeekCell != null) {
-//				cellType = currentEmptyWeekCell.getCellType();
-                r.removeCell(currentEmptyWeekCell);
+            for (int colIndex = numCols - 1; colIndex >= insertingColIndex; colIndex--) {
+                moveColumn(evaluator, row, colIndex, colIndex + 1);
             }
 
             // create new column
-            r.createCell(columnIndex, cellType);
+//            row.createCell(insertingColIndex, cellType);
         }
 
         // Adjust the column widths
-        for (int col = nrCols; col > columnIndex; col--) {
-            sheet.setColumnWidth(col, sheet.getColumnWidth(col - 1));
+        for (int colIndex = numCols - 1; colIndex >= insertingColIndex; colIndex--) {
+            int newColIndex = colIndex + 1;
+            sheet.setColumnWidth(newColIndex, sheet.getColumnWidth(colIndex));
         }
 
         // currently updates formula on the last cell of the moved column
@@ -128,10 +80,43 @@ public final class ExcelOperatorUtils {
         XSSFFormulaEvaluator.evaluateAllFormulaCells(workbook);
     }
 
+
+    /**
+     * @param evaluator
+     * @param row
+     * @param sourceColIndex e.g. current col is 5
+     * @param targetColIndex Note: the old data of the target column will be replaced by original column.
+     */
+    private static void moveColumn(FormulaEvaluator evaluator, Row row, int sourceColIndex, int targetColIndex) {
+
+        Cell targetCell = row.getCell(targetColIndex);//The first targetCell is the empty cell.
+        if (targetCell != null) {
+            row.removeCell(targetCell);
+        }
+
+        Cell sourceCell = row.getCell(sourceColIndex);
+
+        if (sourceCell != null) {
+            targetCell = row.createCell(targetColIndex, sourceCell.getCellTypeEnum());
+            cloneCell(sourceCell, targetCell);
+            if (targetCell.getCellTypeEnum() == CellType.FORMULA) {
+                //TODO also change the reference of other cols which is related to this col.
+                String newCellFormula = ExcelHelper.updateFormula(targetCell.getCellFormula(), sourceColIndex, targetColIndex);
+                targetCell.setCellFormula(newCellFormula);
+                evaluator.notifySetFormula(targetCell);
+                CellValue cellValue = evaluator.evaluate(targetCell);
+                evaluator.evaluateFormulaCellEnum(targetCell);
+                System.out.println(cellValue);
+            }
+
+            row.removeCell(sourceCell);
+        }
+    }
+
     /*
      * Takes an existing Cell and merges all the styles and formula into the new one
      */
-    private static void cloneCell(Cell newCell, Cell oldCell) {
+    private static void cloneCell(Cell oldCell, Cell newCell) {
         newCell.setCellComment(oldCell.getCellComment());
         newCell.setCellStyle(oldCell.getCellStyle());
 
@@ -172,4 +157,6 @@ public final class ExcelOperatorUtils {
         }
         return lastCol;
     }
+
+
 }

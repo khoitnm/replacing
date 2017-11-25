@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.tnmk.replacing.all.scoutdata.ScoutDataProcessingService;
 import org.tnmk.replacing.all.renaming.AddingLineService;
 import org.tnmk.replacing.all.renaming.CopyingAndReplacingService;
 import org.tnmk.replacing.all.renaming.RenameService;
+import org.tnmk.replacing.all.scoutdata.ScoutDataProcessingService;
 
 import java.util.Arrays;
 import java.util.HashMap;

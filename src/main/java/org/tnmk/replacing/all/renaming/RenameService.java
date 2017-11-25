@@ -24,7 +24,7 @@ public class RenameService {
     public void rename(String rootPath, Map<String, String> renameMap) {
         File file = new File(rootPath);
         for (String sourceText : renameMap.keySet()) {
-            traverseFolderService.traverFile(file, currentFile -> {
+            this.traverseFolderService.traverFile(file, currentFile -> {
                 String destText = renameMap.get(sourceText);
                 File renamedFile = renameFileIfMatch(currentFile, sourceText, destText);
                 return renamedFile;
@@ -49,7 +49,7 @@ public class RenameService {
             LOGGER.info("Rename: \n\tfrom: {} \n\tto: {}", file.getAbsoluteFile(), newFile.getAbsoluteFile());
             if (!renameSuccess) {
                 throw new UnexpectedException(
-                    String.format("Cannot addingLine from %s to %s", file.getAbsolutePath(), newFilePath));
+                        String.format("Cannot addingLine from %s to %s", file.getAbsolutePath(), newFilePath));
             }
             return newFile;
         } else {

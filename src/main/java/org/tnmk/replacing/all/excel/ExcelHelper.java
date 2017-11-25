@@ -11,12 +11,13 @@ public class ExcelHelper {
      * "B6:B8" (columnIndex = 2) -> "C6:C8" (columnIndex = 3)
      *
      * @param cellFormula
-     * @param columnIndex
+     * @param originalColumnIndex
      * @return
      */
-    public static String updateFormula(String cellFormula, int columnIndex) {
-        String existingColName = getReferenceForColumnIndex(columnIndex);
-        String newColName = getReferenceForColumnIndex(columnIndex + 1);
+    public static String updateFormula(String cellFormula, int originalColumnIndex, int newColumnIndex) {
+        String existingColName = getReferenceForColumnIndex(originalColumnIndex);
+        String newColName = getReferenceForColumnIndex(newColumnIndex);
+        //FIXME doesn't work correctly when the column name has more than one characters (e.g. AA, AB, AC...)
         String newCellFormula = cellFormula.replace(existingColName, newColName);
         return newCellFormula;
     }

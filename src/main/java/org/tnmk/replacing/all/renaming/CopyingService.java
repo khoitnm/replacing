@@ -26,7 +26,7 @@ public class CopyingService {
                 FileUtils.forceMkdir(destDir);
             } catch (java.io.IOException e) {
                 throw new IOException(
-                    String.format("Cannot create folder %s: %s", destDir.getAbsolutePath(), e.getMessage()), e);
+                        String.format("Cannot create folder %s: %s", destDir.getAbsolutePath(), e.getMessage()), e);
             }
         }
         try {
@@ -41,8 +41,8 @@ public class CopyingService {
             FileUtils.copyDirectory(sourceDir, destDir, excludingFileFilter);
         } catch (java.io.IOException e) {
             throw new IOException(
-                String.format("Error copying %s to %s: %s",
-                    sourceDir.getAbsolutePath(), destDir.getAbsolutePath(), e.getMessage()), e);
+                    String.format("Error copying %s to %s: %s",
+                            sourceDir.getAbsolutePath(), destDir.getAbsolutePath(), e.getMessage()), e);
         }
 
     }
