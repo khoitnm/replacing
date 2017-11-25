@@ -1,2 +1,2 @@
-spring.application.name: publishing-service
+spring.application.name: publishing-renaming
 spring.cloud.config.uri: ${SERVICES_ENDPOINT:http://localhost:8888}/configs/_/

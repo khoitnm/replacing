@@ -1,4 +1,4 @@
-package org.tnmk.replacing.all.service;
+package org.tnmk.replacing.all.renaming;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ public class FolderReplacingService {
     private ReplacingService replacingService;
 
     public void renamingProject() {
-        String projectRootPath = "/SourceCode/MBC/stream-service";
+        String projectRootPath = "/SourceCode/MBC/stream-renaming";
         Map<String, String> renaming = new HashMap<>();
         renaming.put("campaign", "stream");
         renaming.put("CAMPAIGN", "STREAM");

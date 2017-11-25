@@ -1,4 +1,4 @@
-package org.tnmk.replacing.all.service;
+package org.tnmk.replacing.all.renaming;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

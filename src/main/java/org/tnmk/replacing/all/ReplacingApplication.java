@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.tnmk.replacing.all.excel.ScoutDataProcessingService;
-import org.tnmk.replacing.all.service.AddingLineService;
-import org.tnmk.replacing.all.service.CopyingAndReplacingService;
-import org.tnmk.replacing.all.service.RenameService;
+import org.tnmk.replacing.all.scoutdata.ScoutDataProcessingService;
+import org.tnmk.replacing.all.renaming.AddingLineService;
+import org.tnmk.replacing.all.renaming.CopyingAndReplacingService;
+import org.tnmk.replacing.all.renaming.RenameService;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -50,7 +50,7 @@ public class ReplacingApplication implements CommandLineRunner {
 
     private void renameService() {
         String sourcePath = "D:\\Photos\\KhoiTien_100_tam_album-20171103T081956Z-001\\KhoiTien_100_tam_album";
-//        String destPath = "/SourceCode/MBC/dam-service";
+//        String destPath = "/SourceCode/MBC/dam-renaming";
 //        List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
 
         Map<String, String> renaming = new HashMap<>();
@@ -78,8 +78,8 @@ public class ReplacingApplication implements CommandLineRunner {
     }
 //
 //    private void cloneToPublishingService() {
-//        String sourcePath = "/SourceCode/MBC/content-presentation-service";
-//        String destPath = "/SourceCode/MBC/publishing-service";
+//        String sourcePath = "/SourceCode/MBC/content-presentation-renaming";
+//        String destPath = "/SourceCode/MBC/publishing-renaming";
 //        List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
 //
 //        Map<String, String> renaming = new HashMap<>();
@@ -102,8 +102,8 @@ public class ReplacingApplication implements CommandLineRunner {
 //    }
 //
 //    private void cloneToStreamService() {
-//        String sourcePath = "/SourceCode/MBC/content-presentation-service";
-//        String destPath = "/SourceCode/MBC/stream-service";
+//        String sourcePath = "/SourceCode/MBC/content-presentation-renaming";
+//        String destPath = "/SourceCode/MBC/stream-renaming";
 //        List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
 //
 //        Map<String, String> renaming = new HashMap<>();
