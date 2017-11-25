@@ -125,17 +125,22 @@ public class ScoutDataProcessingService {
     }
 
     private void rearrangeColumns(Sheet sheet) {
-        int accelerateColIndex = findColumnWithHeader(sheet, "Acceleration");
-        int paceColIndex = findColumnWithHeader(sheet, "Pace");
-        ExcelOperatorUtils.moveColumn(sheet, paceColIndex, accelerateColIndex + 1);
-        int jumpIndex = findColumnWithHeader(sheet, "Jump");
-        ExcelOperatorUtils.moveColumn(sheet, jumpIndex, accelerateColIndex + 2);
-        int staminaColIndex = findColumnWithHeader(sheet, "Stamina");
-        ExcelOperatorUtils.moveColumn(sheet, staminaColIndex, accelerateColIndex + 3);
-        int strengthIndex = findColumnWithHeader(sheet, "Strength");
-        ExcelOperatorUtils.moveColumn(sheet, strengthIndex, accelerateColIndex + 4);
+        arrangeColumns(sheet,
+                "Acceleration", "Pace", "Jump", "Stamina", "Strength",
+                "Tackling", "Mark", "Position", "Head",
+                "Finishing", "Long shot", "Off The Ball",
+                "Dribbling", "Technique",
+                "Passing", "Creativity", "Crossing");
+    }
 
-
+    private void arrangeColumns(Sheet sheet, String... columnHeaders) {
+        String firstColumnHeader = columnHeaders[0];
+        int firstColumnIndex = findColumnWithHeader(sheet, firstColumnHeader);
+        for (int i = 1; i < columnHeaders.length; i++) {
+            String nextColumnHeader = columnHeaders[i];
+            int nextColIndex = findColumnWithHeader(sheet, nextColumnHeader);
+            ExcelOperatorUtils.moveColumn(sheet, nextColIndex, firstColumnIndex + i);
+        }
     }
 
     private int findColumnWithHeader(Sheet sheet, String header) {
