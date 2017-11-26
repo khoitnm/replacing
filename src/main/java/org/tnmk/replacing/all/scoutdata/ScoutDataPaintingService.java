@@ -27,8 +27,8 @@ public class ScoutDataPaintingService {
 
     public void paintColumnsByValues(Sheet sheet) {
         paintColumnsByValues(sheet,
-                new Color(61, 170, 81),
-                new Color(210, 247, 218),
+                new Color(0, 194, 45),
+                new Color(220, 255, 222),
                 "Value"
         );
         paintColumnsByValues(sheet,
@@ -37,8 +37,8 @@ public class ScoutDataPaintingService {
                 "Acceleration", "Pace", "Jumping", "Stamina", "Strength"
         );
         paintColumnsByValues(sheet,
-                new Color(247, 220, 221),
-                new Color(180, 52, 51),
+                new Color(247, 215, 236),
+                new Color(235, 79, 220),
                 "Tackling", "Marking", "Positioning", "Head"
 //                "Finishing", "Long shot", "Off The Ball",
 //                "Dribbling", "Technique",
@@ -53,8 +53,8 @@ public class ScoutDataPaintingService {
 //                "Passing", "Creativity", "Crossing"
         );
         paintColumnsByValues(sheet,
-                new Color(247, 240, 221),
-                new Color(212, 161, 6),
+                new Color(255, 247, 209),
+                new Color(231, 180, 6),
 //                "Tackling", "Marking", "Positioning", "Head",
 //                "Finishing", "Long shot", "Off The Ball",
                 "Dribbling", "Technique"
