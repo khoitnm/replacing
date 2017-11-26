@@ -17,6 +17,7 @@ import org.tnmk.replacing.all.excel.ExcelOperatorUtils;
 import org.tnmk.replacing.all.excel.ExcelStyleUtils;
 import org.tnmk.replacing.all.excel.ExcelValueUtils;
 import org.tnmk.replacing.all.renaming.TraverseFolderService;
+import org.tnmk.replacing.all.util.DateTimeUtils;
 import org.tnmk.replacing.all.util.FileUtils;
 
 import java.awt.*;
@@ -47,7 +48,7 @@ public class ScoutDataProcessingService {
         File file = new File(rootFolderPath);
         this.traverseFolderService.traverFile(file, currentFile -> {
             if (isCsvFile(currentFile)) {
-                String targetFileName = currentFile + ".xlsx";
+                String targetFileName = currentFile + "_" + DateTimeUtils.formatLocalDateTimeForFilePath() + "_.xlsx";
                 processCsvToXlsx(currentFile.getAbsolutePath(), targetFileName);
             }
             return currentFile;

@@ -40,32 +40,20 @@ public class ScoutDataPaintingService {
                 new Color(247, 215, 236),
                 new Color(235, 79, 220),
                 "Tackling", "Marking", "Positioning", "Head"
-//                "Finishing", "Long shot", "Off The Ball",
-//                "Dribbling", "Technique",
-//                "Passing", "Creativity", "Crossing"
         );
         paintColumnsByValues(sheet,
                 new Color(217, 216, 247),
                 new Color(96, 67, 180),
-//                "Tackling", "Marking", "Positioning", "Head",
                 "Finishing", "Long shot", "Off The Ball"
-//                "Dribbling", "Technique",
-//                "Passing", "Creativity", "Crossing"
         );
         paintColumnsByValues(sheet,
                 new Color(255, 247, 209),
                 new Color(231, 180, 6),
-//                "Tackling", "Marking", "Positioning", "Head",
-//                "Finishing", "Long shot", "Off The Ball",
                 "Dribbling", "Technique"
-//                "Passing", "Creativity", "Crossing"
         );
         paintColumnsByValues(sheet,
                 new Color(224, 247, 228),
                 new Color(16, 212, 0),
-//                "Tackling", "Marking", "Positioning", "Head",
-//                "Finishing", "Long shot", "Off The Ball",
-//                "Dribbling", "Technique"
                 "Passing", "Creativity", "Crossing"
         );
     }
