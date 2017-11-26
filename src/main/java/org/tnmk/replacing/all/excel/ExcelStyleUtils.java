@@ -30,8 +30,12 @@ public final class ExcelStyleUtils {
 
     public static XSSFCellStyle newCellStyle(XSSFWorkbook workbook, Color textColor, Color backgroundColor) {
         XSSFCellStyle cellStyle = workbook.createCellStyle();
-        applyTextColor(workbook, cellStyle, textColor);
-        applyBackgroundColor(cellStyle, backgroundColor);
+        if (textColor != null) {
+            applyTextColor(workbook, cellStyle, textColor);
+        }
+        if (backgroundColor != null) {
+            applyBackgroundColor(cellStyle, backgroundColor);
+        }
         return cellStyle;
     }
 

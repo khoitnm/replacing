@@ -40,7 +40,7 @@ public final class ColorUtils {
         }
     }
 
-    public static float[] rbgToHsb(int r, int g, int b) {
+    public static float[] rgbToHsb(int r, int g, int b) {
         float[] hsb = new float[3];
         Color.RGBtoHSB(r, g, b, hsb);
         return hsb;
@@ -51,5 +51,10 @@ public final class ColorUtils {
         String gs = Integer.toHexString((int) (g * 256));
         String bs = Integer.toHexString((int) (b * 256));
         return rs + gs + bs;
+    }
+
+    public static Color hsbToRbg(float[] hsb) {
+        int rgb = Color.HSBtoRGB(hsb[0], hsb[1], hsb[2]);
+        return new Color(rgb);
     }
 }
