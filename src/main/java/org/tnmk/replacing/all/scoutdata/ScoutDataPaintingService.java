@@ -56,6 +56,12 @@ public class ScoutDataPaintingService {
                 new Color(16, 212, 0),
                 "Passing", "Creativity", "Crossing"
         );
+        paintColumnsByValues(sheet
+                , new Color(247, 232, 211)
+                , new Color(212, 127, 15)
+                , "Handling", "Reflexes", "One On Ones"
+
+        );
     }
 
     public void paintColumnsByValues(Sheet sheet, Color lowestColor, Color highestColor, String... columnsHeaders) {

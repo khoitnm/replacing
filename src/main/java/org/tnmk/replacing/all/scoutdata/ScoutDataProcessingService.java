@@ -31,15 +31,11 @@ public class ScoutDataProcessingService {
     public static final Logger LOGGER = LoggerFactory.getLogger(ScoutDataProcessingService.class);
 
 
-    private static final int ROW_DATA_CONTENT = 2;
-    private static final int COL_NAME = 0;
-    private static final int COL_CP = 4;
-    private static final int COL_PP = 5;
-    private static final int COL_AP = 6;
-    private static final int COL_POTENTIAL_RATE = 7;
+    @Autowired
+    private ScoutDataPaintingService scoutDataPaintingService;
 
     @Autowired
-    ScoutDataPaintingService scoutDataPaintingService;
+    private ScoutDataRemoveLowPotentialService removeLowPotentialService;
 
     @Autowired
     private TraverseFolderService traverseFolderService;
@@ -63,22 +59,36 @@ public class ScoutDataProcessingService {
 
     public void processCsvToXlsx(String csvAbsFileName, String xlsxAbsFileName) {
         XSSFWorkbook workbook = ExcelIOUtils.readCsvAsXlsx(csvAbsFileName, ",");
-        process(workbook);
+        process(workbook, xlsxAbsFileName);
         ExcelIOUtils.writeToFile(workbook, xlsxAbsFileName);
     }
 
-    private void process(XSSFWorkbook workbook) {
+    private void process(XSSFWorkbook workbook, String xlsxAbsFileName) {
+
         Sheet sheet = workbook.getSheetAt(0);
 
         calculateAP(sheet);
         calculatePotentialRate(sheet);
+//        this.removeLowPotentialService.removeLowPotentialRate(sheet);
+//        ExcelIOUtils.writeToFile(workbook, xlsxAbsFileName);
+        LOGGER.info("Calculated potential rate " + xlsxAbsFileName);
 
         rearrangeColumns(sheet);
+//        ExcelIOUtils.writeToFile(workbook, xlsxAbsFileName);
+        LOGGER.info("Rearranged columns " + xlsxAbsFileName);
+
 
         applyHeaderFilter(sheet);
         changeHeaderStyle(sheet);
         this.scoutDataPaintingService.paintColumnsByValues(sheet);
-        sheet.createFreezePane(COL_NAME + 1, ROW_DATA_CONTENT);
+//        ExcelIOUtils.writeToFile(workbook, xlsxAbsFileName);
+        LOGGER.info("Applying styles " + xlsxAbsFileName);
+
+
+        sheet.createFreezePane(ScoutDataHelper.COL_NAME + 1, ScoutDataHelper.ROW_DATA_CONTENT);
+//        ExcelIOUtils.writeToFile(workbook, xlsxAbsFileName);
+        LOGGER.info("Finished!!! " + xlsxAbsFileName);
+
     }
 
     private void changeHeaderStyle(Sheet sheet) {
@@ -95,12 +105,16 @@ public class ScoutDataProcessingService {
      * @param sheet
      */
     private void calculateAP(Sheet sheet) {
-        insertColumn(sheet, COL_AP, "AP", "Firow-Eirow");
+        int colPotAbilityIndex = findColumnWithHeader(sheet, ScoutDataHelper.HEADER_POT_ABILITY);
+        int colAvailableAbilityIndex = colPotAbilityIndex + 1;
+        insertColumn(sheet, colAvailableAbilityIndex, "AP", "Firow-Eirow");
     }
 
     private void calculatePotentialRate(Sheet sheet) {
-        insertColumn(sheet, COL_POTENTIAL_RATE, "Potential Rate", "Kirow+Girow*$B$1/10/100");
-        stylePercentage(sheet, COL_POTENTIAL_RATE);
+        int colPotAbilityIndex = findColumnWithHeader(sheet, ScoutDataHelper.HEADER_POT_ABILITY);
+        int colPotentialRate = colPotAbilityIndex + 2;
+        insertColumn(sheet, colPotentialRate, ScoutDataHelper.HEADER_POTENTIAL_RATE, "Kirow+Girow*$B$1/10/100");
+        stylePercentage(sheet, colPotentialRate);
     }
 
     /**
@@ -116,7 +130,7 @@ public class ScoutDataProcessingService {
 
         ExcelValueUtils.setString(sheet, ROW_DATA_HEADER, colIndex, header);
         int numRow = ExcelOperatorUtils.countRows(sheet);
-        for (int irow = ROW_DATA_CONTENT; irow < numRow; irow++) {
+        for (int irow = ScoutDataHelper.ROW_DATA_CONTENT; irow < numRow; irow++) {
             String formula = formulaPattern.replaceAll("irow", "" + (irow + 1));
             ExcelValueUtils.setFormula(sheet, irow, colIndex, formula);
         }
@@ -128,7 +142,7 @@ public class ScoutDataProcessingService {
         style.setDataFormat(workbook.createDataFormat().getFormat("0%"));
 
         int numRow = ExcelOperatorUtils.countRows(sheet);
-        for (int irow = ROW_DATA_CONTENT; irow < numRow; irow++) {
+        for (int irow = ScoutDataHelper.ROW_DATA_CONTENT; irow < numRow; irow++) {
             Cell cell = sheet.getRow(irow).getCell(colIndex, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
             cell.setCellStyle(style);
         }
@@ -144,11 +158,13 @@ public class ScoutDataProcessingService {
 
     private void rearrangeColumns(Sheet sheet) {
         arrangeColumns(sheet,
-                "Acceleration", "Pace", "Jumping", "Stamina", "Strength",
-                "Tackling", "Marking", "Positioning", "Head",
-                "Finishing", "Long shot", "Off The Ball",
-                "Dribbling", "Technique",
-                "Passing", "Creativity", "Crossing");
+                "Acceleration", "Pace", "Jumping", "Stamina", "Strength"
+                , "Tackling", "Marking", "Positioning", "Head"
+                , "Finishing", "Long shot", "Off The Ball"
+                , "Dribbling", "Technique"
+                , "Passing", "Creativity", "Crossing"
+                , "Handling", "Reflexes", "One On Ones"
+        );
     }
 
     private void arrangeColumns(Sheet sheet, String... columnHeaders) {
