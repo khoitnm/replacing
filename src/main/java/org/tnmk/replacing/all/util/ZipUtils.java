@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+/**
+ * Version 1.0.0
+ */
 public final class ZipUtils {
     private ZipUtils() {
         //Utils
@@ -78,6 +81,7 @@ public final class ZipUtils {
     private static void extractZipFile(String sourceZipFilePath, String finalTargetFolderPath) {
         extractFile(sourceZipFilePath, finalTargetFolderPath, ArchiveFormat.ZIP, null);
     }
+
     private static void extract7zFile(String sourceZipFilePath, String finalTargetFolderPath) {
         extractFile(sourceZipFilePath, finalTargetFolderPath, ArchiveFormat.SEVEN_Z, null);
     }
@@ -85,9 +89,9 @@ public final class ZipUtils {
 
     private static void extractFile(String sourceZipFilePath, String finalTargetFolderPath, ArchiveFormat archiveFormat, CompressionType compression) {
         Archiver archiver;
-        if (compression != null){
+        if (compression != null) {
             archiver = ArchiverFactory.createArchiver(archiveFormat, compression);
-        }else{
+        } else {
             archiver = ArchiverFactory.createArchiver(archiveFormat);
         }
         try {
@@ -96,6 +100,7 @@ public final class ZipUtils {
             throw new FileIOException(String.format("Error when unzip file '%s' to '%s'", sourceZipFilePath, finalTargetFolderPath), e);
         }
     }
+
     @Deprecated
     public static void extract7zFileWithCommonCompress(String sourceZipFilePath, String finalTargetFolderPath) {
         SevenZFile sevenZFile = null;
