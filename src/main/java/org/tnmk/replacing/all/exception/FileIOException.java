@@ -10,21 +10,21 @@ package org.tnmk.replacing.all.exception;
  * But inside your binarySearch(), you find out that input list was not sorted, throw UnexpectedException.
  * </pre>
  */
-public class IOException extends BaseException {
+public class FileIOException extends BaseException {
 
     private static final long serialVersionUID = -2947099715615663831L;
     private static final String ERROR_CODE = ExceptionConstants.General.UnexpectedError;
 
-    public IOException() {
+    public FileIOException() {
         //This is used by Feign client
         this(null);
     }
 
-    public IOException(final String message) {
+    public FileIOException(final String message) {
         super(ERROR_CODE, message);
     }
 
-    public IOException(final String message, final Throwable throwable) {
+    public FileIOException(final String message, final Throwable throwable) {
         super(ERROR_CODE, message, throwable);
     }
 }

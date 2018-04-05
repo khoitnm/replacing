@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.tnmk.replacing.all.util.FileUtils;
 import org.tnmk.replacing.all.util.IOUtils;
 
 import java.io.File;
@@ -34,7 +35,7 @@ public class AddingLineService {
     }
 
     private boolean addingContentFile(File file, int lineIndex, String addingContent) {
-        if (!IOUtils.isTextFile(file.getAbsolutePath())) {
+        if (!FileUtils.isTextFile(file.getAbsolutePath())) {
             return false;
         }
         String content = IOUtils.loadTextFileInSystem(file.getAbsolutePath());

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.tnmk.replacing.all.exception.UnexpectedException;
+import org.tnmk.replacing.all.util.FileUtils;
 import org.tnmk.replacing.all.util.IOUtils;
 
 import java.io.File;
@@ -55,7 +56,7 @@ public class ReplacingService {
     }
 
     private boolean replaceContentFile(File file, String sourceText, String destText) {
-        if (!IOUtils.isTextFile(file.getAbsolutePath())) {
+        if (!FileUtils.isTextFile(file.getAbsolutePath())) {
             return false;
         }
         String content = IOUtils.loadTextFileInSystem(file.getAbsolutePath());

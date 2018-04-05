@@ -4,8 +4,8 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'idea'
 
-sourceCompatibility = 1.9
-targetCompatibility = 1.9
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 buildscript {
     repositories {
@@ -30,6 +30,12 @@ dependencies {
     compile group: 'org.apache.poi', name: 'poi', version: '3.17'
     //Excel (.xlsx)
     compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+    // https://mvnrepository.com/artifact/com.github.junrar/junrar
+    compile group: 'com.github.junrar', name: 'junrar', version: '0.7'
+
+    //7z: Common-compress needs tukaani.xz dependencies.
+    compile group: 'org.apache.commons', name: 'commons-compress', version: '1.16.1'
+    compile group: 'org.tukaani', name: 'xz', version: '1.5'
 
 }
 //dependencies {

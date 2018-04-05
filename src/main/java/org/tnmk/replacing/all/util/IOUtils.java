@@ -1,9 +1,12 @@
 package org.tnmk.replacing.all.util;
 
+import org.apache.commons.io.FileUtils;
+import org.tnmk.replacing.all.exception.FileIOException;
 import org.tnmk.replacing.all.exception.UnexpectedException;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -11,6 +14,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
+ * version: 1.0.1
+ * 2018/04/04
+ *
  * @author khoi.tran on 7/5/17.
  */
 public final class IOUtils {
@@ -90,46 +96,42 @@ public final class IOUtils {
         return new String(bytes);
     }
 
-    public static boolean isBinaryFileWithProbeContentType(File file) {
-        String type;
-        try {
-            type = Files.probeContentType(file.toPath());
-        } catch (IOException e) {
-            throw new UnexpectedException("Cannot get ProbeContentType of file " + file);
-        }
-        if (type == null) {
-            //type couldn't be determined, assume binary
-            return true;
-        } else if (type.startsWith("text")) {
-            return false;
-        } else {
-            //type isn't text
-            return true;
-        }
+    public static File createParentFolderIfNecessary(String filePath) {
+        File destinationFile = new File(filePath);
+
+        String parentPath = destinationFile.getParent();
+        return createFolderIfNecessary(parentPath);
     }
 
-    public static boolean isTextFile(String filePath) {
+    /**
+     * @param folderPath
+     * @return If folder already exists or has just created, return the folder.
+     * If there's a file with the same name, return null.
+     * Else, throw Exception.
+     */
+    public static File createFolderIfNecessary(String folderPath) {
+        File file = new File(folderPath);
         try {
-            File f = new File(filePath);
-            if (!f.exists()) { return false; }
-            FileInputStream in = new FileInputStream(f);
-            int size = in.available();
-            if (size > 1000) { size = 1000; }
-            byte[] data = new byte[size];
-            in.read(data);
-            in.close();
-            String s = new String(data, "ISO-8859-1");
-            String s2 = s.replaceAll(
-                "[a-zA-Z0-9ßöäü\\.\\*!\"§\\$\\%&/()=\\?@~'#:,;\\" +
-                    "+><\\|\\[\\]\\{\\}\\^°²³\\\\ \\n\\r\\t_\\-`´âêîô" +
-                    "ÂÊÔÎáéíóàèìòÁÉÍÓÀÈÌÒ©‰¢£¥€±¿»«¼½¾™ª]", "");
-            // will delete all text signs
+            if (!file.exists()) {
+                FileUtils.forceMkdir(file);
+            }else if (!file.isDirectory()){
+                return null;
+            }
+        } catch (IOException e) {
+            throw new FileIOException(String.format("Cannot create folder '%s'", file.getAbsolutePath()), e);
+        }
+        return file;
+    }
 
-            double d = (double) (s.length() - s2.length()) / (double) (s.length());
-            // percentage of text signs in the text
-            return d > 0.95;
-        } catch (IOException ex) {
-            throw new UnexpectedException("Cannot check file is text or binary " + filePath, ex);
+    /**
+     * @param path the path could be relative path or absolute path.
+     * @return
+     */
+    public static FileInputStream loadInputStreamSystemFile(String path) {
+        try {
+            return new FileInputStream(new File(path));
+        } catch (FileNotFoundException e) {
+            throw new UnexpectedException(String.format("Cannot load InputStream from file '%s'", path), e);
         }
     }
 }

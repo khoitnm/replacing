@@ -8,6 +8,7 @@ import org.tnmk.replacing.all.renaming.AddingLineService;
 import org.tnmk.replacing.all.renaming.CopyingAndReplacingService;
 import org.tnmk.replacing.all.renaming.RenameService;
 import org.tnmk.replacing.all.scoutdata.ScoutDataProcessingService;
+import org.tnmk.replacing.all.unzip.UnzipService;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -19,87 +20,91 @@ import java.util.Map;
  */
 @SpringBootApplication
 public class ReplacingApplication implements CommandLineRunner {
-    public static final List<String> PATTERN_EXCLUDING_JAVA_PROJECT = Arrays.asList(
-            ".*[\\/]\\.git",
-            ".*[\\/]\\.idea",
-            ".*[\\/]\\.gradle",
-            ".*\\.class");
+	public static final List<String> PATTERN_EXCLUDING_JAVA_PROJECT = Arrays.asList(
+		".*[\\/]\\.git",
+		".*[\\/]\\.idea",
+		".*[\\/]\\.gradle",
+		".*\\.class");
 
-    @Autowired
-    private ScoutDataProcessingService scoutDataProcessingService;
-    @Autowired
-    private CopyingAndReplacingService copyingAndReplacingService;
+	@Autowired
+	private ScoutDataProcessingService scoutDataProcessingService;
+	@Autowired
+	private CopyingAndReplacingService copyingAndReplacingService;
 
-    @Autowired
-    private AddingLineService addingLineService;
-    @Autowired
-    private RenameService renameService;
+	@Autowired
+	private AddingLineService addingLineService;
+	@Autowired
+	private RenameService renameService;
 
-    public static void main(String[] args) {
-        SpringApplication.run(ReplacingApplication.class, args);
-    }
+	@Autowired
+	private UnzipService unzipService;
+	public static void main(String[] args) {
+		SpringApplication.run(ReplacingApplication.class, args);
+	}
 
-    @Override
-    public void run(String... args) throws Exception {
+	@Override
+	public void run(String... args) throws Exception {
+		unzipService.unzipRecursive("D:\\OldFree\\HeroesIII\\Mods\\Objects\\Mods\\ItsJustHoMM3CreatureDefs");
 //        analyseScoutData();
-//        cloneToPublishingService();
+//		cloneToPublishingService();
 //        cloneToStreamService();
 //        renameService();
-        analyseScoutData();
-    }
+//        analyseScoutData();
+	}
 
-    private void renameService() {
-        String sourcePath = "D:\\Photos\\KhoiTien_100_tam_album-20171103T081956Z-001\\KhoiTien_100_tam_album";
+	private void renameService() {
+		String sourcePath = "D:\\Photos\\KhoiTien_100_tam_album-20171103T081956Z-001\\KhoiTien_100_tam_album";
 //        String destPath = "/SourceCode/MBC/dam-renaming";
 //        List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
 
-        Map<String, String> renaming = new HashMap<>();
-        renaming.put("KhôiTiên", "KhoiTien");
+		Map<String, String> renaming = new HashMap<>();
+		renaming.put("KhôiTiên", "KhoiTien");
 //        renaming.put("!", "");
 //        renaming.put("_.", ".");
-        this.renameService.rename(sourcePath, renaming);
-    }
+		this.renameService.rename(sourcePath, renaming);
+	}
 
-    private void analyseScoutData() {
-        String sourcePath = "D:\\Program Files (x86)\\Championship Manager 01-02\\search\\All";
-        String destPath = "D:\\Program Files (x86)\\Championship Manager 01-02\\search\\All-analysis";
-        List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
+	private void analyseScoutData() {
+		String sourcePath = "D:\\Program Files (x86)\\Championship Manager 01-02\\search\\All";
+		String destPath = "D:\\Program Files (x86)\\Championship Manager 01-02\\search\\All-analysis";
+		List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
 
-        Map<String, String> renaming = new HashMap<>();
-        renaming.put(", ", " ");
-        renaming.put(";", ",");
-        renaming.put(" % ", "%, ");
-        renaming.put("Scout Rating", "Scout,Rating");
+		Map<String, String> renaming = new HashMap<>();
+		renaming.put(", ", " ");
+		renaming.put(";", ",");
+		renaming.put(" % ", "%, ");
+		renaming.put("Scout Rating", "Scout,Rating");
 
-        this.copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
-        this.addingLineService.addingLine(destPath, 0, "Improve rate,2");
+		this.copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
+		this.addingLineService.addingLine(destPath, 0, "Improve rate,2");
 
-        this.scoutDataProcessingService.processCsvToXlsx(destPath);
-    }
+		this.scoutDataProcessingService.processCsvToXlsx(destPath);
+	}
+
+	//
+	private void cloneToPublishingService() {
+		String sourcePath = "C:\\SourceCode\\Practice\\spring-security-oauth-master\\spring-security-oauth-fullbackend";
+		String destPath = "C:\\SourceCode\\Practice\\spring-security-oauth-master\\spring-security-oauth-fullserver";
+		List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
+
+		Map<String, String> renaming = new HashMap<>();
+
+		//Plural
+		renaming.put("spring-security-oauth-fullbackend", "spring-security-oauth-fullserver");
+//		renaming.put("contentpresentations", "dams");
+//		renaming.put("contentPresentations", "dams");
+//		renaming.put("ContentPresentations", "Dams");
+//		renaming.put("CONTENT_PRESENTATIONS", "DAMS");
 //
-//    private void cloneToPublishingService() {
-//        String sourcePath = "/SourceCode/MBC/content-presentation-renaming";
-//        String destPath = "/SourceCode/MBC/publishing-renaming";
-//        List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
-//
-//        Map<String, String> renaming = new HashMap<>();
+//		//Singular
+//		renaming.put("content-presentation", "dam");
+//		renaming.put("contentpresentation", "dam");
+//		renaming.put("contentPresentation", "dam");
+//		renaming.put("ContentPresentation", "Dam");
+//		renaming.put("CONTENT_PRESENTATION", "DAM");
 
-//        //Plural
-//        renaming.put("content-presentations", "dams");
-//        renaming.put("contentpresentations", "dams");
-//        renaming.put("contentPresentations", "dams");
-//        renaming.put("ContentPresentations", "Dams");
-//        renaming.put("CONTENT_PRESENTATIONS", "DAMS");
-//
-//        //Singular
-//        renaming.put("content-presentation", "dam");
-//        renaming.put("contentpresentation", "dam");
-//        renaming.put("contentPresentation", "dam");
-//        renaming.put("ContentPresentation", "Dam");
-//        renaming.put("CONTENT_PRESENTATION", "DAM");
-
-//        copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
-//    }
+		this.copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
+	}
 //
 //    private void cloneToStreamService() {
 //        String sourcePath = "/SourceCode/MBC/content-presentation-renaming";
