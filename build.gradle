@@ -33,10 +33,10 @@ dependencies {
     // https://mvnrepository.com/artifact/com.github.junrar/junrar
     compile group: 'com.github.junrar', name: 'junrar', version: '0.7'
 
-    //7z: Common-compress needs tukaani.xz dependencies.
-    compile group: 'org.apache.commons', name: 'commons-compress', version: '1.16.1'
+    //A facade of common-compress libraries.
+    compile group: 'org.rauschig', name: 'jarchivelib', version: '0.7.1'
+    //This dependencies is necessary for 7z compression/extraction (which use XZ compression algorithm)
     compile group: 'org.tukaani', name: 'xz', version: '1.5'
-
 }
 //dependencies {
 //

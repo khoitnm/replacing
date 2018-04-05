@@ -3,18 +3,19 @@ package org.tnmk.replacing.all.util;
 import com.github.junrar.extract.ExtractArchive;
 import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
 import org.apache.commons.compress.archivers.sevenz.SevenZFile;
+import org.rauschig.jarchivelib.ArchiveFormat;
+import org.rauschig.jarchivelib.Archiver;
+import org.rauschig.jarchivelib.ArchiverFactory;
+import org.rauschig.jarchivelib.CompressionType;
 import org.tnmk.replacing.all.exception.FileIOException;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
 public final class ZipUtils {
@@ -74,7 +75,29 @@ public final class ZipUtils {
         return finalTargetFolderPath;
     }
 
-    public static void extract7zFile(String sourceZipFilePath, String finalTargetFolderPath) {
+    private static void extractZipFile(String sourceZipFilePath, String finalTargetFolderPath) {
+        extractFile(sourceZipFilePath, finalTargetFolderPath, ArchiveFormat.ZIP, null);
+    }
+    private static void extract7zFile(String sourceZipFilePath, String finalTargetFolderPath) {
+        extractFile(sourceZipFilePath, finalTargetFolderPath, ArchiveFormat.SEVEN_Z, null);
+    }
+
+
+    private static void extractFile(String sourceZipFilePath, String finalTargetFolderPath, ArchiveFormat archiveFormat, CompressionType compression) {
+        Archiver archiver;
+        if (compression != null){
+            archiver = ArchiverFactory.createArchiver(archiveFormat, compression);
+        }else{
+            archiver = ArchiverFactory.createArchiver(archiveFormat);
+        }
+        try {
+            archiver.extract(new File(sourceZipFilePath), new File(finalTargetFolderPath));
+        } catch (IOException e) {
+            throw new FileIOException(String.format("Error when unzip file '%s' to '%s'", sourceZipFilePath, finalTargetFolderPath), e);
+        }
+    }
+    @Deprecated
+    public static void extract7zFileWithCommonCompress(String sourceZipFilePath, String finalTargetFolderPath) {
         SevenZFile sevenZFile = null;
         try {
             sevenZFile = new SevenZFile(new File(sourceZipFilePath));
@@ -105,7 +128,8 @@ public final class ZipUtils {
         return finalTargetFolderPath;
     }
 
-    public static String extractZipFile(String sourceZipFilePath, String finalTargetFolderPath) {
+    @Deprecated
+    public static String extractZipFileOldWay(String sourceZipFilePath, String finalTargetFolderPath) {
         try {
             byte[] buffer = new byte[1024];
 
