@@ -88,7 +88,7 @@ public class ReplacingApplication implements CommandLineRunner {
 	}
 
 	private void cloneSkeleton(){
-		String sourcePath = "/home/khoitran/SourceCode";
+		String sourcePath = "/home/khoitran/SourceCode/Skeletons";
 		cloneProjectService.simpleCloneToTheSameFolder(sourcePath,"skeleton","kafka");
 	}
 

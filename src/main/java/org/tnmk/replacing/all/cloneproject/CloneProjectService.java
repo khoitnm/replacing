@@ -1,10 +1,14 @@
 package org.tnmk.replacing.all.cloneproject;
 
+import org.apache.commons.vfs2.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tnmk.replacing.all.cloneproject.transform.*;
 import org.tnmk.replacing.all.renaming.CopyingAndReplacingService;
+import org.tnmk.replacing.all.util.FileUtils;
+import org.tnmk.replacing.all.util.IOUtils;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +35,9 @@ public class CloneProjectService {
     public void simpleCloneToTheSameFolder(String sourcePath, String oldSingularName, String newSingularName) {
         List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
         String destPath = sourcePath;//Clone to the same folder.
+        File parentFolder = IOUtils.createParentFolderIfNecessary(destPath);
+        destPath = parentFolder.getAbsolutePath()+"/"+new LowerCaseWithHyphenTransform().apply(newSingularName);
+
         Map<String, String> renaming = new HashMap<>();
 
         replaceMapWithTransform(renaming, oldSingularName, newSingularName, new CamelCaseTransform());
