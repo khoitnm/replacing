@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.tnmk.replacing.all.cloneproject.CloneProjectService;
 import org.tnmk.replacing.all.renaming.AddingLineService;
 import org.tnmk.replacing.all.renaming.CopyingAndReplacingService;
 import org.tnmk.replacing.all.renaming.RenameService;
@@ -32,6 +33,10 @@ public class ReplacingApplication implements CommandLineRunner {
 	private CopyingAndReplacingService copyingAndReplacingService;
 
 	@Autowired
+	private CloneProjectService cloneProjectService;
+
+
+	@Autowired
 	private AddingLineService addingLineService;
 	@Autowired
 	private RenameService renameService;
@@ -44,7 +49,8 @@ public class ReplacingApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		unzipService.unzipRecursive("D:\\OldFree\\HeroesIII\\Mods\\Objects\\Mods\\ItsJustHoMM3CreatureDefs");
+		cloneSkeleton();
+//		unzipService.unzipRecursive("D:\\OldFree\\HeroesIII\\Mods\\Objects\\Mods\\ItsJustHoMM3CreatureDefs");
 //        analyseScoutData();
 //		cloneToPublishingService();
 //        cloneToStreamService();
@@ -79,6 +85,11 @@ public class ReplacingApplication implements CommandLineRunner {
 		this.addingLineService.addingLine(destPath, 0, "Improve rate,2");
 
 		this.scoutDataProcessingService.processCsvToXlsx(destPath);
+	}
+
+	private void cloneSkeleton(){
+		String sourcePath = "/home/khoitran/SourceCode";
+		cloneProjectService.simpleCloneToTheSameFolder(sourcePath,"skeleton","kafka");
 	}
 
 	//

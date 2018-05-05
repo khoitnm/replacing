@@ -40,4 +40,9 @@ public final class StringUtils {
         }
 
     }
+
+    public static String[] splitToWords(String wordsString){
+        String normalizedSpaceString = org.apache.commons.lang3.StringUtils.normalizeSpace(wordsString);
+        return normalizedSpaceString.split("\\W+");
+    }
 }
