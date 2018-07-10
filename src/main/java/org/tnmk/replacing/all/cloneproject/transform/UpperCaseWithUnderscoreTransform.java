@@ -4,6 +4,7 @@ package org.tnmk.replacing.all.cloneproject.transform;
 import org.tnmk.replacing.all.util.StringUtils;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -11,8 +12,8 @@ public class UpperCaseWithUnderscoreTransform implements Function<String, String
 
     @Override
     public String apply(String wordsString) {
-        String[] wordsList = StringUtils.splitToWords(wordsString);
-        String className = Arrays.stream(wordsList).map(
+        List<String> wordsList = SplitWordsHelper.splitWords(wordsString);
+        String className = wordsList.stream().map(
                 String::toUpperCase
         ).collect(Collectors.joining("_"));
         return className;

@@ -88,8 +88,8 @@ public class ReplacingApplication implements CommandLineRunner {
 	}
 
 	private void cloneSkeleton(){
-		String sourcePath = "/home/khoitran/SourceCode/Skeletons";
-		cloneProjectService.simpleCloneToTheSameFolder(sourcePath,"skeleton","kafka");
+		String sourcePath = "/home/khoitran/SourceCode/Skeletons/practice-spring-jpa/pro01-simple-entity";
+		cloneProjectService.simpleCloneToTheSameFolder(sourcePath,"pro01-simple-entity","pro02-json-column");
 	}
 
 	//
