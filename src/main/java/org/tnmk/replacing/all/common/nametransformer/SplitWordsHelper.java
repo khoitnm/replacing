@@ -1,4 +1,4 @@
-package org.tnmk.replacing.all.cloneproject.transform;
+package org.tnmk.replacing.all.common.nametransformer;
 
 import org.tnmk.replacing.all.util.StringUtils;
 

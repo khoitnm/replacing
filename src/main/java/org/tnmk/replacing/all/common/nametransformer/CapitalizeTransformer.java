@@ -1,14 +1,11 @@
-package org.tnmk.replacing.all.cloneproject.transform;
+package org.tnmk.replacing.all.common.nametransformer;
 
 
-import org.tnmk.replacing.all.util.StringUtils;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class CapitalizeTransform implements Function<String, String> {
+public class CapitalizeTransformer implements Function<String, String> {
 
     @Override
     public String apply(String wordsString) {
