@@ -13,7 +13,7 @@ public class MultiFormRenameHelper {
      *                        For example: "the-name-01"
      * @param newSingularName words should be separated by spaces or hyphen. Each word could be lowercase, uppercase, capitalized,
      *                        For example: "the-new-name-02"
-     * @return the rename map with multi form:
+     * @return the replace map with multi form:
      * <li>CamelCase: TheName01 -> TheNewName02</li>
      * <li>CamelCaseUncapitalize: theName01 -> theNewName02</li>
      * <li>Capitalize: Thename01 -> Thenewname02</li>

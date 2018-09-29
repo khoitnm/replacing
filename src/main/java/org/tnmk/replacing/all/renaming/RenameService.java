@@ -14,6 +14,8 @@ import java.util.Map;
 
 /**
  * @author khoi.tran on 7/5/17.
+ * This service just rename the file, it doesn't replace text inside files' content.
+ * If you want to replace content inside files, please use {@link ReplacingService}
  */
 @Service
 public class RenameService {

@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.tnmk.replacing.all.common.multiformname.MultiFormRenameHelper;
 import org.tnmk.replacing.all.exception.UnexpectedException;
 import org.tnmk.replacing.all.util.FileUtils;
 import org.tnmk.replacing.all.util.IOUtils;
@@ -22,7 +23,12 @@ public class ReplacingService {
     @Autowired
     private TraverseFolderService traverseFolderService;
 
-    public void rename(String rootPath, Map<String, String> renameMap) {
+    public void replace(String rootPath, String originalSingularName, String newSingularName) {
+        Map<String, String> renameMap = MultiFormRenameHelper.createMultiFormRenameMap(originalSingularName, newSingularName);
+        replace(rootPath, renameMap);
+    }
+
+    public void replace(String rootPath, Map<String, String> renameMap) {
         File file = new File(rootPath);
         for (String sourceText : renameMap.keySet()) {
             this.traverseFolderService.traverFile(file, currentFile -> {

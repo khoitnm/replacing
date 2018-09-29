@@ -8,6 +8,7 @@ import org.tnmk.replacing.all.cloneproject.CloneProjectService;
 import org.tnmk.replacing.all.renaming.AddingLineService;
 import org.tnmk.replacing.all.renaming.CopyingAndReplacingService;
 import org.tnmk.replacing.all.renaming.RenameService;
+import org.tnmk.replacing.all.renaming.ReplacingService;
 import org.tnmk.replacing.all.scoutdata.ScoutDataProcessingService;
 import org.tnmk.replacing.all.unzip.UnzipService;
 
@@ -42,6 +43,9 @@ public class ReplacingApplication implements CommandLineRunner {
 	private RenameService renameService;
 
 	@Autowired
+	private ReplacingService replacingService;
+
+	@Autowired
 	private UnzipService unzipService;
 	public static void main(String[] args) {
 		SpringApplication.run(ReplacingApplication.class, args);
@@ -54,13 +58,13 @@ public class ReplacingApplication implements CommandLineRunner {
 //        analyseScoutData();
 //		cloneToPublishingService();
 //        cloneToStreamService();
-        renameService();
+        replaceService();
 //        analyseScoutData();
 	}
 
-	private void renameService() {
+	private void replaceService() {
 		String sourcePath = "D:\\TmpSourceCode\\practice-spring-grpc";
-		this.renameService.rename(sourcePath, "grpc-resource","sample-service-proto");
+		this.replacingService.replace(sourcePath, "grpc-resource","sample-service-proto");
 	}
 
 	private void analyseScoutData() {
