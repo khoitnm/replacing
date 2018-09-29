@@ -2,16 +2,15 @@ package org.tnmk.replacing.all.cloneproject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.tnmk.replacing.all.common.nametransformer.*;
+import org.tnmk.replacing.all.common.multiformname.MultiFormRenameHelper;
+import org.tnmk.replacing.all.common.multiformname.nametransformer.LowerCaseWithHyphenTransformer;
 import org.tnmk.replacing.all.renaming.CopyingAndReplacingService;
 import org.tnmk.replacing.all.util.IOUtils;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 @Service
 public class CloneProjectService {
@@ -27,8 +26,10 @@ public class CloneProjectService {
     /**
      *
      * @param sourcePath
-     * @param oldSingularName words should be separated by spaces. Each word could be lowercase, uppercase, capitalized,
-     * @param newSingularName words should be separated by spaces. Each word could be lowercase, uppercase, capitalized,
+     * @param oldSingularName words should be separated by spaces or hyphen. Each word could be lowercase, uppercase, capitalized.
+     *                        For example: "the-name-01"
+     * @param newSingularName words should be separated by spaces or hyphen. Each word could be lowercase, uppercase, capitalized,
+     *                        For example: "the-name-02"
      */
     public void simpleCloneToTheSameFolder(String sourcePath, String oldSingularName, String newSingularName) {
         List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;

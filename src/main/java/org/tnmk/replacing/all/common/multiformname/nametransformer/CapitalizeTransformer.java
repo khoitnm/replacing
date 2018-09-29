@@ -1,4 +1,4 @@
-package org.tnmk.replacing.all.common.nametransformer;
+package org.tnmk.replacing.all.common.multiformname.nametransformer;
 
 
 import java.util.List;
@@ -9,7 +9,7 @@ public class CapitalizeTransformer implements Function<String, String> {
 
     @Override
     public String apply(String wordsString) {
-        List<String> wordsList = SplitWordsHelper.splitWords(wordsString);
+        List<String> wordsList = SplitWordsHelper.splitWordsBySpaceOrHyphen(wordsString);
         String className = wordsList.stream().collect(Collectors.joining());
         return org.apache.commons.lang3.StringUtils.capitalize(className);
     }

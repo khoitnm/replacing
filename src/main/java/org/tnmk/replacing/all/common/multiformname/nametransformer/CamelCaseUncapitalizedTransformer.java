@@ -1,4 +1,4 @@
-package org.tnmk.replacing.all.common.nametransformer;
+package org.tnmk.replacing.all.common.multiformname.nametransformer;
 
 
 import java.util.function.Function;

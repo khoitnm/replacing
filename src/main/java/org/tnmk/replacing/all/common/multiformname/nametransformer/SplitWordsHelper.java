@@ -1,4 +1,4 @@
-package org.tnmk.replacing.all.common.nametransformer;
+package org.tnmk.replacing.all.common.multiformname.nametransformer;
 
 import org.tnmk.replacing.all.util.StringUtils;
 
@@ -13,7 +13,7 @@ public class SplitWordsHelper {
      * @param phase
      * @return
      */
-    public static List<String> splitWords(String phase){
+    public static List<String> splitWordsBySpaceOrHyphen(String phase){
         String[] splitBySpaceWords = StringUtils.splitToWords(phase);
         List<String> splitByHyphenWordsList = new ArrayList<>();
         for (String splitBySpaceWord : splitBySpaceWords) {

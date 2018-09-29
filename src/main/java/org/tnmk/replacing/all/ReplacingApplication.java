@@ -91,6 +91,7 @@ public class ReplacingApplication implements CommandLineRunner {
 //		String sourcePath = "/home/khoitran/SourceCode/Skeletons/practice-spring-jpa/pro01-simple-entity";
 		String sourcePath = "D:\\Programming\\SourceCode\\Skeletons\\practice-spring-aws\\pro02-customize-download-s3-by-aws-java-sdk";
 		cloneProjectService.simpleCloneToTheSameFolder(sourcePath,"pro02-customize-download-s3-by-aws-java-sdk","pro03-customize-upload-s3-by-aws-java-sdk");
+
 	}
 
 	//

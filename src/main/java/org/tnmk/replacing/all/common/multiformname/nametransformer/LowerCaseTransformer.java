@@ -1,4 +1,4 @@
-package org.tnmk.replacing.all.common.nametransformer;
+package org.tnmk.replacing.all.common.multiformname.nametransformer;
 
 
 import java.util.List;
@@ -9,7 +9,7 @@ public class LowerCaseTransformer implements Function<String, String> {
 
     @Override
     public String apply(String wordsString) {
-        List<String> wordsList = SplitWordsHelper.splitWords(wordsString);
+        List<String> wordsList = SplitWordsHelper.splitWordsBySpaceOrHyphen(wordsString);
         String className = wordsList.stream().map(
                 String::toLowerCase
         ).collect(Collectors.joining());
