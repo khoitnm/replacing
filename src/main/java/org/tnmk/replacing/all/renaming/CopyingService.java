@@ -2,6 +2,7 @@ package org.tnmk.replacing.all.renaming;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
+import org.tnmk.replacing.all.common.filefilter.FileFilterHelper;
 import org.tnmk.replacing.all.exception.FileIOException;
 
 import java.io.File;
@@ -30,14 +31,7 @@ public class CopyingService {
             }
         }
         try {
-            FileFilter excludingFileFilter = file -> {
-                for (String excludedPattern : excludingPatterns) {
-                    if (file.getAbsolutePath().matches(excludedPattern)) {
-                        return false;
-                    }
-                }
-                return true;
-            };
+            FileFilter excludingFileFilter = FileFilterHelper.constructExcludeFileFilter(excludingPatterns);
             FileUtils.copyDirectory(sourceDir, destDir, excludingFileFilter);
         } catch (java.io.IOException e) {
             throw new FileIOException(

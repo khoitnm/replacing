@@ -25,6 +25,6 @@ public class FolderReplacingService {
         renaming.put("CAMPAIGN", "STREAM");
         renaming.put("Campaign", "Stream");
 
-        this.replacingService.rename(projectRootPath, renaming);
+        this.replacingService.replace(projectRootPath, renaming);
     }
 }

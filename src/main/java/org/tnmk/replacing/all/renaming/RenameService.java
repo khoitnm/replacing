@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.tnmk.replacing.all.common.multiformname.MultiFormRenameHelper;
 import org.tnmk.replacing.all.exception.UnexpectedException;
 import org.tnmk.replacing.all.util.StringUtils;
 
@@ -13,13 +14,22 @@ import java.util.Map;
 
 /**
  * @author khoi.tran on 7/5/17.
+ * This service just rename the file, it doesn't replace text inside files' content.
+ * If you want to replace content inside files, please use {@link ReplacingService}
  */
 @Service
 public class RenameService {
     public static final Logger LOGGER = LoggerFactory.getLogger(RenameService.class);
-
+    private final TraverseFolderService traverseFolderService;
     @Autowired
-    private TraverseFolderService traverseFolderService;
+    public RenameService(TraverseFolderService traverseFolderService) {
+        this.traverseFolderService = traverseFolderService;
+    }
+
+    public void rename(String rootPath, String originalSingularName, String newSingularName) {
+        Map<String, String> renameMap = MultiFormRenameHelper.createMultiFormRenameMap(originalSingularName, newSingularName);
+        rename(rootPath, renameMap);
+    }
 
     public void rename(String rootPath, Map<String, String> renameMap) {
         File file = new File(rootPath);

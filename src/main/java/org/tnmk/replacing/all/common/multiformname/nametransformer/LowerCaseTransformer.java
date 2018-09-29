@@ -1,18 +1,15 @@
-package org.tnmk.replacing.all.cloneproject.transform;
+package org.tnmk.replacing.all.common.multiformname.nametransformer;
 
 
-import org.tnmk.replacing.all.util.StringUtils;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class LowerCaseTransform implements Function<String, String> {
+public class LowerCaseTransformer implements Function<String, String> {
 
     @Override
     public String apply(String wordsString) {
-        List<String> wordsList = SplitWordsHelper.splitWords(wordsString);
+        List<String> wordsList = SplitWordsHelper.splitWordsBySpaceOrHyphen(wordsString);
         String className = wordsList.stream().map(
                 String::toLowerCase
         ).collect(Collectors.joining());
