@@ -49,25 +49,18 @@ public class ReplacingApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		cloneFolder();
+//		cloneFolder();
 //		unzipService.unzipRecursive("D:\\OldFree\\HeroesIII\\Mods\\Objects\\Mods\\ItsJustHoMM3CreatureDefs");
 //        analyseScoutData();
 //		cloneToPublishingService();
 //        cloneToStreamService();
-//        renameService();
+        renameService();
 //        analyseScoutData();
 	}
 
 	private void renameService() {
-		String sourcePath = "D:\\Photos\\KhoiTien_100_tam_album-20171103T081956Z-001\\KhoiTien_100_tam_album";
-//        String destPath = "/SourceCode/MBC/dam-renaming";
-//        List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
-
-		Map<String, String> renaming = new HashMap<>();
-		renaming.put("KhôiTiên", "KhoiTien");
-//        renaming.put("!", "");
-//        renaming.put("_.", ".");
-		this.renameService.rename(sourcePath, renaming);
+		String sourcePath = "D:\\TmpSourceCode\\practice-spring-grpc";
+		this.renameService.rename(sourcePath, "grpc-resource","sample-service-proto");
 	}
 
 	private void analyseScoutData() {
