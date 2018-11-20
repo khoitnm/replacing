@@ -29,7 +29,7 @@ public class CloneProjectService {
      * @param newSingularName words should be separated by spaces or hyphen. Each word could be lowercase, uppercase, capitalized,
      *                        For example: "the-name-02"
      */
-    public void simpleCloneToTheSameFolder(String sourcePath, String newSingularName) {
+    public void simpleCloneToTheSameParentFolder(String sourcePath, String newSingularName) {
         int lastPathIndex = sourcePath.lastIndexOf('/');
         lastPathIndex = Math.max(lastPathIndex, sourcePath.lastIndexOf('\\'));
         if (lastPathIndex <= 0) {
@@ -37,7 +37,7 @@ public class CloneProjectService {
         }
 
         String oldSingularName = sourcePath.substring(lastPathIndex);
-        simpleCloneToTheSameFolder(sourcePath, oldSingularName, newSingularName);
+        simpleCloneToTheSameParentFolder(sourcePath, oldSingularName, newSingularName);
     }
     /**
      *
@@ -47,7 +47,7 @@ public class CloneProjectService {
      * @param newSingularName words should be separated by spaces or hyphen. Each word could be lowercase, uppercase, capitalized,
      *                        For example: "the-name-02"
      */
-    public void simpleCloneToTheSameFolder(String sourcePath, String oldSingularName, String newSingularName) {
+    public void simpleCloneToTheSameParentFolder(String sourcePath, String oldSingularName, String newSingularName) {
         List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
         String destPath = sourcePath;//Clone to the same folder.
         File parentFolder = IOUtils.createParentFolderIfNecessary(destPath);

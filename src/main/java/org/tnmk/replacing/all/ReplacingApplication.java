@@ -53,12 +53,13 @@ public class ReplacingApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-//		cloneFolder();
+		cloneFolder();
+//        replaceFolder();
+
 //		unzipService.unzipRecursive("D:\\OldFree\\HeroesIII\\Mods\\Objects\\Mods\\ItsJustHoMM3CreatureDefs");
 //        analyseScoutData();
 //		cloneToPublishingService();
 //        cloneToStreamService();
-        replaceFolder();
 //        analyseScoutData();
 	}
 
@@ -89,8 +90,8 @@ public class ReplacingApplication implements CommandLineRunner {
 
 	private void cloneFolder(){
 //		String sourcePath = "/home/khoitran/SourceCode/Skeletons/practice-spring-jpa/pro01-simple-entity";
-		String sourcePath = "/home/kevintran/SourceCode/Personal/Skeletons/practice-spring-oauth-grpc";
-		cloneProjectService.simpleCloneToTheSameFolder(sourcePath,"practice-spring-oauth-grpc","practice-spring-grpc-oauth");
+		String sourcePath = "/home/kevintran/SourceCode/Personal/Skeletons/practice-spring-grpc-oauth/sample-resource-server";
+		cloneProjectService.simpleCloneToTheSameParentFolder(sourcePath,"sample-authorization-server");
 
 	}
 
