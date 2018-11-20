@@ -15,6 +15,8 @@ import java.util.Map;
 
 /**
  * @author khoi.tran on 7/5/17.
+ * This service will rename and also replace the text content inside files.
+ * If you want to rename the file only, use {@link RenameService}.
  */
 @Service
 public class ReplacingService {

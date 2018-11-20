@@ -58,14 +58,17 @@ public class ReplacingApplication implements CommandLineRunner {
 //        analyseScoutData();
 //		cloneToPublishingService();
 //        cloneToStreamService();
-        replaceService();
+        replaceFolder();
 //        analyseScoutData();
 	}
 
-	private void replaceService() {
-		String sourcePath = "D:\\TmpSourceCode\\practice-spring-grpc";
-		this.replacingService.replace(sourcePath, "grpc-resource","sample-service-proto");
-	}
+	private void replaceFolder() {
+		String sourcePath = "/home/kevintran/SourceCode/Personal/Skeletons/practice-spring-grpc-oauth";
+		this.replacingService.replace(sourcePath, "sample-grpc-client","sample-client");
+		this.replacingService.replace(sourcePath, "sample-grpc-authorization-server","sample-authorization-server");
+		this.replacingService.replace(sourcePath, "sample-grpc-resource-server","sample-resource-server");
+        this.replacingService.replace(sourcePath, "sample-proto","sample-resource-server-proto");
+    }
 
 	private void analyseScoutData() {
 		String sourcePath = "D:\\Programming\\SourceCode\\Skeletons\\practice-spring-aws\\pro02-customize-download-s3-by-aws-java-sdk";
@@ -86,8 +89,8 @@ public class ReplacingApplication implements CommandLineRunner {
 
 	private void cloneFolder(){
 //		String sourcePath = "/home/khoitran/SourceCode/Skeletons/practice-spring-jpa/pro01-simple-entity";
-		String sourcePath = "D:\\Programming\\SourceCode\\Skeletons\\practice-spring-aws\\pro02-customize-download-s3-by-aws-java-sdk";
-		cloneProjectService.simpleCloneToTheSameFolder(sourcePath,"pro02-customize-download-s3-by-aws-java-sdk","pro03-customize-upload-s3-by-aws-java-sdk");
+		String sourcePath = "/home/kevintran/SourceCode/Personal/Skeletons/practice-spring-oauth-grpc";
+		cloneProjectService.simpleCloneToTheSameFolder(sourcePath,"practice-spring-oauth-grpc","practice-spring-grpc-oauth");
 
 	}
 

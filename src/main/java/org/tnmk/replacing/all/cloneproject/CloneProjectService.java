@@ -26,6 +26,22 @@ public class CloneProjectService {
     /**
      *
      * @param sourcePath
+     * @param newSingularName words should be separated by spaces or hyphen. Each word could be lowercase, uppercase, capitalized,
+     *                        For example: "the-name-02"
+     */
+    public void simpleCloneToTheSameFolder(String sourcePath, String newSingularName) {
+        int lastPathIndex = sourcePath.lastIndexOf('/');
+        lastPathIndex = Math.max(lastPathIndex, sourcePath.lastIndexOf('\\'));
+        if (lastPathIndex <= 0) {
+            throw new RuntimeException("The sourcePath "+sourcePath+" must have at least one path indication character (e.g. '/' or '\\'");
+        }
+
+        String oldSingularName = sourcePath.substring(lastPathIndex);
+        simpleCloneToTheSameFolder(sourcePath, oldSingularName, newSingularName);
+    }
+    /**
+     *
+     * @param sourcePath
      * @param oldSingularName words should be separated by spaces or hyphen. Each word could be lowercase, uppercase, capitalized.
      *                        For example: "the-name-01"
      * @param newSingularName words should be separated by spaces or hyphen. Each word could be lowercase, uppercase, capitalized,
