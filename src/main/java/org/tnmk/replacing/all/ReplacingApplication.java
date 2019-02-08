@@ -55,17 +55,28 @@ public class ReplacingApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws RuntimeException {
 		cloneProject();
-//        renameFileFolderAndContentInsideAFolder();
+        renameFileFolderAndContentInsideAFolder();
 	}
 
+	/**
+	 * Note: It only rename the exactly phases (with different upper/lower cases situations).
+	 * For example:
+	 * java-service-template will be renamed to the-new-project
+	 * JavaServiceTemplate to TheNewProject
+	 * ...
+	 *
+	 * However, the phases java-service-template-xxx will not be renamed to the-new-project-xxx.
+	 * If you want some additional renaming phases, use renameFileFolderAndContentInsideAFolder() on the new cloned project.
+	 */
 	private void cloneProject(){
 		String sourcePath = "/home/kevintran/SourceCode/MonaLisa/java-service-template";
-		cloneProjectService.simpleCloneToTheSameParentFolder(sourcePath,"the-new-project-name");
+		cloneProjectService.simpleCloneToTheSameParentFolder(sourcePath,"mobias-mona-lisa-syndicator-api-gateway");
 	}
 
 	private void renameFileFolderAndContentInsideAFolder() {
-		String sourcePath = "/home/kevintran/SourceCode/MonaLisa/java-service-template";
-		this.replacingService.replace(sourcePath, "my-service","java-service-template");
+		String sourcePath = "/home/kevintran/SourceCode/MonaLisa/mobias-mona-lisa-syndicator-api-gateway";
+		this.replacingService.replace(sourcePath, "java-service-template-service","api-gateway-core");
+		this.replacingService.replace(sourcePath, "java-service-template-db","api-gateway-db");
 	}
 
 	/**
