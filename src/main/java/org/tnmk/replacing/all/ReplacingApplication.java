@@ -54,11 +54,16 @@ public class ReplacingApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws RuntimeException {
-//		cloneProject();
-        renameFileFolderAndContentInsideAFolder();
+		cloneProject();
+//        renameFileFolderAndContentInsideAFolder();
 
-//		unzipService.unzipRecursive("D:\\OldFree\\HeroesIII\\Mods\\Objects\\Mods\\ItsJustHoMM3CreatureDefs");
 //        analyseScoutData();
+	}
+
+	private void cloneProject(){
+		String sourcePath = "/home/kevintran/SourceCode/MonaLisa/java-service-template";
+		cloneProjectService.simpleCloneToTheSameParentFolder(sourcePath,"the-new-project-name");
+
 	}
 
 	private void renameFileFolderAndContentInsideAFolder() {
@@ -81,11 +86,5 @@ public class ReplacingApplication implements CommandLineRunner {
 		this.addingLineService.addingLine(destPath, 0, "Improve rate,2");
 
 		this.scoutDataProcessingService.processCsvToXlsx(destPath);
-	}
-
-	private void cloneProject(){
-		String sourcePath = "/home/khoitran/SourceCode/Skeletons/practice-spring-jpa/pro01-simple-entity";
-		cloneProjectService.simpleCloneToTheSameParentFolder(sourcePath,"the-new-project-name");
-
 	}
 }
