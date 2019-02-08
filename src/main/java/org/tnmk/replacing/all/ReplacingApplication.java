@@ -64,6 +64,7 @@ public class ReplacingApplication implements CommandLineRunner {
 	 * java-service-template will be renamed to the-new-project
 	 * JavaServiceTemplate to TheNewProject
 	 * ...
+	 * View more at {@link org.tnmk.replacing.all.common.multiformname.MultiFormRenameHelper#createMultiFormRenameMap(String, String)} to see all supporting word forms.
 	 *
 	 * However, the phases java-service-template-xxx will not be renamed to the-new-project-xxx.
 	 * If you want some additional renaming phases, use renameFileFolderAndContentInsideAFolder() on the new cloned project.
