@@ -36,9 +36,9 @@ public class ReplacingApplication implements CommandLineRunner {
 	@Autowired
 	private CloneProjectService cloneProjectService;
 
-
 	@Autowired
 	private AddingLineService addingLineService;
+
 	@Autowired
 	private RenameService renameService;
 
@@ -47,29 +47,24 @@ public class ReplacingApplication implements CommandLineRunner {
 
 	@Autowired
 	private UnzipService unzipService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ReplacingApplication.class, args);
 	}
 
 	@Override
-	public void run(String... args) throws Exception {
-		cloneFolder();
-//        replaceFolder();
+	public void run(String... args) throws RuntimeException {
+//		cloneProject();
+        renameFileFolderAndContentInsideAFolder();
 
 //		unzipService.unzipRecursive("D:\\OldFree\\HeroesIII\\Mods\\Objects\\Mods\\ItsJustHoMM3CreatureDefs");
 //        analyseScoutData();
-//		cloneToPublishingService();
-//        cloneToStreamService();
-//        analyseScoutData();
 	}
 
-	private void replaceFolder() {
-		String sourcePath = "/home/kevintran/SourceCode/Personal/Skeletons/practice-spring-grpc-oauth";
-		this.replacingService.replace(sourcePath, "sample-grpc-client","sample-client");
-		this.replacingService.replace(sourcePath, "sample-grpc-authorization-server","sample-authorization-server");
-		this.replacingService.replace(sourcePath, "sample-grpc-resource-server","sample-resource-server");
-        this.replacingService.replace(sourcePath, "sample-proto","sample-resource-server-proto");
-    }
+	private void renameFileFolderAndContentInsideAFolder() {
+		String sourcePath = "/home/kevintran/SourceCode/MonaLisa/java-service-template";
+		this.replacingService.replace(sourcePath, "my-service","java-service-template");
+	}
 
 	private void analyseScoutData() {
 		String sourcePath = "D:\\Programming\\SourceCode\\Skeletons\\practice-spring-aws\\pro02-customize-download-s3-by-aws-java-sdk";
@@ -88,50 +83,9 @@ public class ReplacingApplication implements CommandLineRunner {
 		this.scoutDataProcessingService.processCsvToXlsx(destPath);
 	}
 
-	private void cloneFolder(){
-//		String sourcePath = "/home/khoitran/SourceCode/Skeletons/practice-spring-jpa/pro01-simple-entity";
-		String sourcePath = "/home/kevintran/SourceCode/Personal/Skeletons/practice-spring-grpc-oauth/sample-resource-server";
-		cloneProjectService.simpleCloneToTheSameParentFolder(sourcePath,"sample-authorization-server");
+	private void cloneProject(){
+		String sourcePath = "/home/khoitran/SourceCode/Skeletons/practice-spring-jpa/pro01-simple-entity";
+		cloneProjectService.simpleCloneToTheSameParentFolder(sourcePath,"the-new-project-name");
 
 	}
-
-	//
-	@Deprecated
-	private void cloneToPublishingService() {
-		String sourcePath = "C:\\SourceCode\\Practice\\spring-security-oauth-master\\spring-security-oauth-fullbackend";
-		String destPath = "C:\\SourceCode\\Practice\\spring-security-oauth-master\\spring-security-oauth-fullserver";
-		List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
-
-		Map<String, String> renaming = new HashMap<>();
-
-		//Plural
-		renaming.put("spring-security-oauth-fullbackend", "spring-security-oauth-fullserver");
-//		renaming.put("contentpresentations", "dams");
-//		renaming.put("contentPresentations", "dams");
-//		renaming.put("ContentPresentations", "Dams");
-//		renaming.put("CONTENT_PRESENTATIONS", "DAMS");
-//
-//		//Singular
-//		renaming.put("content-presentation", "dam");
-//		renaming.put("contentpresentation", "dam");
-//		renaming.put("contentPresentation", "dam");
-//		renaming.put("ContentPresentation", "Dam");
-//		renaming.put("CONTENT_PRESENTATION", "DAM");
-
-		this.copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
-	}
-//
-//    private void cloneToStreamService() {
-//        String sourcePath = "/SourceCode/MBC/content-presentation-renaming";
-//        String destPath = "/SourceCode/MBC/stream-renaming";
-//        List<String> excludingPatterns = PATTERN_EXCLUDING_JAVA_PROJECT;
-//
-//        Map<String, String> renaming = new HashMap<>();
-//        renaming.put("content-presentation", "stream");
-//        renaming.put("contentpresentation", "stream");
-//        renaming.put("contentPresentation", "stream");
-//        renaming.put("ContentPresentation", "Stream");
-//        renaming.put("CONTENT_PRESENTATION", "STREAM");
-//        copyingAndReplacingService.copyingAndReplacing(sourcePath, destPath, excludingPatterns, renaming);
-//    }
 }
