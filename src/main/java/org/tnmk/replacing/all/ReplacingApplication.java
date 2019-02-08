@@ -63,7 +63,6 @@ public class ReplacingApplication implements CommandLineRunner {
 	private void cloneProject(){
 		String sourcePath = "/home/kevintran/SourceCode/MonaLisa/java-service-template";
 		cloneProjectService.simpleCloneToTheSameParentFolder(sourcePath,"the-new-project-name");
-
 	}
 
 	private void renameFileFolderAndContentInsideAFolder() {
