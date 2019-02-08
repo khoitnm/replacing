@@ -56,8 +56,6 @@ public class ReplacingApplication implements CommandLineRunner {
 	public void run(String... args) throws RuntimeException {
 		cloneProject();
 //        renameFileFolderAndContentInsideAFolder();
-
-//        analyseScoutData();
 	}
 
 	private void cloneProject(){
@@ -70,6 +68,9 @@ public class ReplacingApplication implements CommandLineRunner {
 		this.replacingService.replace(sourcePath, "my-service","java-service-template");
 	}
 
+	/**
+	 * Analysing scout data in game CM01/02
+	 */
 	private void analyseScoutData() {
 		String sourcePath = "D:\\Programming\\SourceCode\\Skeletons\\practice-spring-aws\\pro02-customize-download-s3-by-aws-java-sdk";
 		String destPath = "D:\\Programming\\SourceCode\\Skeletons\\practice-spring-aws\\pro03-customize-upload-s3-by-aws-java-sdk";
