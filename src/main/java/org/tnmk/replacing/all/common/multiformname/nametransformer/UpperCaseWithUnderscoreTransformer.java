@@ -9,7 +9,7 @@ public class UpperCaseWithUnderscoreTransformer implements Function<String, Stri
 
     @Override
     public String apply(String wordsString) {
-        List<String> wordsList = SplitWordsHelper.splitWordsBySpaceOrHyphen(wordsString);
+        List<String> wordsList = SplitWordsHelper.splitWordsBySpaceOrHyphenOrUnderscore(wordsString);
         String className = wordsList.stream().map(
                 String::toUpperCase
         ).collect(Collectors.joining("_"));

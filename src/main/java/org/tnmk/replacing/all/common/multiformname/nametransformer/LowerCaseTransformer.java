@@ -9,7 +9,7 @@ public class LowerCaseTransformer implements Function<String, String> {
 
     @Override
     public String apply(String wordsString) {
-        List<String> wordsList = SplitWordsHelper.splitWordsBySpaceOrHyphen(wordsString);
+        List<String> wordsList = SplitWordsHelper.splitWordsBySpaceOrHyphenOrUnderscore(wordsString);
         String className = wordsList.stream().map(
                 String::toLowerCase
         ).collect(Collectors.joining());
