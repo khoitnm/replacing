@@ -30,6 +30,7 @@ public class MultiFormRenameHelper {
         replaceMapWithTransform(renaming, oldSingularName, newSingularName, new CapitalizeTransformer());
         replaceMapWithTransform(renaming, oldSingularName, newSingularName, new LowerCaseTransformer());
         replaceMapWithTransform(renaming, oldSingularName, newSingularName, new LowerCaseWithHyphenTransformer());
+        replaceMapWithTransform(renaming, oldSingularName, newSingularName, new LowerCaseWithUnderscoreTransformer());
         replaceMapWithTransform(renaming, oldSingularName, newSingularName, new UpperCaseWithUnderscoreTransformer());
 
         return renaming;

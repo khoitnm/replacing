@@ -13,11 +13,11 @@ public class SplitWordsHelper {
      * @param phase
      * @return
      */
-    public static List<String> splitWordsBySpaceOrHyphen(String phase){
+    public static List<String> splitWordsBySpaceOrHyphenOrUnderscore(String phase){
         String[] splitWordsArray = StringUtils.splitToWords(phase);
         List<String> splitWords = Arrays.asList(splitWordsArray);
         splitWords = splitWordsByCharacter(splitWords, "-");
-//        splitWords = splitWordsByCharacter(splitWords, "_");
+        splitWords = splitWordsByCharacter(splitWords, "_");
         return splitWords;
     }
 
