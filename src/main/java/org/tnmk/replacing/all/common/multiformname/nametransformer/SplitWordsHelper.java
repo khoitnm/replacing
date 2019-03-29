@@ -14,12 +14,19 @@ public class SplitWordsHelper {
      * @return
      */
     public static List<String> splitWordsBySpaceOrHyphen(String phase){
-        String[] splitBySpaceWords = StringUtils.splitToWords(phase);
-        List<String> splitByHyphenWordsList = new ArrayList<>();
-        for (String splitBySpaceWord : splitBySpaceWords) {
-            String[] splitByHyphenWords = splitBySpaceWord.split("-");
-            splitByHyphenWordsList.addAll(Arrays.asList(splitByHyphenWords));
+        String[] splitWordsArray = StringUtils.splitToWords(phase);
+        List<String> splitWords = Arrays.asList(splitWordsArray);
+        splitWords = splitWordsByCharacter(splitWords, "-");
+//        splitWords = splitWordsByCharacter(splitWords, "_");
+        return splitWords;
+    }
+
+    private static List<String> splitWordsByCharacter(List<String> words, String delimiter){
+        List<String> result = new ArrayList<>();
+        for (String word : words) {
+            String[] splitedWords = word.split(delimiter);
+            result.addAll(Arrays.asList(splitedWords));
         }
-        return splitByHyphenWordsList;
+        return result;
     }
 }

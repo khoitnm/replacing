@@ -55,7 +55,7 @@ public class ReplacingApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws RuntimeException {
 		cloneProject();
-        renameFileFolderAndContentInsideAFolder();
+//        renameFileFolderAndContentInsideAFolder();
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class ReplacingApplication implements CommandLineRunner {
 	 */
 	private void cloneProject(){
 		String sourcePath = "/home/kevintran/SourceCode/MonaLisa/java-service-template";
-		cloneProjectService.simpleCloneToTheSameParentFolder(sourcePath,"mobias-mona-lisa-syndicator-api-gateway");
+		cloneProjectService.simpleCloneToTheSameParentFolder(sourcePath,"expedia_dump_state");
 	}
 
 	private void renameFileFolderAndContentInsideAFolder() {
