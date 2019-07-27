@@ -1,5 +1,5 @@
-group 'tnmk.replace'
-version '1.0-SNAPSHOT'
+group 'org.tnmk.replace'
+version '1.0.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'idea'
