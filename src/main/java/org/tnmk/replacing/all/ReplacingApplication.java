@@ -70,8 +70,8 @@ public class ReplacingApplication implements CommandLineRunner {
 	 * If you want some additional renaming phases, use renameFileFolderAndContentInsideAFolder() on the new cloned project.
 	 */
 	private void cloneProject(){
-		String sourcePath = "D:\\SourceCode\\practice-spring-aws\\pro03-customize-upload-s3-by-aws-java-sdk";
-		cloneProjectService.simpleCloneToTheSameParentFolder(sourcePath,"pro03-uploade-s3-by-transfer-manager");
+		String sourcePath = "D:\\SourceCode\\practice-spring-grpc\\sample-grpc-client";
+		cloneProjectService.simpleCloneToTheSameParentFolder(sourcePath,"grpc-client-app");
 	}
 
 	private void renameFileFolderAndContentInsideAFolder() {
