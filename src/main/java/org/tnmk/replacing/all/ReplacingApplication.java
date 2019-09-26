@@ -70,14 +70,14 @@ public class ReplacingApplication implements CommandLineRunner {
 	 * If you want some additional renaming phases, use renameFileFolderAndContentInsideAFolder() on the new cloned project.
 	 */
 	private void cloneProject(){
-		String sourcePath = "D:\\SourceCode\\practice-spring-grpc\\sample-grpc-client";
-		cloneProjectService.simpleCloneToTheSameParentFolder(sourcePath,"grpc-client-app");
+		String sourcePath = "/home/kevintran/SourceCode/Personal/Practice/practice-microservices/fe-01-simple";
+		cloneProjectService.simpleCloneToTheSameParentFolder(sourcePath,"fe-02-properties-config");
 	}
 
 	private void renameFileFolderAndContentInsideAFolder() {
-		String sourcePath = "/home/kevintran/SourceCode/MonaLisa/mobias-mona-lisa-syndicator-api-gateway";
-		this.replacingService.replace(sourcePath, "java-service-template-service","api-gateway-core");
-		this.replacingService.replace(sourcePath, "java-service-template-db","api-gateway-db");
+		String sourcePath = "/home/kevintran/SourceCode/Personal/Practice/practice-spring-grpc";
+		this.replacingService.replace(sourcePath, "sample-grpc-client","pro-01-client-simple");
+		//this.replacingService.replace(sourcePath, "sample-grpc-tls-client","sample-grpc-tls-server");
 	}
 
 	/**
