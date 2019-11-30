@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.tnmk.replacing.all.common.multiformname.MultiFormRenameHelper;
 import org.tnmk.replacing.all.renaming.CopyingAndReplacingService;
 import org.tnmk.replacing.all.renaming.ReplacingService;
 import org.tnmk.replacing.all.util.IOUtils;
