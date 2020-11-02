@@ -15,13 +15,13 @@ public class TraverseFolderService {
     public static final Logger LOGGER = LoggerFactory.getLogger(TraverseFolderService.class);
 
     /**
-     * @param file
-     * @param action do some action on the file.
+     * @param file this could be a file or a folder. This method will traverse that folder and all of children files, and then apply the action on each of them.
+     * @param action do some action on the traversed file.
      *               If renaming or changing file, return the new file.
      *               If deleting file, return null
      *               If don't want to lookup into file, return null
      */
-    public void traverFile(File file, Function<File, File> action) {
+    public void traverseFile(File file, Function<File, File> action) {
         if (file.exists()) {
             File changedFile = action.apply(file);
             if (changedFile == null) {
@@ -30,7 +30,7 @@ public class TraverseFolderService {
             if (changedFile.exists() && changedFile.isDirectory()) {
                 File[] children = changedFile.listFiles();
                 for (File child : children) {
-                    traverFile(child, action);
+                    traverseFile(child, action);
                 }
             }
         } else {
