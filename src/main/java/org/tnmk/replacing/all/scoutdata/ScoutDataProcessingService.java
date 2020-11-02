@@ -42,7 +42,7 @@ public class ScoutDataProcessingService {
 
     public void processCsvToXlsx(String rootFolderPath) {
         File file = new File(rootFolderPath);
-        this.traverseFolderService.traverFile(file, currentFile -> {
+        this.traverseFolderService.traverseFile(file, currentFile -> {
             if (isCsvFile(currentFile)) {
                 String targetFileName = currentFile + "_" + DateTimeUtils.formatLocalDateTimeForFilePath() + "_.xlsx";
                 processCsvToXlsx(currentFile.getAbsolutePath(), targetFileName);

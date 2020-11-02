@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tnmk.replacing.all.renaming.TraverseFolderService;
-import org.tnmk.replacing.all.util.FileUtils;
 import org.tnmk.replacing.all.util.IOUtils;
 import org.tnmk.replacing.all.util.ZipUtils;
 
@@ -21,7 +20,7 @@ public class UnzipService {
 
     public void unzipRecursive(String rootPath) {
         File file = new File(rootPath);
-        this.traverseFolderService.traverFile(file, currentFile -> {
+        this.traverseFolderService.traverseFile(file, currentFile -> {
             String absPath = currentFile.getAbsolutePath();
             File parentFolder = IOUtils.createParentFolderIfNecessary(absPath);
             if (ZipUtils.isCompressedFileName(currentFile.getName())){

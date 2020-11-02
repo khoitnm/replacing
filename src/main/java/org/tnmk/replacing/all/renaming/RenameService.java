@@ -34,7 +34,7 @@ public class RenameService {
     public void rename(String rootPath, Map<String, String> renameMap) {
         File file = new File(rootPath);
         for (String sourceText : renameMap.keySet()) {
-            this.traverseFolderService.traverFile(file, currentFile -> {
+            this.traverseFolderService.traverseFile(file, currentFile -> {
                 String destText = renameMap.get(sourceText);
                 File renamedFile = renameFileIfMatch(currentFile, sourceText, destText);
                 return renamedFile;

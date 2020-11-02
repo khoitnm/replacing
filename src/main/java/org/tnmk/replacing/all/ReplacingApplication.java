@@ -70,8 +70,8 @@ public class ReplacingApplication implements CommandLineRunner {
 	 * If you want some additional renaming phases, use renameFileFolderAndContentInsideAFolder() on the new cloned project.
 	 */
 	private void cloneProject(){
-		String sourcePath = "D:\\SourceCode\\practice-spring-arangodb\\pro-01-simple-entity";
-		cloneProjectService.cloneAndRenameInSameParentFolder(sourcePath,"common-arangodb");
+		String sourcePath = "/home/dell/Programming/Project/Personal/SourceCode/Practice/practice-spring-kafka/pro-04-stream/pro-04b-publish-to-statestore/pro-04a-producer";
+		cloneProjectService.cloneAndRenameInSameParentFolder(sourcePath,"pro-04b-producer");
 	}
 
 	private void renameFileFolderAndContentInsideAFolder() {

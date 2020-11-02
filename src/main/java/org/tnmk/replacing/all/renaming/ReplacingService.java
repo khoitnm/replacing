@@ -33,7 +33,7 @@ public class ReplacingService {
     public void replace(String rootPath, Map<String, String> renameMap) {
         File file = new File(rootPath);
         for (String sourceText : renameMap.keySet()) {
-            this.traverseFolderService.traverFile(file, currentFile -> {
+            this.traverseFolderService.traverseFile(file, currentFile -> {
                 String destText = renameMap.get(sourceText);
                 File renamedFile = renameFileIfMatch(currentFile, sourceText, destText);
                 if (renamedFile.isFile()) {
