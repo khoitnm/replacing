@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * version: 1.0.1
@@ -94,6 +95,18 @@ public final class IOUtils {
     public static String loadTextFileInSystem(final String path) {
         byte[] bytes = readBytesFromSystemFile(path);
         return new String(bytes);
+    }
+
+    public static List<String> loadTextLinesInSystemFile(final String path) {
+        File file = new File(path);
+        try
+        {
+            return FileUtils.readLines(file);
+        }
+        catch (IOException e)
+        {
+            throw new UnexpectedException("Cannot read lines in file "+file.getAbsolutePath());
+        }
     }
 
     public static File createParentFolderIfNecessary(String filePath) {
