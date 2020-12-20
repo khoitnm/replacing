@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.tnmk.replacing.all.checkdependencies.CheckAccessibleDependency;
+import org.tnmk.replacing.all.checkdependencies.Dependency;
 import org.tnmk.replacing.all.cloneproject.CloneProjectService;
 import org.tnmk.replacing.all.renaming.AddingLineService;
 import org.tnmk.replacing.all.renaming.CopyingAndReplacingService;
@@ -54,7 +56,11 @@ public class ReplacingApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws RuntimeException {
-		cloneProject();
+		Dependency dependency = CheckAccessibleDependency.isAccessibleDependency(
+				"https://repo.pointclickcare.com/artifactory/public",
+				"https://repo.pointclickcare.com/artifactory/public/org/flywaydb/flyway-core/7.1.1/flyway-core-7.1.1.pom");
+		System.out.println(""+dependency);
+		//cloneProject();
 //        renameFileFolderAndContentInsideAFolder();
 	}
 
@@ -70,8 +76,8 @@ public class ReplacingApplication implements CommandLineRunner {
 	 * If you want some additional renaming phases, use renameFileFolderAndContentInsideAFolder() on the new cloned project.
 	 */
 	private void cloneProject(){
-		String sourcePath = "/home/dell/Programming/Project/Personal/SourceCode/Practice/practice-spring-kafka/pro-04-stream/pro-04b-publish-to-statestore/pro-04a-producer";
-		cloneProjectService.cloneAndRenameInSameParentFolder(sourcePath,"pro-04b-producer");
+		String sourcePath = "C:\\dev\\workspace\\practice\\practice-nodejs-basic-master\\pro-04-express-api\\pro-04d-async";
+		cloneProjectService.cloneAndRenameInSameParentFolder(sourcePath,"pro-00-simple");
 	}
 
 	private void renameFileFolderAndContentInsideAFolder() {
