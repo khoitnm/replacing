@@ -9,11 +9,11 @@ import org.tnmk.replacing.all.util.StringUtils;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CheckAccessibleDependencyTest
-{
+public class CheckAccessibleDependencyTest {
   public static final String REPO_HOST = "https://repo.pointclickcare.com/artifactory/public";
+
   @Test
-  public void testAnalyzeOneDependencyLink(){
+  public void testAnalyzeOneDependencyLink() {
     Dependency dependency = CheckAccessibleDependency.isAccessibleDependency(
         REPO_HOST,
         "https://repo.pointclickcare.com/artifactory/public/org/flywaydb/flyway-core/7.1.1/flyway-core-7.1.1.pom");

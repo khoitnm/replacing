@@ -2,17 +2,14 @@ package org.tnmk.replacing.all.checkdependencies;
 
 import org.springframework.stereotype.Component;
 
-public class CheckAccessibleDependency
-{
-  public static Dependency isAccessibleDependency(String repositoryHost, String urlLink)
-  {
+public class CheckAccessibleDependency {
+  public static Dependency isAccessibleDependency(String repositoryHost, String urlLink) {
     Dependency dependency = analyzeDependency(repositoryHost, urlLink);
     dependency.setAccessible(CheckAccessibleLink.isAccessibleURL(urlLink));
     return dependency;
   }
 
-  public static Dependency analyzeDependency(String repositoryHost, String urlLink)
-  {
+  public static Dependency analyzeDependency(String repositoryHost, String urlLink) {
     String dependencyRelativePath = urlLink.replaceFirst(repositoryHost, "");
     if (dependencyRelativePath.startsWith("/")) {
       dependencyRelativePath = dependencyRelativePath.replaceFirst("/", "");
@@ -24,8 +21,7 @@ public class CheckAccessibleDependency
     StringBuilder groupSB = new StringBuilder();
     for (int i = 0; i < parts.length - 3; i++) {
       groupSB.append(parts[i]);
-      if (i < parts.length - 4)
-      {
+      if (i < parts.length - 4) {
         groupSB.append(".");
       }
     }
