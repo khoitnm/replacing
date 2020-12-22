@@ -14,19 +14,18 @@ import java.util.stream.Collectors;
  * ```
  * 3) Run this test to analyze that mvn_logs.txt file, it will automatically print the report which dependencies are missing.
  */
-public class CheckAccessibleDependenciesInFileTest
-{
+public class CheckAccessibleDependenciesInFileTest {
   public static final String REPO_HOST = "https://repo.pointclickcare.com/artifactory/public";
 
   @Test
-  public void testAnalyzeLinksFile(){
+  public void testAnalyzeLinksFile() {
     List<Dependency> dependencies = CheckAccessibleDependenciesFromFile.missingDependencies(REPO_HOST,
         "C:\\dev\\workspace\\pcc\\secure-conversations-service\\sc-api"
-        + "\\mvn_logs.txt");
+            + "\\mvn_logs.txt");
     String missingDependencies = dependencies.stream()
         .map(
-            dependency -> dependency.getGroupId()+":"+dependency.getArtifactId()+":"+dependency.getVersion()
-//            +"\n"+dependency.getLink()
+            dependency -> dependency.getGroupId() + ":" + dependency.getArtifactId() + ":" + dependency.getVersion()
+            //            +"\n"+dependency.getLink()
         )
         .distinct()
         .sorted()
