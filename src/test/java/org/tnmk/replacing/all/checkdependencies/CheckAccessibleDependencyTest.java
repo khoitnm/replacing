@@ -14,10 +14,11 @@ public class CheckAccessibleDependencyTest {
 
   @Test
   public void testAnalyzeOneDependencyLink() {
-    Dependency dependency = CheckAccessibleDependency.isAccessibleDependency(
+    CheckedDependency checkedDependency = CheckAccessibleDependency.isAccessibleDependency(
         REPO_HOST,
         "https://repo.pointclickcare.com/artifactory/public/org/flywaydb/flyway-core/7.1.1/flyway-core-7.1.1.pom");
-    System.out.println(dependency);
+    System.out.println(checkedDependency);
+    Dependency dependency = checkedDependency.getDependency();
     Assertions.assertEquals("org.flywaydb", dependency.getGroupId());
     Assertions.assertEquals("flyway-core", dependency.getArtifactId());
     Assertions.assertEquals("7.1.1", dependency.getVersion());

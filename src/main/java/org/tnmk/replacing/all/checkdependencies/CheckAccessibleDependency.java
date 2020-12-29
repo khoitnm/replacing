@@ -3,10 +3,10 @@ package org.tnmk.replacing.all.checkdependencies;
 import org.springframework.stereotype.Component;
 
 public class CheckAccessibleDependency {
-  public static Dependency isAccessibleDependency(String repositoryHost, String urlLink) {
+  public static CheckedDependency isAccessibleDependency(String repositoryHost, String urlLink) {
     Dependency dependency = analyzeDependency(repositoryHost, urlLink);
-    dependency.setAccessible(CheckAccessibleLink.isAccessibleURL(urlLink));
-    return dependency;
+    boolean isAccessible= CheckAccessibleLink.isAccessibleURL(urlLink);
+    return new CheckedDependency(dependency, isAccessible);
   }
 
   public static Dependency analyzeDependency(String repositoryHost, String urlLink) {
