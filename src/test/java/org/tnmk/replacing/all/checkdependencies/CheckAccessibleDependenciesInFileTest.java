@@ -19,7 +19,7 @@ public class CheckAccessibleDependenciesInFileTest {
 
   @Test
   public void testAnalyzeLinksFile() {
-    List<Dependency> dependencies = CheckAccessibleDependenciesFromFile.missingDependencies(REPO_HOST,
+    List<CheckedDependency> dependencies = CheckAccessibleDependenciesFromFile.missingDependencies(REPO_HOST,
         "C:\\dev\\workspace\\pcc\\secure-conversations-service\\sc-api"
             + "\\mvn_logs.txt");
     String missingDependencies = dependencies.stream()
@@ -30,8 +30,8 @@ public class CheckAccessibleDependenciesInFileTest {
     System.out.println(missingDependencies);
   }
 
-  private String reportDependency(Dependency dependency) {
-
+  private String reportDependency(CheckedDependency checkedDependency) {
+    Dependency dependency = checkedDependency.getDependency();
     String message = String.format("https://snyk.io/vuln/search?q=%s&type=any \n", dependency.getGroupId())
         + String.format("https://nvd.nist.gov/vuln/search/results?form_type=Basic&results_type=overview&query=%s&search_type=all \n",
         extractArtifactWords(dependency))

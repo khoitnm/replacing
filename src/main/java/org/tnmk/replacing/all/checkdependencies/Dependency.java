@@ -9,7 +9,6 @@ public class Dependency {
 
   private String link;
   private String fileName;
-  private boolean accessible;
 
   public Dependency(String groupId, String artifactId, String version) {
     this.groupId = groupId;
@@ -42,7 +41,6 @@ public class Dependency {
         ", version='" + version + '\'' +
         ", link='" + link + '\'' +
         ", fileName='" + fileName + '\'' +
-        ", accessible=" + accessible +
         '}';
   }
 
@@ -74,16 +72,6 @@ public class Dependency {
   public void setVersion(String version)
   {
     this.version = version;
-  }
-
-  public boolean isAccessible()
-  {
-    return accessible;
-  }
-
-  public void setAccessible(boolean accessible)
-  {
-    this.accessible = accessible;
   }
 
   public String getFileName()
