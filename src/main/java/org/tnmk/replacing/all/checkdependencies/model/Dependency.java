@@ -1,4 +1,4 @@
-package org.tnmk.replacing.all.checkdependencies;
+package org.tnmk.replacing.all.checkdependencies.model;
 
 import java.util.Objects;
 
@@ -6,41 +6,39 @@ public class Dependency {
   private String groupId;
   private String artifactId;
   private String version;
+  private String packageType;
+//  private String link;
+//  private String fileName;
 
-  private String link;
-  private String fileName;
-
-  public Dependency(String groupId, String artifactId, String version) {
+  public Dependency(String groupId, String artifactId, String version, String packageType) {
     this.groupId = groupId;
     this.artifactId = artifactId;
     this.version = version;
+    this.packageType = packageType;
   }
 
-  @Override public boolean equals(Object o)
-  {
+  @Override public boolean equals(Object o) {
     if (this == o)
       return true;
     if (o == null || getClass() != o.getClass())
       return false;
     Dependency that = (Dependency) o;
-    return groupId.equals(that.groupId) &&
-        artifactId.equals(that.artifactId) &&
-        version.equals(that.version);
+    return Objects.equals(groupId, that.groupId) &&
+        Objects.equals(artifactId, that.artifactId) &&
+        Objects.equals(version, that.version) &&
+        Objects.equals(packageType, that.packageType);
   }
 
-  @Override public int hashCode()
-  {
-    return Objects.hash(groupId, artifactId, version);
+  @Override public int hashCode() {
+    return Objects.hash(groupId, artifactId, version, packageType);
   }
 
-  @Override public String toString()
-  {
+  @Override public String toString() {
     return "Dependency{" +
         "groupId='" + groupId + '\'' +
         ", artifactId='" + artifactId + '\'' +
         ", version='" + version + '\'' +
-        ", link='" + link + '\'' +
-        ", fileName='" + fileName + '\'' +
+        ", packageType='" + packageType + '\'' +
         '}';
   }
 
@@ -74,23 +72,11 @@ public class Dependency {
     this.version = version;
   }
 
-  public String getFileName()
-  {
-    return fileName;
+  public String getPackageType() {
+    return packageType;
   }
 
-  public void setFileName(String fileName)
-  {
-    this.fileName = fileName;
-  }
-
-  public String getLink()
-  {
-    return link;
-  }
-
-  public void setLink(String link)
-  {
-    this.link = link;
+  public void setPackageType(String packageType) {
+    this.packageType = packageType;
   }
 }

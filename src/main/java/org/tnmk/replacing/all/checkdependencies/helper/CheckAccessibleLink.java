@@ -1,4 +1,4 @@
-package org.tnmk.replacing.all.checkdependencies;
+package org.tnmk.replacing.all.checkdependencies.helper;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
