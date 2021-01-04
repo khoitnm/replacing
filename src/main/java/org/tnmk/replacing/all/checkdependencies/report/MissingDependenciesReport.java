@@ -1,5 +1,6 @@
 package org.tnmk.replacing.all.checkdependencies.report;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.tnmk.replacing.all.checkdependencies.model.AccessibleDependency;
 import org.tnmk.replacing.all.checkdependencies.model.Dependency;
 import org.tnmk.replacing.all.checkdependencies.model.DependencyOnRepo;
@@ -9,6 +10,9 @@ import java.util.stream.Collectors;
 
 public class MissingDependenciesReport {
   public String reportMissingDependencies(List<AccessibleDependency> missingDependencies) {
+    if (CollectionUtils.isEmpty(missingDependencies)) {
+      return "There's no missing dependencies. All good!";
+    }
     String missingDependenciesString = missingDependencies.stream()
         .map(dependency -> reportDependency(dependency))
         .distinct()

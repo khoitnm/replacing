@@ -31,7 +31,7 @@ public class DependenciesCheckerByDependenciesTreeLog {
     this.dependencyUrlCreator = dependencyUrlCreator;
   }
 
-  public List<AccessibleDependency> missingDependencies(String repoHost, String projectAbsolutePath) {
+  public List<AccessibleDependency> missingDependencies(String repoHost, String projectAbsolutePath, String... excludingGroupIdsPrefixList) {
     logger.info("Exporting dependencies tree to a log file ...");
     File dependenciesTreeLogFile = dependenciesTreeLogging.reportDependenciesTree(projectAbsolutePath);
 
@@ -40,6 +40,7 @@ public class DependenciesCheckerByDependenciesTreeLog {
     List<String> dependenciesInfo = dependencyLinesFilter.extractLinesWithDependencies(lines);
     List<Dependency> dependencies = dependenciesInfo.parallelStream()
         .map(line -> dependencyParser.parse(line))
+        .filter(dependency -> !isExcluded(dependency, excludingGroupIdsPrefixList))
         .collect(Collectors.toList());
 
     logger.info("Found {} dependencies. Checking dependencies exist in repo '{}' ...", dependencies.size(), repoHost);
@@ -53,6 +54,15 @@ public class DependenciesCheckerByDependenciesTreeLog {
         .filter(accessibleDependency -> !accessibleDependency.isAccessible())
         .collect(Collectors.toList());
     return missingDependencies;
+  }
+
+  private boolean isExcluded(Dependency dependency, String... excludingGroupIdsPrefixList) {
+    for (String excludingGroupIdPrefix : excludingGroupIdsPrefixList) {
+      if (dependency.getGroupId().startsWith(excludingGroupIdPrefix)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private AccessibleDependency checkAccessibleDependency(DependencyOnRepo dependencyOnRepo) {
