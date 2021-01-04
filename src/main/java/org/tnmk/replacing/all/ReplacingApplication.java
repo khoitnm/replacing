@@ -56,11 +56,7 @@ public class ReplacingApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws RuntimeException {
-		Dependency dependency = CheckAccessibleDependency.isAccessibleDependency(
-				"https://repo.pointclickcare.com/artifactory/public",
-				"https://repo.pointclickcare.com/artifactory/public/org/flywaydb/flyway-core/7.1.1/flyway-core-7.1.1.pom");
-		System.out.println(""+dependency);
-		//cloneProject();
+		cloneProject();
 //        renameFileFolderAndContentInsideAFolder();
 	}
 
@@ -76,8 +72,8 @@ public class ReplacingApplication implements CommandLineRunner {
 	 * If you want some additional renaming phases, use renameFileFolderAndContentInsideAFolder() on the new cloned project.
 	 */
 	private void cloneProject(){
-		String sourcePath = "C:\\dev\\workspace\\practice\\practice-nodejs-basic-master\\pro-04-express-api\\pro-04d-async";
-		cloneProjectService.cloneAndRenameInSameParentFolder(sourcePath,"pro-00-simple");
+		String sourcePath = "C:\\dev\\workspace\\personal\\practice-nodejs-basic\\pro-04-express-api\\pro-04d-async";
+		cloneProjectService.cloneAndRenameInSameParentFolder(sourcePath,"documentation");
 	}
 
 	private void renameFileFolderAndContentInsideAFolder() {

@@ -19,7 +19,7 @@ public class CheckAccessibleDependenciesInFileTest {
 
   @Test
   public void testAnalyzeLinksFile() {
-    List<CheckedDependency> dependencies = CheckAccessibleDependenciesFromFile.missingDependencies(REPO_HOST,
+    List<CheckedDependency> dependencies = CheckAccessibleDependenciesFromMvnLogFile.missingDependencies(REPO_HOST,
         "C:\\dev\\workspace\\pcc\\secure-conversations-service\\sc-api"
             + "\\mvn_logs.txt");
     String missingDependencies = dependencies.stream()
