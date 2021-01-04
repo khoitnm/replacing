@@ -19,10 +19,11 @@ public class DependenciesCheckerByDependenciesTreeLoggingTest {
 
   @Test
   public void testAnalyzeLinksFile() {
-    //    String projectPath = "C:\\dev\\workspace\\pcc\\secure-conversations-service";
-    String projectPath = "C:\\dev\\workspace\\personal\\replacing\\";
+        String projectPath = "C:\\dev\\workspace\\pcc\\secure-conversations-service";
+//    String projectPath = "C:\\dev\\workspace\\personal\\replacing\\";
+    String excludedGroupdIdPrefix = "com.pointclickcare";
     List<AccessibleDependency> dependencies = dependenciesCheckerByDependenciesTreeLog.missingDependencies(
-        REPO_HOST, projectPath);
+        REPO_HOST, projectPath, excludedGroupdIdPrefix);
     String missingDependencies = missingDependenciesReport.reportMissingDependencies(dependencies);
     System.out.println(missingDependencies);
   }
