@@ -7,8 +7,6 @@ public class Dependency {
   private String artifactId;
   private String version;
   private String packageType;
-//  private String link;
-//  private String fileName;
 
   public Dependency(String groupId, String artifactId, String version, String packageType) {
     this.groupId = groupId;

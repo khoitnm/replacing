@@ -1,7 +1,5 @@
 package org.tnmk.replacing.all.checkdependencies.model;
 
-import java.util.Objects;
-
 public class DependencyOnRepo {
   private Dependency dependency;
   private String link;
