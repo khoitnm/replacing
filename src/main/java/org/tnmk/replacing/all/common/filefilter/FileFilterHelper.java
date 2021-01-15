@@ -19,13 +19,19 @@ public class FileFilterHelper {
      */
     public static FileFilter constructExcludeFileFilter(List<String> excludingPatterns){
         FileFilter excludingFileFilter = file -> {
-            for (String excludedPattern : excludingPatterns) {
-                if (file.getAbsolutePath().matches(excludedPattern)) {
-                    return false;
-                }
-            }
-            return true;
+            boolean shouldExclude = matchAnyPattern(file.getAbsolutePath(), excludingPatterns);
+            boolean shouldInclude = !shouldExclude;
+            return shouldInclude;
         };
         return excludingFileFilter;
+    }
+
+    public static boolean matchAnyPattern(String string, List<String> patterns){
+        for (String pattern : patterns) {
+            if (string.matches(pattern)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

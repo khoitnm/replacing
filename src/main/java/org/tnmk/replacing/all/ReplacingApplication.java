@@ -23,10 +23,17 @@ import java.util.Map;
 @SpringBootApplication
 public class ReplacingApplication implements CommandLineRunner {
   public static final List<String> PATTERN_EXCLUDING_JAVA_PROJECT = Arrays.asList(
-      ".*[\\/]\\.git",
-      ".*[\\/]\\.idea",
-      ".*[\\/]\\.gradle",
-      ".*\\.class");
+      // Note: We need to escape '/' with an '\', hence "\/" means '/'
+      // But in string, you cannot write '\', you have to write "\\" instead.
+      // Hence "\\/" means '/', hence [\\\\\\/] means '\' or '/'
+      ".*\\.iml",
+      ".*\\.class",
+      ".*[\\\\\\/]\\.git[\\\\\\/]?",
+      ".*[\\\\\\/]\\.idea[\\\\\\/]?",
+      ".*[\\\\\\/]\\.gradle[\\\\\\/]?",
+      ".*[\\\\\\/]build[\\\\\\/]?",
+      ".*[\\\\\\/]node_modules[\\\\\\/]?"
+  );
 
   @Autowired
   private ScoutDataProcessingService scoutDataProcessingService;
