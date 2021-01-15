@@ -1,9 +1,5 @@
 package org.tnmk.replacing.all.cloneproject;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tnmk.replacing.all.common.multiformname.MultiFormRenameHelper;
@@ -11,13 +7,26 @@ import org.tnmk.replacing.all.renaming.CopyingAndReplacingService;
 import org.tnmk.replacing.all.renaming.ReplacingService;
 import org.tnmk.replacing.all.util.IOUtils;
 
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class CloneProjectService {
     public static final List<String> PATTERN_EXCLUDING_JAVA_PROJECT = Arrays.asList(
-            ".*[\\/]\\.git",
-            ".*[\\/]\\.idea",
-            ".*[\\/]\\.gradle",
-            ".*\\.class");
+        // Note: We need to escape '/' with an '\', hence "\/" means '/'
+        // But in string, you cannot write '\', you have to write "\\" instead.
+        // Hence "\\/" means '/', hence [\\\\\\/] means '\' or '/'
+        ".*\\.iml",
+        ".*\\.class",
+        ".*[\\\\\\/]\\.git[\\\\\\/]?",
+        ".*[\\\\\\/]\\.idea[\\\\\\/]?",
+        ".*[\\\\\\/]\\.gradle[\\\\\\/]?",
+        ".*[\\\\\\/]build[\\\\\\/]?",
+        ".*[\\\\\\/]node_modules[\\\\\\/]?"
+    );
+
     @Autowired
     private CopyingAndReplacingService copyingAndReplacingService;
 

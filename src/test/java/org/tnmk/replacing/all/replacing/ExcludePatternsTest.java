@@ -3,8 +3,9 @@ package org.tnmk.replacing.all.replacing;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.tnmk.replacing.all.ReplacingApplication;
 import org.tnmk.replacing.all.common.filefilter.FileFilterHelper;
+
+import static org.tnmk.replacing.all.cloneproject.CloneProjectService.PATTERN_EXCLUDING_JAVA_PROJECT;
 
 public class ExcludePatternsTest {
   @ParameterizedTest
@@ -17,7 +18,7 @@ public class ExcludePatternsTest {
   })
   public void shouldExcludePaths(String path) {
 //    System.out.println(Pattern.matches(".*build[\\\\\\/]?", "build\\"));
-    boolean shouldExclude = FileFilterHelper.matchAnyPattern(path, ReplacingApplication.PATTERN_EXCLUDING_JAVA_PROJECT);
+    boolean shouldExclude = FileFilterHelper.matchAnyPattern(path, PATTERN_EXCLUDING_JAVA_PROJECT);
     Assertions.assertTrue(shouldExclude);
   }
 }

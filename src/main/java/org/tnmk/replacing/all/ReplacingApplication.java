@@ -12,28 +12,17 @@ import org.tnmk.replacing.all.renaming.ReplacingService;
 import org.tnmk.replacing.all.scoutdata.ScoutDataProcessingService;
 import org.tnmk.replacing.all.unzip.UnzipService;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.tnmk.replacing.all.cloneproject.CloneProjectService.PATTERN_EXCLUDING_JAVA_PROJECT;
 
 /**
  * @author khoi.tran on 7/4/17.
  */
 @SpringBootApplication
 public class ReplacingApplication implements CommandLineRunner {
-  public static final List<String> PATTERN_EXCLUDING_JAVA_PROJECT = Arrays.asList(
-      // Note: We need to escape '/' with an '\', hence "\/" means '/'
-      // But in string, you cannot write '\', you have to write "\\" instead.
-      // Hence "\\/" means '/', hence [\\\\\\/] means '\' or '/'
-      ".*\\.iml",
-      ".*\\.class",
-      ".*[\\\\\\/]\\.git[\\\\\\/]?",
-      ".*[\\\\\\/]\\.idea[\\\\\\/]?",
-      ".*[\\\\\\/]\\.gradle[\\\\\\/]?",
-      ".*[\\\\\\/]build[\\\\\\/]?",
-      ".*[\\\\\\/]node_modules[\\\\\\/]?"
-  );
 
   @Autowired
   private ScoutDataProcessingService scoutDataProcessingService;
@@ -77,8 +66,8 @@ public class ReplacingApplication implements CommandLineRunner {
    * If you want some additional renaming phases, use renameFileFolderAndContentInsideAFolder() on the new cloned project.
    */
   private void cloneProject() {
-    String sourcePath = "C:\\dev\\workspace\\personal\\practice-nodejs-basic\\pro-04-express-api\\pro-04d-async";
-    cloneProjectService.cloneAndRenameInSameParentFolder(sourcePath, "documentation");
+    String sourcePath = "C:\\dev\\workspace\\personal\\documentation";
+    cloneProjectService.cloneAndRenameInSameParentFolder(sourcePath, "practice-react-redux");
   }
 
   private void renameFileFolderAndContentInsideAFolder() {
