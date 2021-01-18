@@ -1,5 +1,6 @@
 package org.tnmk.replacing.all.checkdependencies.byinstalllog;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.tnmk.replacing.all.checkdependencies.model.AccessibleDependency;
 import org.tnmk.replacing.all.checkdependencies.report.MissingDependenciesReport;
@@ -19,6 +20,7 @@ public class DependenciesCheckerByInstallLogFileTest {
   public static final String REPO_HOST = "https://repo.pointclickcare.com/artifactory/public";
   private final MissingDependenciesReport missingDependenciesReport = new MissingDependenciesReport();
 
+  @Disabled // Only run with manual trigger
   @Test
   public void testAnalyzeLinksFile() {
     List<AccessibleDependency> dependencies = DependenciesCheckerByInstallLogFile.missingDependencies(REPO_HOST,
