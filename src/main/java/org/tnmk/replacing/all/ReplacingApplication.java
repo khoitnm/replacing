@@ -66,8 +66,8 @@ public class ReplacingApplication implements CommandLineRunner {
    * If you want some additional renaming phases, use renameFileFolderAndContentInsideAFolder() on the new cloned project.
    */
   private void cloneProject() {
-    String sourcePath = "C:\\dev\\workspace\\personal\\documentation";
-    cloneProjectService.cloneAndRenameInSameParentFolder(sourcePath, "practice-react-redux");
+    String sourcePath = "C:\\dev\\workspace\\personal\\practice-react-redux\\pro-01-redux-simple\\src\\comp-00-originalFolder";
+    cloneProjectService.cloneAndRenameInSameParentFolder(sourcePath, "target-folder");
   }
 
   private void renameFileFolderAndContentInsideAFolder() {
