@@ -50,7 +50,7 @@ public class ReplacingApplication implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws RuntimeException {
-    cloneProject();
+//    cloneProject();
     //        renameFileFolderAndContentInsideAFolder();
   }
 
