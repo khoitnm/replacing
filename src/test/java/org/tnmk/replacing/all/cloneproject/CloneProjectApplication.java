@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.tnmk.replacing.all.common.BaseSpringTest;
 import org.tnmk.replacing.all.common.TestType;
 
+@Disabled
 @Tag(TestType.APPLICATION_TRIGGER)
 public class CloneProjectApplication extends BaseSpringTest {
 
@@ -24,7 +25,6 @@ public class CloneProjectApplication extends BaseSpringTest {
    * However, the phases java-service-template-xxx will not be renamed to the-new-project-xxx.
    * If you want some additional renaming phases, use renameFileFolderAndContentInsideAFolder() on the new cloned project.
    */
-  @Disabled
   @Test
   public void test_cloneProject() {
     String sourcePath = "C:\\dev\\workspace\\personal\\practice-react-redux\\pro-01-redux-simple\\src\\comp-00-originalFolder";
