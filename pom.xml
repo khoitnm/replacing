@@ -75,6 +75,23 @@
 
         <!-- Test -->
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <exclusions>
+                <exclusion>
+                    <!--
+                    https://junit.org/junit5/docs/current/user-guide/
+                    JUnit Vintage provides a TestEngine for running JUnit 3 and JUnit 4 based tests
+                    And we don't need it anymore, we are using newer JUnit.
+                    -->
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>test</scope>
+
+        </dependency>
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>5.7.0</version>
