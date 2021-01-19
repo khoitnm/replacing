@@ -27,7 +27,7 @@ public class CloneProjectApplication extends BaseSpringTest {
    */
   @Test
   public void test_cloneProject() {
-    String sourcePath = "C:\\dev\\workspace\\personal\\practice-react-redux\\pro-01-redux-simple\\src\\comp-00-originalFolder";
-    cloneProjectService.cloneAndRenameInSameParentFolder(sourcePath, "target-folder");
+    String sourcePath = "C:\\dev\\workspace\\personal\\replacing";
+    cloneProjectService.cloneAndRenameInSameParentFolder(sourcePath, "dependencies-accessibility");
   }
 }
