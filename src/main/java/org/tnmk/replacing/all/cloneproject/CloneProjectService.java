@@ -41,14 +41,15 @@ public class CloneProjectService {
   private ReplacingService replacingService;
 
   /**
-   * This method is a little bit different from {@link #simpleCloneToTheSameParentFolder(String, String)}.
+   * This method is a bit different from {@link #simpleCloneToTheSameParentFolder(String, String)}.
    * This will clone the project and rename every single phase which has the old project name by the new project name.
    * For example:
    * <li>the old name: java-service-template</li>
    * <li>the new name: the-new-project.</li>
    * <li>so the word `java-service-template-xxx` WILL BE RENAMED to `the-new-project-xxx` even though it's not 100% word match.</li>
-   * @param sourcePath
-   * @param newSingularName
+   * @param sourcePath example: C:\some-parent-path\old-project
+   * @param newSingularName example: new-project
+   * Result: C:\some-parent-path\new-project
    */
   public void cloneAndRenameInSameParentFolder(String sourcePath, String newSingularName) {
     String oldSingularName = getFolderName(sourcePath);
@@ -56,8 +57,10 @@ public class CloneProjectService {
     replacingService.replace(destPath, oldSingularName, newSingularName);
   }
 
+
+
   /**
-   * Note: It only rename the exactly phases (with different upper/lower cases situations).
+   * Note: It only renames the exactly phases (with different upper/lower cases situations).
    * For example:
    * java-service-template will be renamed to the-new-project
    * JavaServiceTemplate to TheNewProject
