@@ -6,14 +6,16 @@
     <groupId>org.tnmk.replace</groupId>
     <artifactId>tnmk.replace.all</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>8</java.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <java.version>11</java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+
+        <poi.version>3.17</poi.version>
     </properties>
 
     <dependencies>
@@ -25,12 +27,11 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.0</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.4</version>
+            <version>2.13.0</version>
         </dependency>
 
 <!--        <dependency>-->
@@ -44,34 +45,34 @@
             <!-- Excel (.xls)-->
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>3.17</version>
+            <version>${poi.version}</version>
         </dependency>
         <dependency>
             <!-- Excel (.xlsx)-->
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>3.17</version>
+            <version>${poi.version}</version>
         </dependency>
 
         <!-- ZIP FILE //////////////////////////////////////// -->
         <dependency>
             <groupId>com.github.junrar</groupId>
             <artifactId>junrar</artifactId>
-            <version>0.7</version>
+            <version>7.5.4</version>
         </dependency>
 
         <dependency>
             <!--//A facade of common-compress libraries.-->
             <groupId>org.rauschig</groupId>
             <artifactId>jarchivelib</artifactId>
-            <version>0.7.1</version>
+            <version>1.2.0</version>
         </dependency>
-        <dependency>
-            <!--//This dependencies is necessary for 7z compression/extraction (which use XZ compression algorithm)-->
-            <groupId>org.tukaani</groupId>
-            <artifactId>xz</artifactId>
-            <version>1.5</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            &lt;!&ndash;//This dependencies is necessary for 7z compression/extraction (which use XZ compression algorithm)&ndash;&gt;-->
+<!--            <groupId>org.tukaani</groupId>-->
+<!--            <artifactId>xz</artifactId>-->
+<!--            <version>1.9</version>-->
+<!--        </dependency>-->
 
         <!-- Test -->
         <dependency>
@@ -89,19 +90,6 @@
                 </exclusion>
             </exclusions>
             <scope>test</scope>
-
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.7.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.1.0</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -111,7 +99,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.1.8.RELEASE</version>
+                <version>2.7.12</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
