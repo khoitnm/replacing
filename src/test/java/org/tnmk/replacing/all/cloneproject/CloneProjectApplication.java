@@ -27,7 +27,7 @@ public class CloneProjectApplication extends BaseSpringTest {
    */
   @Test
   public void test_cloneProject() {
-    String sourcePath = "C:\\Projects\\Personal\\personal-blog\\blog-viewer-webapp";
-    cloneProjectService.cloneAndRenameInSameParentFolder(sourcePath, "blog-test-webapp");
+    String sourcePath = "C:\\dev\\workspace\\pcc\\practice-spring-jpa\\pro00-mssql-00-simple";
+    cloneProjectService.cloneAndRenameInSameParentFolder(sourcePath, "dbs-comparison");
   }
 }

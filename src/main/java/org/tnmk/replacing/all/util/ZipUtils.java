@@ -1,8 +1,7 @@
 package org.tnmk.replacing.all.util;
 
-import com.github.junrar.extract.ExtractArchive;
-import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
-import org.apache.commons.compress.archivers.sevenz.SevenZFile;
+import com.github.junrar.Junrar;
+import com.github.junrar.exception.RarException;
 import org.rauschig.jarchivelib.ArchiveFormat;
 import org.rauschig.jarchivelib.Archiver;
 import org.rauschig.jarchivelib.ArchiverFactory;
@@ -49,7 +48,7 @@ public final class ZipUtils {
      * @param sourceZipFilePath relative or absolute path of the zip file.
      * @return return the targetFolder. If cannot extract, return null.
      */
-    public static String unzip(String sourceZipFilePath, String targetFolderPath, boolean createWrapperFolder) {
+    public static String unzip(String sourceZipFilePath, String targetFolderPath, boolean createWrapperFolder) throws RarException, IOException {
         String finalTargetFolderPath = targetFolderPath;
         if (!targetFolderPath.endsWith("/") && !targetFolderPath.endsWith("\\")) {
             finalTargetFolderPath += "/";
@@ -101,35 +100,10 @@ public final class ZipUtils {
         }
     }
 
-    @Deprecated
-    public static void extract7zFileWithCommonCompress(String sourceZipFilePath, String finalTargetFolderPath) {
-        SevenZFile sevenZFile = null;
-        try {
-            sevenZFile = new SevenZFile(new File(sourceZipFilePath));
-            SevenZArchiveEntry entry;
-            while ((entry = sevenZFile.getNextEntry()) != null) {
-                File entryDestination = new File(finalTargetFolderPath, entry.getName());
-                if (entry.isDirectory()) {
-                    entryDestination.mkdirs();
-                } else {
-                    entryDestination.getParentFile().mkdirs();
-                    File curFile = new File(new File(finalTargetFolderPath), entry.getName());
-                    IOUtils.createFolderIfNecessary(finalTargetFolderPath);
-                    FileOutputStream out = new FileOutputStream(curFile);
-                    byte[] content = new byte[(int) entry.getSize()];
-                    sevenZFile.read(content, 0, content.length);
-                    out.write(content);
-                    out.close();
-                }
-            }
-        } catch (IOException e) {
-            throw new FileIOException(String.format("Error when unzip file '%s' to '%s'", sourceZipFilePath, finalTargetFolderPath), e);
-        }
-    }
-
-    private static String extractRarFile(String sourceZipFilePath, String finalTargetFolderPath) {
-        ExtractArchive extractArchive = new ExtractArchive();
-        extractArchive.extractArchive(new File(sourceZipFilePath), new File(finalTargetFolderPath));
+    private static String extractRarFile(String sourceZipFilePath, String finalTargetFolderPath) throws RarException, IOException {
+//        Junrar.extract()
+//        ExtractArchive extractArchive = new ExtractArchive();
+        Junrar.extract(new File(sourceZipFilePath), new File(finalTargetFolderPath));
         return finalTargetFolderPath;
     }
 
