@@ -10,9 +10,7 @@ import org.tnmk.replacing.all.util.IOUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 
 @Service
 public class CopySpecificFilesJob {
@@ -36,8 +34,8 @@ public class CopySpecificFilesJob {
             IOUtils.createFolderIfNecessary(absTargetSubFolder);
 
             String copyAllFilesFromSourceFolder = copySubFolder.getCopyAllFilesFromRelativeSourceFolder();
-            if (StringUtils.isBlank(copyAllFilesFromSourceFolder)) {
-                String absSrcSubFolder = FileUtils.combineFolderPath(absSrcRootFolder, copySubFolder.getCopyAllFilesFromRelativeSourceFolder());
+            if (StringUtils.isNotBlank(copyAllFilesFromSourceFolder)) {
+                String absSrcSubFolder = FileUtils.combineFolderPath(absSrcRootFolder, copyAllFilesFromSourceFolder);
                 i = copyAllFiles(absSrcSubFolder, absTargetSubFolder, i);
             }
 
@@ -78,7 +76,7 @@ public class CopySpecificFilesJob {
     private void copyFile(String absSrcFilePath, String absTargetFilePath) throws IOException {
         Path sourcePath = Paths.get(absSrcFilePath);
         Path targetPath = Paths.get(absTargetFilePath);
-        Files.copy(sourcePath, targetPath);
+        Files.copy(sourcePath, targetPath, StandardCopyOption.REPLACE_EXISTING);
 
         logger.debug("Copied: "
             + "\n\tsourceFile: " + absSrcFilePath
