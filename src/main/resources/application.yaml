@@ -3,7 +3,61 @@ copy-specific-files:
     targetFolder: C:\GamesStore\Fallout 2\Images\Girl 3_Seed 0\Bg4\7_Select\
     copySubFolders:
         - relativeTargetFolder: Angry_Move01\
-          copyAllFilesFromRelativeSourceFolder: Angry5_Speak\
           copySpecificRelativeSourceFiles:
-              -
+              - Angry5_Speak\Angry5_Speak0035.bmp
+              - Angry5_Speak\Angry5_Speak0034.bmp
+              - Angry5_Speak\Angry5_Speak0033.bmp
+              - Angry5_Speak\Angry5_Speak0032.bmp
+              - Angry5_Speak\Angry5_Speak0031.bmp
+              - Angry5_Speak\Angry5_Speak0030.bmp
+              - Angry5_Speak\Angry5_Speak0031.bmp
+              - Angry5_Speak\Angry5_Speak0032.bmp
+              - Angry5_Speak\Angry5_Speak0033.bmp
+              - Angry5_Speak\Angry5_Speak0034.bmp
+              - Angry5_Speak\Angry5_Speak0035.bmp
 
+        - relativeTargetFolder: Angry_Move02\
+          copySpecificRelativeSourceFiles:
+              - Angry5_Speak\Angry5_Speak0062.bmp
+              - Angry5_Speak\Angry5_Speak0064.bmp
+              - Angry5_Speak\Angry5_Speak0066.bmp
+              - Angry5_Speak\Angry5_Speak0068.bmp
+              - Angry5_Speak\Angry5_Speak0070.bmp
+              - Angry5_Speak\Angry5_Speak0072.bmp
+              - Angry5_Speak\Angry5_Speak0074.bmp
+              - Angry5_Speak\Angry5_Speak0076.bmp
+              - Angry5_Speak\Angry5_Speak0078.bmp
+              - Angry5_Speak\Angry5_Speak0079.bmp
+              - Angry5_Speak\Angry5_Speak0077.bmp
+              - Angry5_Speak\Angry5_Speak0075.bmp
+              - Angry5_Speak\Angry5_Speak0073.bmp
+              - Angry5_Speak\Angry5_Speak0071.bmp
+              - Angry5_Speak\Angry5_Speak0069.bmp
+              - Angry5_Speak\Angry5_Speak0067.bmp
+              - Angry5_Speak\Angry5_Speak0065.bmp
+
+        - relativeTargetFolder: Angry_To_Normal\
+          copySpecificRelativeSourceFiles:
+              - Angry5_Speak\Angry5_Speak0075.bmp
+              - Normal_Speak\Normal_Speak0075.bmp
+
+        - relativeTargetFolder: Angry_Speak\
+          copySpecificRelativeSourceFiles:
+              - Angry5_Speak\Angry5_Speak0000.bmp
+              - Angry5_Speak\Angry5_Speak0002.bmp
+              - Angry5_Speak\Angry5_Speak0004.bmp
+              - Angry5_Speak\Angry5_Speak0006.bmp
+              - Angry5_Speak\Angry5_Speak0012.bmp
+              - Angry5_Speak\Angry5_Speak0014.bmp
+              - Angry5_Speak\Angry5_Speak0016.bmp
+              - Angry5_Speak\Angry5_Speak0018.bmp
+              - Angry5_Speak\Angry5_Speak0019.bmp
+              - Angry5_Speak\Angry5_Speak0024.bmp
+              - Angry5_Speak\Angry5_Speak0026.bmp
+              - Angry5_Speak\Angry5_Speak0028.bmp
+              - Angry5_Speak\Angry5_Speak0030.bmp
+              - Angry5_Speak\Angry5_Speak0032.bmp
+              - Angry5_Speak\Angry5_Speak0034.bmp
+              - Angry5_Speak\Angry5_Speak0036.bmp
+              - Angry5_Speak\Angry5_Speak0038.bmp
+              - Angry5_Speak\Angry5_Speak0039.bmp
