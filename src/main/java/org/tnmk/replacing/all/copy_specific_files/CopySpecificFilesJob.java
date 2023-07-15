@@ -10,7 +10,10 @@ import org.tnmk.replacing.all.util.IOUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 @Service
 public class CopySpecificFilesJob {
@@ -65,9 +68,10 @@ public class CopySpecificFilesJob {
     }
 
     private void copyFileToFolder(String absSrcFilePath, String absTargetFolder, int fileIndex) throws IOException {
+        String srcFileName = FileNameUtils.getBaseName(absSrcFilePath);
         String fileExtension = FileNameUtils.getExtension(absSrcFilePath);
 
-        String targetFileName = "" + fileIndex + "." + fileExtension;
+        String targetFileName = String.format("%03d_%s.%s", fileIndex, srcFileName, fileExtension);
         String absTargetFilePath = FileUtils.getFilePath(absTargetFolder, targetFileName);
 
         copyFile(absSrcFilePath, absTargetFilePath);
