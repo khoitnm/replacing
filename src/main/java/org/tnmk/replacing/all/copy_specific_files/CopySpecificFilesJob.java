@@ -1,6 +1,7 @@
 package org.tnmk.replacing.all.copy_specific_files;
 
 import org.apache.commons.compress.utils.FileNameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -23,25 +24,64 @@ public class CopySpecificFilesJob {
     }
 
     public void run() throws IOException {
-        File targetFolder = IOUtils.createFolderIfNecessary(copySpecificFilesProperties.getTargetFolder());
+        String absSrcRootFolder = FileUtils.normalizeDirectoryPath(copySpecificFilesProperties.getSourceFolder());
+        String absTargetRootFolder = FileUtils.normalizeDirectoryPath(copySpecificFilesProperties.getTargetFolder());
+
+        IOUtils.createFolderIfNecessary(absTargetRootFolder);
+
         int i = 0;
-        for (String relativeSourceFilesPath : copySpecificFilesProperties.getRelativeFilesPaths()) {
-            String absoluteSourcePath = FileUtils.getFilePath(copySpecificFilesProperties.getSourceFolder(), relativeSourceFilesPath);
-            String fileExtension = FileNameUtils.getExtension(absoluteSourcePath);
+        for (CopyFolder copySubFolder : copySpecificFilesProperties.getCopySubFolders()) {
+            String relativeTargetSubFolder = copySubFolder.getRelativeTargetFolder();
+            String absTargetSubFolder = FileUtils.combineFolderPath(absTargetRootFolder, relativeTargetSubFolder);
+            IOUtils.createFolderIfNecessary(absTargetSubFolder);
 
-            String targetFileName = "" + i + "." + fileExtension;
-            String absoluteTargetPath = FileUtils.getFilePath(copySpecificFilesProperties.getTargetFolder(), targetFileName);
+            String copyAllFilesFromSourceFolder = copySubFolder.getCopyAllFilesFromRelativeSourceFolder();
+            if (StringUtils.isBlank(copyAllFilesFromSourceFolder)) {
+                String absSrcSubFolder = FileUtils.combineFolderPath(absSrcRootFolder, copySubFolder.getCopyAllFilesFromRelativeSourceFolder());
+                i = copyAllFiles(absSrcSubFolder, absTargetSubFolder, i);
+            }
 
-            copyFile(absoluteSourcePath, absoluteTargetPath);
-            i++;
+            for (String relativeSourceFile : copySubFolder.getCopySpecificRelativeSourceFiles()) {
+                if (StringUtils.isBlank(relativeSourceFile)) {
+                    continue;
+                }
+                String absoluteSourceFilePath = FileUtils.getFilePath(absSrcRootFolder, relativeSourceFile);
+                copyFileToFolder(absoluteSourceFilePath, absTargetSubFolder, i);
+                i++;
+            }
         }
     }
 
-    private void copyFile(String absoluteSourcePath, String absoluteTargetPath) throws IOException {
-        Path sourcePath = Paths.get(absoluteSourcePath);
-        Path targetPath = Paths.get(absoluteTargetPath);
+    private int copyAllFiles(String absSrcSubFolder, String absTargetFolder, int startingFileIndex) throws IOException {
+        File subFolder = new File(absSrcSubFolder);
+        if (!subFolder.exists()) {
+            throw new IOException("Source folder doesn't exist: " + absTargetFolder);
+        }
+        int fileIndex = startingFileIndex;
+        File[] files = subFolder.listFiles();
+        for (File file : files) {
+            copyFileToFolder(file.getAbsolutePath(), absTargetFolder, fileIndex);
+            fileIndex++;
+        }
+        return fileIndex;
+    }
+
+    private void copyFileToFolder(String absSrcFilePath, String absTargetFolder, int fileIndex) throws IOException {
+        String fileExtension = FileNameUtils.getExtension(absSrcFilePath);
+
+        String targetFileName = "" + fileIndex + "." + fileExtension;
+        String absTargetFilePath = FileUtils.getFilePath(absTargetFolder, targetFileName);
+
+        copyFile(absSrcFilePath, absTargetFilePath);
+    }
+
+    private void copyFile(String absSrcFilePath, String absTargetFilePath) throws IOException {
+        Path sourcePath = Paths.get(absSrcFilePath);
+        Path targetPath = Paths.get(absTargetFilePath);
         Files.copy(sourcePath, targetPath);
 
-        logger.debug("Copied file {}", absoluteTargetPath);
+        logger.debug("Copied: "
+            + "\n\tsourceFile: " + absSrcFilePath
+            + "\n\ttargetFile: " + absTargetFilePath);
     }
 }

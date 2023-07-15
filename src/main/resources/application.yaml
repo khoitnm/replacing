@@ -1,5 +1,9 @@
 copy-specific-files:
     sourceFolder: C:\GamesStore\Fallout 2\Images\Girl 3_Seed 0\Bg4\6_Resize\
     targetFolder: C:\GamesStore\Fallout 2\Images\Girl 3_Seed 0\Bg4\7_Select\
-    copies:
-        -
+    copySubFolders:
+        - relativeTargetFolder: Angry_Move01\
+          copyAllFilesFromRelativeSourceFolder: Angry5_Speak\
+          copySpecificRelativeSourceFiles:
+              -
+
