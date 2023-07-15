@@ -2,7 +2,7 @@ copy-specific-files:
     sourceFolder: C:\GamesStore\Fallout 2\Images\Girl 3_Seed 0\Bg4\6_Resize\
     targetFolder: C:\GamesStore\Fallout 2\Images\Girl 3_Seed 0\Bg4\7_Select\
     copySubFolders:
-        - relativeTargetFolder: Angry_Move01\
+        - relativeTargetFolder: Bad_Move01\
           copySpecificRelativeSourceFiles:
               - Angry5_Speak\Angry5_Speak0035.bmp
               - Angry5_Speak\Angry5_Speak0034.bmp
@@ -16,7 +16,7 @@ copy-specific-files:
               - Angry5_Speak\Angry5_Speak0034.bmp
               - Angry5_Speak\Angry5_Speak0035.bmp
 
-        - relativeTargetFolder: Angry_Move02\
+        - relativeTargetFolder: Bad_Move02\
           copySpecificRelativeSourceFiles:
               - Angry5_Speak\Angry5_Speak0062.bmp
               - Angry5_Speak\Angry5_Speak0064.bmp
@@ -36,12 +36,12 @@ copy-specific-files:
               - Angry5_Speak\Angry5_Speak0067.bmp
               - Angry5_Speak\Angry5_Speak0065.bmp
 
-        - relativeTargetFolder: Angry_To_Normal\
+        - relativeTargetFolder: Bad_To_Normal\
           copySpecificRelativeSourceFiles:
               - Angry5_Speak\Angry5_Speak0075.bmp
               - Normal_Speak\Normal_Speak0075.bmp
 
-        - relativeTargetFolder: Angry_Speak\
+        - relativeTargetFolder: Bad_Speak\
           copySpecificRelativeSourceFiles:
               - Angry5_Speak\Angry5_Speak0000.bmp
               - Angry5_Speak\Angry5_Speak0002.bmp
@@ -61,3 +61,77 @@ copy-specific-files:
               - Angry5_Speak\Angry5_Speak0036.bmp
               - Angry5_Speak\Angry5_Speak0038.bmp
               - Angry5_Speak\Angry5_Speak0039.bmp
+
+        - relativeTargetFolder: Good_Move01\
+          copySpecificRelativeSourceFiles:
+              - Smile3_Speak\Smile3_Speak0075.bmp
+              - Smile3_Speak\Smile3_Speak0076.bmp
+              - Smile3_Speak\Smile3_Speak0077.bmp
+              - Smile3_Speak\Smile3_Speak0078.bmp
+              - Smile3_Speak\Smile3_Speak0079.bmp
+              - Smile3_Speak\Smile3_Speak0076.bmp
+
+        - relativeTargetFolder: Good_Move02\
+          copySpecificRelativeSourceFiles:
+              - Smile3_Speak\Smile3_Speak0060.bmp
+              - Smile3_Speak\Smile3_Speak0061.bmp
+              - Smile3_Speak\Smile3_Speak0062.bmp
+              - Smile3_Speak\Smile3_Speak0063.bmp
+              - Smile3_Speak\Smile3_Speak0064.bmp
+              - Smile3_Speak\Smile3_Speak0065.bmp
+              - Smile3_Speak\Smile3_Speak0066.bmp
+              - Smile3_Speak\Smile3_Speak0067.bmp
+              - Smile3_Speak\Smile3_Speak0068.bmp
+              - Smile3_Speak\Smile3_Speak0069.bmp
+              - Smile3_Speak\Smile3_Speak0070.bmp
+              - Smile3_Speak\Smile3_Speak0071.bmp
+              - Smile3_Speak\Smile3_Speak0072.bmp
+              - Smile3_Speak\Smile3_Speak0073.bmp
+              - Smile3_Speak\Smile3_Speak0074.bmp
+              - Smile3_Speak\Smile3_Speak0075.bmp
+              - Smile3_Speak\Smile3_Speak0076.bmp
+              - Smile3_Speak\Smile3_Speak0077.bmp
+              - Smile3_Speak\Smile3_Speak0078.bmp
+              - Smile3_Speak\Smile3_Speak0079.bmp
+              - Smile3_Speak\Smile3_Speak0076.bmp
+              - Smile3_Speak\Smile3_Speak0075.bmp
+
+        - relativeTargetFolder: Good_To_Normal\
+          copySpecificRelativeSourceFiles:
+              - Smile3_Speak\Smile3_Speak0060.bmp
+              - Smile3_Speak\Smile3_Speak0062.bmp
+              - Smile3_Speak\Smile3_Speak0064.bmp
+              - Normal_Speak\Normal_Speak0060.bmp
+              - Normal_Speak\Normal_Speak0062.bmp
+              - Normal_Speak\Normal_Speak0064.bmp
+              - Normal_Speak\Normal_Speak0075.bmp
+
+        - relativeTargetFolder: Good_Speak\
+          copySpecificRelativeSourceFiles:
+              - Smile3_Speak\Smile3_Speak0000.bmp
+              - Smile3_Speak\Smile3_Speak0002.bmp
+              - Smile3_Speak\Smile3_Speak0003.bmp
+              - Smile3_Speak\Smile3_Speak0004.bmp
+              - Smile3_Speak\Smile3_Speak0005.bmp
+              - Smile3_Speak\Smile3_Speak0006.bmp
+              - Smile3_Speak\Smile3_Speak0008.bmp
+              - Smile3_Speak\Smile3_Speak0010.bmp
+              - Smile3_Speak\Smile3_Speak0012.bmp
+              - Smile3_Speak\Smile3_Speak0014.bmp
+              - Smile3_Speak\Smile3_Speak0016.bmp
+              - Smile3_Speak\Smile3_Speak0018.bmp
+              - Smile3_Speak\Smile3_Speak0020.bmp
+              - Smile3_Speak\Smile3_Speak0022.bmp
+              - Smile3_Speak\Smile3_Speak0024.bmp
+              - Smile3_Speak\Smile3_Speak0026.bmp
+              - Smile3_Speak\Smile3_Speak0028.bmp
+              - Smile3_Speak\Smile3_Speak0030.bmp
+              - Smile3_Speak\Smile3_Speak0032.bmp
+              - Smile3_Speak\Smile3_Speak0034.bmp
+              - Smile3_Speak\Smile3_Speak0036.bmp
+              - Smile3_Speak\Smile3_Speak0038.bmp
+              - Smile3_Speak\Smile3_Speak0040.bmp
+              - Smile3_Speak\Smile3_Speak0042.bmp
+              - Smile3_Speak\Smile3_Speak0044.bmp
+              - Smile3_Speak\Smile3_Speak0046.bmp
+              - Smile3_Speak\Smile3_Speak0047.bmp
