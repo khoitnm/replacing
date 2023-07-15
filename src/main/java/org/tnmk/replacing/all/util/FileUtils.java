@@ -101,6 +101,10 @@ public final class FileUtils {
         return normalizedPath;
     }
 
+    public static String combineFolderPath(String parentFolderPath, String folderPath) {
+        return normalizeDirectoryPath(parentFolderPath) + normalizeDirectoryPath(normalizeFilePath(folderPath));
+    }
+
     public static String getFilePath(String parentDirectoryPath, String filePath) {
       return normalizeDirectoryPath(parentDirectoryPath) + normalizeFilePath(filePath);
     }

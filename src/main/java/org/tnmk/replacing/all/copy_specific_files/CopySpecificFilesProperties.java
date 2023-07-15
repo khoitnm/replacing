@@ -11,14 +11,14 @@ public class CopySpecificFilesProperties {
     private String sourceFolder;
     private String targetFolder;
 
-    private List<String> relativeFilesPaths;
+    private List<CopyFolder> copySubFolders;
 
-    public List<String> getRelativeFilesPaths() {
-        return relativeFilesPaths;
+    public List<CopyFolder> getCopySubFolders() {
+        return copySubFolders;
     }
 
-    public void setRelativeFilesPaths(List<String> relativeFilesPaths) {
-        this.relativeFilesPaths = relativeFilesPaths;
+    public void setCopySubFolders(List<CopyFolder> copySubFolders) {
+        this.copySubFolders = copySubFolders;
     }
 
     public String getSourceFolder() {
