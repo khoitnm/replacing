@@ -101,14 +101,13 @@ copy-specific-files:
               - Smile3_Speak\Smile3_Speak0060.bmp
               - Smile3_Speak\Smile3_Speak0062.bmp
               - Smile3_Speak\Smile3_Speak0064.bmp
-              - Normal_Speak\Normal_Speak0060.bmp
+              - Smile3_Speak\Smile3_Speak0061.bmp
               - Normal_Speak\Normal_Speak0062.bmp
               - Normal_Speak\Normal_Speak0064.bmp
               - Normal_Speak\Normal_Speak0075.bmp
 
         - relativeTargetFolder: Good_Speak\
           copySpecificRelativeSourceFiles:
-              - Smile3_Speak\Smile3_Speak0000.bmp
               - Smile3_Speak\Smile3_Speak0002.bmp
               - Smile3_Speak\Smile3_Speak0003.bmp
               - Smile3_Speak\Smile3_Speak0004.bmp
@@ -143,8 +142,6 @@ copy-specific-files:
 
         - relativeTargetFolder: Normal_Move01\
           copySpecificRelativeSourceFiles:
-              - Normal_Speak\Normal_Speak0035.bmp
-              - Normal_Speak\Normal_Speak0034.bmp
               - Normal_Speak\Normal_Speak0033.bmp
               - Normal_Speak\Normal_Speak0032.bmp
               - Normal_Speak\Normal_Speak0031.bmp
@@ -152,12 +149,9 @@ copy-specific-files:
               - Normal_Speak\Normal_Speak0031.bmp
               - Normal_Speak\Normal_Speak0032.bmp
               - Normal_Speak\Normal_Speak0033.bmp
-              - Normal_Speak\Normal_Speak0034.bmp
-              - Normal_Speak\Normal_Speak0035.bmp
 
         - relativeTargetFolder: Normal_Move02\
           copySpecificRelativeSourceFiles:
-              - Normal_Speak\Normal_Speak0060.bmp
               - Normal_Speak\Normal_Speak0061.bmp
               - Normal_Speak\Normal_Speak0062.bmp
               - Normal_Speak\Normal_Speak0063.bmp
@@ -175,16 +169,22 @@ copy-specific-files:
               - Normal_Speak\Normal_Speak0075.bmp
               - Normal_Speak\Normal_Speak0076.bmp
               - Normal_Speak\Normal_Speak0077.bmp
-              - Normal_Speak\Normal_Speak0078.bmp
               - Normal_Speak\Normal_Speak0079.bmp
               - Normal_Speak\Normal_Speak0075.bmp
+              - Normal_Speak\Normal_Speak0071.bmp
+              - Normal_Speak\Normal_Speak0069.bmp
+              - Normal_Speak\Normal_Speak0067.bmp
+              - Normal_Speak\Normal_Speak0065.bmp
+              - Normal_Speak\Normal_Speak0063.bmp
+              - Normal_Speak\Normal_Speak0062.bmp
+              - Normal_Speak\Normal_Speak0061.bmp
 
         - relativeTargetFolder: Normal_To_Good\
           copySpecificRelativeSourceFiles:
               - Normal_Speak\Normal_Speak0075.bmp
               - Normal_Speak\Normal_Speak0064.bmp
               - Normal_Speak\Normal_Speak0062.bmp
-              - Normal_Speak\Normal_Speak0060.bmp
+              - Normal_Speak\Normal_Speak0061.bmp
               - Smile3_Speak\Smile3_Speak0064.bmp
               - Smile3_Speak\Smile3_Speak0062.bmp
               - Smile3_Speak\Smile3_Speak0060.bmp
