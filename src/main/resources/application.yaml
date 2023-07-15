@@ -135,3 +135,93 @@ copy-specific-files:
               - Smile3_Speak\Smile3_Speak0044.bmp
               - Smile3_Speak\Smile3_Speak0046.bmp
               - Smile3_Speak\Smile3_Speak0047.bmp
+
+        - relativeTargetFolder: Normal_To_Bad\
+          copySpecificRelativeSourceFiles:
+              - Normal_Speak\Normal_Speak0075.bmp
+              - Angry5_Speak\Angry5_Speak0075.bmp
+
+        - relativeTargetFolder: Normal_Move01\
+          copySpecificRelativeSourceFiles:
+              - Normal_Speak\Normal_Speak0035.bmp
+              - Normal_Speak\Normal_Speak0034.bmp
+              - Normal_Speak\Normal_Speak0033.bmp
+              - Normal_Speak\Normal_Speak0032.bmp
+              - Normal_Speak\Normal_Speak0031.bmp
+              - Normal_Speak\Normal_Speak0030.bmp
+              - Normal_Speak\Normal_Speak0031.bmp
+              - Normal_Speak\Normal_Speak0032.bmp
+              - Normal_Speak\Normal_Speak0033.bmp
+              - Normal_Speak\Normal_Speak0034.bmp
+              - Normal_Speak\Normal_Speak0035.bmp
+
+        - relativeTargetFolder: Normal_Move02\
+          copySpecificRelativeSourceFiles:
+              - Normal_Speak\Normal_Speak0060.bmp
+              - Normal_Speak\Normal_Speak0061.bmp
+              - Normal_Speak\Normal_Speak0062.bmp
+              - Normal_Speak\Normal_Speak0063.bmp
+              - Normal_Speak\Normal_Speak0064.bmp
+              - Normal_Speak\Normal_Speak0065.bmp
+              - Normal_Speak\Normal_Speak0066.bmp
+              - Normal_Speak\Normal_Speak0067.bmp
+              - Normal_Speak\Normal_Speak0068.bmp
+              - Normal_Speak\Normal_Speak0069.bmp
+              - Normal_Speak\Normal_Speak0070.bmp
+              - Normal_Speak\Normal_Speak0071.bmp
+              - Normal_Speak\Normal_Speak0072.bmp
+              - Normal_Speak\Normal_Speak0073.bmp
+              - Normal_Speak\Normal_Speak0074.bmp
+              - Normal_Speak\Normal_Speak0075.bmp
+              - Normal_Speak\Normal_Speak0076.bmp
+              - Normal_Speak\Normal_Speak0077.bmp
+              - Normal_Speak\Normal_Speak0078.bmp
+              - Normal_Speak\Normal_Speak0079.bmp
+              - Normal_Speak\Normal_Speak0075.bmp
+
+        - relativeTargetFolder: Normal_To_Good\
+          copySpecificRelativeSourceFiles:
+              - Normal_Speak\Normal_Speak0075.bmp
+              - Normal_Speak\Normal_Speak0064.bmp
+              - Normal_Speak\Normal_Speak0062.bmp
+              - Normal_Speak\Normal_Speak0060.bmp
+              - Smile3_Speak\Smile3_Speak0064.bmp
+              - Smile3_Speak\Smile3_Speak0062.bmp
+              - Smile3_Speak\Smile3_Speak0060.bmp
+
+        - relativeTargetFolder: Normal_Speak\
+          copySpecificRelativeSourceFiles:
+              - Normal_Speak\Normal_Speak0000.bmp
+              - Normal_Speak\Normal_Speak0001.bmp
+              - Normal_Speak\Normal_Speak0002.bmp
+              - Normal_Speak\Normal_Speak0003.bmp
+              - Normal_Speak\Normal_Speak0004.bmp
+              - Normal_Speak\Normal_Speak0005.bmp
+              - Normal_Speak\Normal_Speak0006.bmp
+              - Normal_Speak\Normal_Speak0007.bmp
+              - Normal_Speak\Normal_Speak0008.bmp
+              - Normal_Speak\Normal_Speak0009.bmp
+              - Normal_Speak\Normal_Speak0010.bmp
+              - Normal_Speak\Normal_Speak0011.bmp
+              - Normal_Speak\Normal_Speak0012.bmp
+              - Normal_Speak\Normal_Speak0013.bmp
+              - Normal_Speak\Normal_Speak0014.bmp
+              - Normal_Speak\Normal_Speak0015.bmp
+              - Normal_Speak\Normal_Speak0016.bmp
+              - Normal_Speak\Normal_Speak0017.bmp
+              - Normal_Speak\Normal_Speak0018.bmp
+              - Normal_Speak\Normal_Speak0019.bmp
+              - Normal_Speak\Normal_Speak0020.bmp
+              - Normal_Speak\Normal_Speak0021.bmp
+              - Normal_Speak\Normal_Speak0022.bmp
+              - Normal_Speak\Normal_Speak0023.bmp
+              - Normal_Speak\Normal_Speak0024.bmp
+              - Normal_Speak\Normal_Speak0025.bmp
+              - Normal_Speak\Normal_Speak0026.bmp
+              - Normal_Speak\Normal_Speak0027.bmp
+              - Normal_Speak\Normal_Speak0028.bmp
+              - Normal_Speak\Normal_Speak0029.bmp
+              - Normal_Speak\Normal_Speak0030.bmp
+              - Normal_Speak\Normal_Speak0031.bmp
+              - Normal_Speak\Normal_Speak0032.bmp
+              - Normal_Speak\Normal_Speak0033.bmp
