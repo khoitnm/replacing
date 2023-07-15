@@ -85,11 +85,23 @@ public final class FileUtils {
    * @param path
    * @return
    */
-  public static String normalizePath(String path) {
+  public static String normalizeFilePath(String path) {
     String normalizedPath = path;
     if (path.endsWith("/") || path.endsWith("\\")) {
       normalizedPath = path.substring(0, path.length() - 1);
     }
     return normalizedPath;
   }
+
+    public static String normalizeDirectoryPath(String path) {
+        String normalizedPath = path;
+        if (!path.endsWith("/") && !path.endsWith("\\")) {
+            normalizedPath = path + "/";
+        }
+        return normalizedPath;
+    }
+
+    public static String getFilePath(String parentDirectoryPath, String filePath) {
+      return normalizeDirectoryPath(parentDirectoryPath) + normalizeFilePath(filePath);
+    }
 }

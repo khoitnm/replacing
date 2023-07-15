@@ -28,8 +28,8 @@ public class RenameProjectApplication extends BaseSpringTest {
    */
   @Test
   public void renameFileFolderAndContentInsideAFolder() {
-      String sourcePath = "C:\\Projects\\Personal\\personal-blog\\";
+      String sourcePath = "C:\\Projects\\Personal\\personal-blog";
 
-      this.replacingService.replace(sourcePath, "blog-editor-service", "blog-admin-service");
+      this.replacingService.replace(sourcePath, "blog-editor-webapp", "blog-admin-webapp");
   }
 }
