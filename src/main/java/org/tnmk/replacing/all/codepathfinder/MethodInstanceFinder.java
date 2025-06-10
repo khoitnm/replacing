@@ -7,8 +7,8 @@ public class MethodInstanceFinder
 {
     public static void main(String[] args)
     {
-        String projectPath = "path/to/your/project"; // Replace with your project path
-        String className = "MultiTenantConnectionProvider"; // Replace with your class name
+        String projectPath = "C:\\dev\\workspace\\explore\\hibernate-orm"; // Replace with your project path
+        String className = "org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider"; // Replace with your class name
         String methodName = "releaseConnection"; // Replace with your method name
 
         List<String> results = findMethodInstances(projectPath, className, methodName);
@@ -64,7 +64,11 @@ public class MethodInstanceFinder
                 // Check for method calls
                 if (classImported && line.contains(methodName + "("))
                 {
-                    results.add("Found in: " + file.getPath() + " at line " + lineNumber);
+                    results.add("""
+                        Found in: %s
+                            at `%s` \t(line: %s)""".formatted(
+                        file.getAbsolutePath(), line, lineNumber
+                    ));
                 }
             }
         }
